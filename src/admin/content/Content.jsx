@@ -1,0 +1,23 @@
+function Content() {
+    return (
+        <div>
+            {/* Content Side */}
+            <div className="flex flex-col w-full h-[100vh] ">
+                <div className="m-3 border-[3px] border-[#213361] h-2/5 rounded-[20px] flex flex-col">
+                    <b className="text-[#213361] text-[28px] ml-3">Dashboard</b>
+                    <div className="m-3 h-full flex flex-row justify-center">
+                        <div className="overflow-hidden margin-[10px] p-3 bg-white border-[2px] border-[#213361] m-1 w-1/4 h-4/5 rounded-[20px]">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis quia neque soluta ullam perferendis consectetur odit sit quasi minima totam est, reprehenderit voluptates laboriosam rerum incidunt facilis asperiores corporis itaque. Quisquam sequi voluptatem suscipit minima dolor aspernatur, hic, similique exercitationem ab maiores tenetur doloremque beatae cum vel temporibus iure accusantium dolorum qui ratione earum veritatis laudantium nisi illum. Autem quo doloribus sed atque facere! Culpa nesciunt inventore perferendis, ipsum a rerum perspiciatis quod in sint eum quisquam deleniti ad soluta maiores velit nihil harum facere expedita, quis, eius optio dicta. Libero aliquid iure fugiat voluptatem similique veritatis laborum laboriosam maiores!</div>
+                        <div className="overflow-hidden margin-[10px] p-3 bg-white border-[2px] border-[#213361] m-1 w-1/4 h-4/5 rounded-[20px]">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis quia neque soluta ullam perferendis consectetur odit sit quasi minima totam est, reprehenderit voluptates laboriosam rerum incidunt facilis asperiores corporis itaque. Quisquam sequi voluptatem suscipit minima dolor aspernatur, hic, similique exercitationem ab maiores tenetur doloremque beatae cum vel temporibus iure accusantium dolorum qui ratione earum veritatis laudantium nisi illum. Autem quo doloribus sed atque facere! Culpa nesciunt inventore perferendis, ipsum a rerum perspiciatis quod in sint eum quisquam deleniti ad soluta maiores velit nihil harum facere expedita, quis, eius optio dicta. Libero aliquid iure fugiat voluptatem similique veritatis laborum laboriosam maiores!</div>
+                        <div className="overflow-hidden margin-[10px] p-3 bg-white border-[2px] border-[#213361] m-1 w-1/4 h-4/5 rounded-[20px]">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis quia neque soluta ullam perferendis consectetur odit sit quasi minima totam est, reprehenderit voluptates laboriosam rerum incidunt facilis asperiores corporis itaque. Quisquam sequi voluptatem suscipit minima dolor aspernatur, hic, similique exercitationem ab maiores tenetur doloremque beatae cum vel temporibus iure accusantium dolorum qui ratione earum veritatis laudantium nisi illum. Autem quo doloribus sed atque facere! Culpa nesciunt inventore perferendis, ipsum a rerum perspiciatis quod in sint eum quisquam deleniti ad soluta maiores velit nihil harum facere expedita, quis, eius optio dicta. Libero aliquid iure fugiat voluptatem similique veritatis laborum laboriosam maiores!</div>
+                        <div className="overflow-hidden margin-[10px] p-3 bg-white border-[2px] border-[#213361] m-1 w-1/4 h-4/5 rounded-[20px]">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis quia neque soluta ullam perferendis consectetur odit sit quasi minima totam est, reprehenderit voluptates laboriosam rerum incidunt facilis asperiores corporis itaque. Quisquam sequi voluptatem suscipit minima dolor aspernatur, hic, similique exercitationem ab maiores tenetur doloremque beatae cum vel temporibus iure accusantium dolorum qui ratione earum veritatis laudantium nisi illum. Autem quo doloribus sed atque facere! Culpa nesciunt inventore perferendis, ipsum a rerum perspiciatis quod in sint eum quisquam deleniti ad soluta maiores velit nihil harum facere expedita, quis, eius optio dicta. Libero aliquid iure fugiat voluptatem similique veritatis laborum laboriosam maiores!</div>
+                    </div>
+                </div>
+                <div className="m-3 flex flex-col h-[87vh] border-[2px] border-[#213361] rounded-[20px]">
+                    <b className="text-[#213361] text-[28px] ml-3">Analytics</b>
+                </div>
+            </div>
+            {/* --------------- */}
+        </div>
+    )
+}
+export default Content
