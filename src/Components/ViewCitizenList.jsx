@@ -3,29 +3,28 @@ import { FiEdit } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
 
-function CompanyList() {
+function ViewUserList() {
     return (
         <div>
             <div>
                 <table className="border-collapse font-sans w-[98.2%] m-3 ">
                     <tr className="font-bold text-[#213361]">
-                        <th className="border pt-3 pb-3s" >Company ID</th>
-                        <th className="border pt-3 pb-3s" >Company Name</th>
+                        <th className="border pt-3 pb-3s" >User ID</th>
+                        <th className="border pt-3 pb-3s" >User Name</th>
                         <th className="border pt-3 pb-3s" >Address</th>
                         <th className="border pt-3 pb-3s" >Email</th>
                         <th className="border pt-3 pb-3s" >Phone</th>
-                        <th className="border pt-3 pb-3s" >View/Edit/Delete</th>
+                        <th className="border pt-3 pb-3s" >Edit/Delete</th>
                     </tr>
                     <tr className="text-center">
                         <td className="border pt-3 pb-3 ">ID</td>
-                        <td className="border pt-3 pb-3 ">Company1</td>
+                        <td className="border pt-3 pb-3 ">Username</td>
                         <td className="border pt-3 pb-3 ">Addressofcompany1</td>
-                        <td className="border pt-3 pb-3 ">company1@gmail.com</td>
+                        <td className="border pt-3 pb-3 ">username@gmail.com</td>
                         <td className="border pt-3 pb-3 ">0123456789</td>
                         <td className="border pt-3 pb-3 ">
                             <div className="flex align-middle w-full justify-center items-center gap-8">
-                                <Link to={'viewcompany'}><GrView color="#213361" size={25} /></Link>
-                                <Link to={'editcompany'}><FiEdit color="#213361" size={25} /></Link>
+                                <Link to={'editcitizen'}><FiEdit color="#213361" size={25} /></Link>
                                 <MdDeleteOutline color="#ff6060" size={25} />
                             </div>
                         </td>
@@ -35,4 +34,4 @@ function CompanyList() {
         </div>
     )
 }
-export default CompanyList
+export default ViewUserList

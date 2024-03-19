@@ -1,4 +1,4 @@
-function SignUpPage2Citizen() {
+function EditCitizenP2() {
     return (
         <div className="flex flex-col w-11/12">
             <br />
@@ -23,4 +23,4 @@ function SignUpPage2Citizen() {
         </div>
     )
 }
-export default SignUpPage2Citizen
+export default EditCitizenP2

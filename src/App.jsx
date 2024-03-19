@@ -12,8 +12,15 @@ import SignInPage from "./LandingPage/content/SignInPage"
 import SignUpPage1 from "./LandingPage/content/SignUpPage1"
 import SignUpPage2Citizen from "./LandingPage/content/SignUpPage2Citizen"
 import CompanyList from "./admin/content/CompanyList"
-import ViewProjectDetails from "./admin/content/ViewProjectDetails"
+import ViewProjectDetails from "./Components/ViewProjectDetails"
+import EditProjectDetailGov from "./Components/EditProjectDetailGov"
 import { Toaster } from "react-hot-toast"
+import ViewUserList from "./Components/ViewCitizenList"
+import ViewCompany from "./Components/ViewCompany"
+import EditCompanyP1 from "./Components/EditCompanyP1"
+import EditCitizenP1 from "./Components/EditCitizenP1"
+import InteractionList from "./Components/InteractionList"
+import ReplyCitizen from "./Components/ReplyCitizen"
 // import Home from "./pages/Home"
 // import Blogs from "./pages/Blogs"
 
@@ -27,7 +34,15 @@ function App() {
           {/* <Route path="companies" element={<Contact />} /> */}
           <Route path="projects" element={<ProjectList />} />
           <Route path="projects/viewproject" element={<ViewProjectDetails />} />
+          <Route path="projects/editproject" element={<EditProjectDetailGov />} />
           <Route path="companies" element={<CompanyList />} />
+          <Route path="companies/viewcompany" element={<ViewCompany />} />
+          <Route path="companies/editcompany" element={<EditCompanyP1 />} />
+          <Route path="viewusers" element={<ViewUserList />} />
+          <Route path="viewusers/editcitizen" element={<EditCitizenP1/>} />
+          <Route path="interactions" element={<InteractionList />} />
+          <Route path="interactions/replycitizen" element={<ReplyCitizen />} />
+
 
 
         </Route>

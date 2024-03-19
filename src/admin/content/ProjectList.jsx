@@ -32,7 +32,7 @@ function ProjectList() {
                                     <td className="border pt-3 pb-3 ">
                                         <div className="flex align-middle w-full justify-center items-center gap-8">
                                         <Link to={'viewproject'}><GrView color="#213361" size={25} /></Link>
-                                            <FiEdit color="#213361" size={25} />
+                                        <Link to={'editproject'}><FiEdit color="#213361" size={25} /></Link>
                                             <MdDeleteOutline onClick={()=>{
                                                 // confirm('qree')
                                                 successToast("Hello")
