@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom"
-import SignUpPage2Citizen from "./SignUpPage2Citizen";
-import SignUpPage2Company from "./SignUpPage2Company";
-function SignUpPage1() {
+import EditCitizenP2 from "./EditCitizenP2";
+function EditProfileCitizenP1() {
 
     const [userType,setUserType] = useState('')
     const [next,setNext] = useState(true)
@@ -18,10 +17,10 @@ function SignUpPage1() {
     return (
         <div>
             <div className="text-center">
-                <b className="text-[36px]">Sign Up</b>
+                <b className="text-[36px]">Edit Citizen</b>
             </div>
             <hr />
-            <div className="flex flex-col w-full h-[79vh] border-[2px] border-[#213361] rounded-[20px] m-3 text-center items-center overflow-scroll overflow-x-hidden">
+            <div className="flex flex-col w-full h-[100vh] border-[2px] border-[#213361] rounded-[20px] m-3 text-center items-center overflow-scroll overflow-x-hidden">
                 { next && <div className="flex flex-col w-11/12">
                     <br />
                     <b className="text-[20px] self-start">Username</b>
@@ -38,15 +37,15 @@ function SignUpPage1() {
                     <br />
                     <b className="text-[20px] self-start">User Type</b>
                     <div className="flex gap-10">
-                        <div><input type="radio" onChange={handleChange}  name="usertype" id="usertype" value={"Citizen"} className="w-6 h-6" /> <b className="text-[20px] self-start">Citizen</b></div>
-                        <div><input type="radio" onChange={handleChange}  name="usertype" id="usertype" value={"Company"} className="w-6 h-6" /> <b className="text-[20px] self-start">Company</b></div>
+                        <div><input type="radio" onChange={handleChange}  name="usertype" id="usertype" value={"Citizen"} checked className="text-[20px] " /> <b className="text-[20px] self-start">Citizen</b></div>
+                        <div><input type="radio" onChange={handleChange}  name="usertype" id="usertype" value={"Company"} className="text-[20px] " /> <b className="text-[20px] self-start">Company</b></div>
                     </div>
                 </div>}
-                { userType === 'Citizen' && next === false && <SignUpPage2Citizen/>}
-                { userType === 'Company' && next === false && <SignUpPage2Company/>}
+                { userType === 'Citizen' && next === false && <EditCitizenP2/>}
+                {/* { userType === 'Company' && next === false && <EditCitizenP2/>} */}
                     <b className="bg-[#213361] text-white rounded-lg w-auto h-auto p-3 pl-5 pr-5 self-center" onClick={handleNext}><Link >Next</Link></b>
             </div>
         </div>
     )
 }
-export default SignUpPage1
+export default EditProfileCitizenP1

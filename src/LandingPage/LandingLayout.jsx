@@ -11,7 +11,7 @@ function LandingLayout() {
                     <b><Link to={'/'}>OpenGov</Link></b>
                 </div>
                 <div className="flex gap-9   pe-6 justify-end m-auto mr-3 w-full items-center">
-                    <ul className="flex gap-9">
+                    <ul className="flex gap-9 md:text-2xl sm:text-[20px] lg:text-3xl ">
                         <li onClick={()=>setSelectLink('citizenlanding')} className={`${selectLink === 'citizenlanding' ? 'border-[2px] border-[#213361] rounded-[20px] p-1':""}`}><Link to={'/'}>Citizens</Link></li>
                         <li onClick={()=>setSelectLink('govtlanding')} className={`${selectLink === 'govtlanding' ? 'border-[2px] border-[#213361] rounded-[20px] p-1':""}`}><Link to={'/govtlanding'}>Govt.</Link></li>
                         <li onClick={()=>setSelectLink('companylanding')} className={`${selectLink === 'companylanding' ? 'border-[2px] border-[#213361] rounded-[20px] p-1':""}`}><Link to={'/companylanding'}>Company</Link></li>

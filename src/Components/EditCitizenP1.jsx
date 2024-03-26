@@ -37,7 +37,7 @@ function EditCitizenP1() {
                     <br />
                     <b className="text-[20px] self-start">User Type</b>
                     <div className="flex gap-10">
-                        <div><input type="radio" onChange={handleChange}  name="usertype" id="usertype" value={"Citizen"} className="text-[20px] " /> <b className="text-[20px] self-start">Citizen</b></div>
+                        <div><input type="radio" onChange={handleChange}  name="usertype" id="usertype" value={"Citizen"} checked className="text-[20px] " /> <b className="text-[20px] self-start">Citizen</b></div>
                         <div><input type="radio" onChange={handleChange}  name="usertype" id="usertype" value={"Company"} className="text-[20px] " /> <b className="text-[20px] self-start">Company</b></div>
                     </div>
                 </div>}

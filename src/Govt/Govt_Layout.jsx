@@ -9,7 +9,7 @@ import { LuMessagesSquare } from "react-icons/lu";
 import { FaHamburger, FaSignOutAlt } from "react-icons/fa";
 import { BsLayoutTextSidebarReverse } from "react-icons/bs";
 
-function Layout() {
+function Govt_Layout() {
     const [selectLink, setSelectLink] = useState('home')
     const [activeSideBar, setActiveSideBar] = useState(true)
     return (
@@ -26,7 +26,7 @@ function Layout() {
                 </div>
                 <div className="w-1/4 h-4/5 items-center flex mr-[20px]">
                     <div className="w-full h-full"></div>
-                    <b>Admin</b>
+                    <b>Govt.</b>
                 </div>
             </div>
             {/* -------------------- */}
@@ -79,4 +79,4 @@ function Layout() {
         </div>
     )
 }
-export default Layout
+export default Govt_Layout
