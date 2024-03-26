@@ -9,7 +9,7 @@ import { LuMessagesSquare } from "react-icons/lu";
 import { FaHamburger, FaSignOutAlt } from "react-icons/fa";
 import { BsLayoutTextSidebarReverse } from "react-icons/bs";
 
-function Govt_Layout() {
+function CompanyLayout() {
     const [selectLink, setSelectLink] = useState('home')
     const [activeSideBar, setActiveSideBar] = useState(true)
     return (
@@ -18,7 +18,7 @@ function Govt_Layout() {
             {/* header */}
             <div className="fixed w-full text-[#213361] text-sm bg-white h-[75px] flex justify-between border-[2px] border-[#213361] items-center rounded-[20px] m-3 lg:text-2xl xl:text-3xl sm:text-sm">
                 <div className="items-start flex m-auto ml-[20px] w-1/4 ">
-                    <b onClick={() => setSelectLink('home')}> <Link to={'/admin/'}>OpenGov</Link></b>
+                    <b onClick={() => setSelectLink('home')}> <Link to={'/company/'}>OpenGov</Link></b>
                 </div>
                 <div className="m-auto w-4/6 h-2/3 flex justify-center">
                     <input className="border-[1px] border-[#213361] outline-none px-8 w-full rounded-[20px] items-center pl-5 pr-20" type="search" name="Search" id="" placeholder="Search..." />
@@ -26,7 +26,7 @@ function Govt_Layout() {
                 </div>
                 <div className="w-1/4 h-4/5 items-center flex mr-[20px]">
                     <div className="w-full h-full"></div>
-                    <b>Govt.</b>
+                    <b>Comapany</b>
                 </div>
             </div>
             {/* -------------------- */}
@@ -37,10 +37,11 @@ function Govt_Layout() {
                 <div className="fixed rounded-[20px] hidden sm:flex m-3 w-1/5 h-[88.7vh] bg-[#213361] text-[0px] justify-center xl:text-[28px] lg:text-[24px] sm:text-[0px]">
                     <div className="w-full">
                         <ul>
-                            <li onClick={() => setSelectLink('home')} ><Link to={'/govt/'}><div className={`${selectLink === 'home' ? 'ms-3 mt-3 mb-3 -me-1 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white  p-2 text-[#213361] sm:text-hidden`}><MdOutlineDashboard size={45} className="ml-3 mr-3" /><b>Dashboard</b></div></Link></li>
-                            <li onClick={() => setSelectLink('projects')} ><Link to={'/govt/projects'}><div className={`${selectLink === 'projects' ? 'ms-3 mt-3 mb-3 -me-1 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white  p-2 text-[#213361] sm:text-hidden`}><AiOutlineFundProjectionScreen size={45} className="ml-3 mr-3" /><b>Projects</b></div></Link></li>
-                            <li onClick={() => setSelectLink('companies')} ><Link to={'/govt/companies'}><div className={`${selectLink === 'companies' ? 'ms-3 mt-3 mb-3 -me-1 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white p-2 text-[#213361] sm:text-hidden`}><BsBuildings size={45} className="ml-3 mr-3" /><b>Companies</b></div></Link></li>
-                            <li onClick={() => setSelectLink('interactions')} ><Link to={'/govt/interactions'}><div className={`${selectLink === 'interactions' ? 'ms-3 mt-3 mb-3 -me-1 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white p-2 text-[#213361] sm:text-hidden`}><LuMessagesSquare size={45} className="ml-3 mr-3" /><b>Interaction</b></div></Link></li>
+                            <li onClick={() => setSelectLink('home')} ><Link to={'/admin/'}><div className={`${selectLink === 'home' ? 'ms-3 mt-3 mb-3 -me-1 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white  p-2 text-[#213361] sm:text-hidden`}><MdOutlineDashboard size={45} className="ml-3 mr-3" /><b>Dashboard</b></div></Link></li>
+                            <li onClick={() => setSelectLink('projects')} ><Link to={'/admin/projects'}><div className={`${selectLink === 'projects' ? 'ms-3 mt-3 mb-3 -me-1 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white  p-2 text-[#213361] sm:text-hidden`}><AiOutlineFundProjectionScreen size={45} className="ml-3 mr-3" /><b>Projects</b></div></Link></li>
+                            <li onClick={() => setSelectLink('companies')} ><Link to={'/admin/companies'}><div className={`${selectLink === 'companies' ? 'ms-3 mt-3 mb-3 -me-1 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white p-2 text-[#213361] sm:text-hidden`}><BsBuildings size={45} className="ml-3 mr-3" /><b>Companies</b></div></Link></li>
+                            <li onClick={() => setSelectLink('citizen')} ><Link to={'/admin/viewusers'}><div className={`${selectLink === 'citizen' ? 'ms-3 mt-3 mb-3 -me-1 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white p-2 text-[#213361] sm:text-hidden`}><HiOutlineUsers size={45} className="ml-3 mr-3" /><b>Citizens</b></div></Link></li>
+                            <li onClick={() => setSelectLink('interactions')} ><Link to={'/admin/interactions'}><div className={`${selectLink === 'interactions' ? 'ms-3 mt-3 mb-3 -me-1 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white p-2 text-[#213361] sm:text-hidden`}><LuMessagesSquare size={45} className="ml-3 mr-3" /><b>Interaction</b></div></Link></li>
                             <li onClick={() => setSelectLink('signout')} ><Link to={'/'}><div className=" flex items-center bg-white rounded-[20px] p-2 text-[#213361] m-3 mt-[280px]"><FaSignOutAlt size={45} className="ml-3 mr-5 sm:text-hidden" /><b>Sign Out</b></div></Link></li>
                         </ul>
                     </div>
@@ -78,4 +79,4 @@ function Govt_Layout() {
         </div>
     )
 }
-export default Govt_Layout
+export default CompanyLayout

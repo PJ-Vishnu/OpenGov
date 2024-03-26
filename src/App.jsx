@@ -28,6 +28,12 @@ import CitizenReportProject from "./Citizen/Content/CitizenReportProject"
 import Citizen_Interactions from "./Citizen/Content/Citizen_Interactions"
 import Citizen_QueryReply from "./Citizen/Content/Citizen_QueryReply"
 import Govt_Layout from "./Govt/Govt_Layout"
+import Govt_Dashboard from "./Govt/content/Govt_Dashboard"
+import Govt_CompanyList from "./Govt/content/Govt_CompanyList"
+import GovtTenderingProjectList from "./Govt/content/GovtTenderingProjectList"
+import GovtProjectTenders from "./Govt/content/GovtProjectTenders"
+import ViewTenderDetails from "./Govt/content/ViewTenderDetails"
+import CompanyLayout from "./Company/CompanyLayout"
 
 // import Home from "./pages/Home"
 // import Blogs from "./pages/Blogs"
@@ -73,6 +79,24 @@ function App() {
         </Route>
 
         <Route path="/govt" element={<Govt_Layout />}>
+          <Route path="" element={<Govt_Dashboard />} />
+          <Route path="projects" element={<ProjectList />} />
+          <Route path="projects/viewproject" element={<ViewProjectDetails />} />
+          <Route path="projects/editproject" element={<EditProjectDetailGov />} />
+
+          <Route path="tendering" element={<GovtTenderingProjectList />} />
+          <Route path="tendering/project" element={<GovtProjectTenders />} />
+          <Route path="tendering/project/tenderdetails" element={<ViewTenderDetails />} />
+
+
+          <Route path="companies" element={<Govt_CompanyList />} />
+          <Route path="companies/viewcompany" element={<ViewCompany />} />
+
+          <Route path="interactions" element={<InteractionList />} />
+          <Route path="interactions/replycitizen" element={<ReplyCitizen />} />
+        </Route>
+
+        <Route path="/company" element={<CompanyLayout />}>
           <Route path="" element={<Dashboard />} />
           
         </Route>
