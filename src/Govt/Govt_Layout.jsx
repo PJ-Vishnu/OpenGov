@@ -59,7 +59,6 @@ function Govt_Layout() {
                             <li onClick={() => setSelectLink('home')} ><Link to={'/admin/'}><div className=' flex items-center bg-white  p-2 text-[#213361]'><MdOutlineDashboard size={45} className="ml-3 mr-3" /></div></Link></li>
                             <li onClick={() => setSelectLink('projects')} ><Link to={'/admin/projects'}><div className=' flex items-center bg-white  p-2 text-[#213361]'><AiOutlineFundProjectionScreen size={45} className="ml-3 mr-3" /></div></Link></li>
                             <li onClick={() => setSelectLink('companies')} ><Link to={'/admin/companies'}><div className=' flex items-center bg-white  p-2 text-[#213361]'><BsBuildings size={45} className="ml-3 mr-3" /></div></Link></li>
-                            <li onClick={() => setSelectLink('citizen')} ><Link to={'/admin/viewusers'}><div className=' flex items-center bg-white  p-2 text-[#213361]'><HiOutlineUsers size={45} className="ml-3 mr-3" /></div></Link></li>
                             <li onClick={() => setSelectLink('interactions')} ><Link to={'/admin/interactions'}><div className=' flex items-center bg-white  p-2 text-[#213361]'><LuMessagesSquare size={45} className="ml-3 mr-3" /></div></Link></li>
                             <li onClick={() => setSelectLink('signout')} ><Link to={'/'}><div className=' flex items-center bg-white  p-2 text-[#213361]'><FaSignOutAlt size={45} className="ml-3 mr-5" /></div></Link></li>
                         </ul>

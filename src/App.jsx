@@ -34,6 +34,11 @@ import GovtTenderingProjectList from "./Govt/content/GovtTenderingProjectList"
 import GovtProjectTenders from "./Govt/content/GovtProjectTenders"
 import ViewTenderDetails from "./Govt/content/ViewTenderDetails"
 import CompanyLayout from "./Company/CompanyLayout"
+import CompanyViewProjectList from "./Company/Content/CompanyViewProjectList"
+import CompanyTenderingProjectList from "./Company/Content/CompanyTenderingProjectList"
+import CreateTender from "./Company/Content/CreateTender"
+import CompanyOurProject from "./Company/Content/CompanyOurProject"
+import ViewOurProjectDetails from "./Company/Content/ViewOurProjectDetails"
 
 // import Home from "./pages/Home"
 // import Blogs from "./pages/Blogs"
@@ -98,6 +103,14 @@ function App() {
 
         <Route path="/company" element={<CompanyLayout />}>
           <Route path="" element={<Dashboard />} />
+          <Route path="Projects" element={<CompanyViewProjectList />} />
+          <Route path="projects/viewproject" element={<ViewProjectDetails />} />
+          <Route path="tenderingprojects" element={<CompanyTenderingProjectList />} />
+          <Route path="tenderingprojects/viewproject" element={<ViewProjectDetails />} />
+
+          <Route path="tenderingprojects/newtender" element={<CreateTender />} />
+          <Route path="ourproject" element={<CompanyOurProject />} />
+          <Route path="ourproject/viewproject" element={<ViewOurProjectDetails />} />
           
         </Route>
 
