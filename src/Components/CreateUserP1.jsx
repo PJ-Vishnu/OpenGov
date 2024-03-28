@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom"
 import EditCitizenP2 from "./EditCitizenP2";
-function EditCitizenP1() {
+import CreateUserP2 from "./CreateUserP2";
+function CreateUserP1() {
 
     const [userType, setUserType] = useState('')
     const [next, setNext] = useState(true)
@@ -41,10 +42,10 @@ function EditCitizenP1() {
                         <div><input type="radio" onChange={handleChange} name="usertype" id="usertype" value={"Company"} disabled className="text-[20px] w-5 h-5" /> <b className="text-[20px] self-start">Company</b></div>
                     </div>
                 </div>}
-                {userType === 'Citizen' && next === false && <EditCitizenP2 />}
+                {userType === 'Citizen' && next === false && <CreateUserP2 />}
                 <b className="bg-[#213361] text-white rounded-lg w-auto h-auto p-3 pl-5 pr-5 self-center" onClick={handleNext}><Link >Next</Link></b>
             </div>
         </div>
     )
 }
-export default EditCitizenP1
+export default CreateUserP1

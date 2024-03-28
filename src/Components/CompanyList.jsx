@@ -2,6 +2,7 @@ import { GrView } from "react-icons/gr";
 import { FiEdit } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { BsBuildingAdd } from "react-icons/bs";
 
 function CompanyList() {
     return (
@@ -32,6 +33,11 @@ function CompanyList() {
                     </tr>
                 </table>
             </div>
+            <Link to={"newcompany"}>
+                <div className="absolute right-9     bottom-10 m-3 p-3 rounded-2xl bg-white border-[2px] border-[#213361]">
+                    <BsBuildingAdd color="#213361" size={30} />
+                </div>
+            </Link>
         </div>
     )
 }

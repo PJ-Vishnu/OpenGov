@@ -39,6 +39,11 @@ import CompanyTenderingProjectList from "./Company/Content/CompanyTenderingProje
 import CreateTender from "./Company/Content/CreateTender"
 import CompanyOurProject from "./Company/Content/CompanyOurProject"
 import ViewOurProjectDetails from "./Company/Content/ViewOurProjectDetails"
+import RequestMoreFunds from "./Company/Content/RequestMoreFunds"
+import ProjectListAdminGov from "./Components/ProjectListAdminGov"
+import CreateProjectGov from "./Components/CreateProjectGov"
+import CreateCompanyAdminP1 from "./Components/CreateCompanyAdminP1"
+import CreateUserP1 from "./Components/CreateUserP1"
 
 // import Home from "./pages/Home"
 // import Blogs from "./pages/Blogs"
@@ -51,13 +56,16 @@ function App() {
           {/* <Route index element={<Home />} /> */}
           <Route path="" element={<Content />} />
           {/* <Route path="companies" element={<Contact />} /> */}
-          <Route path="projects" element={<ProjectList />} />
+          <Route path="projects" element={<ProjectListAdminGov />} />
+          <Route path="projects/newproject" element={<CreateProjectGov />} />
           <Route path="projects/viewproject" element={<ViewProjectDetails />} />
           <Route path="projects/editproject" element={<EditProjectDetailGov />} />
           <Route path="companies" element={<CompanyList />} />
+          <Route path="companies/newcompany" element={<CreateCompanyAdminP1/>} />
           <Route path="companies/viewcompany" element={<ViewCompany />} />
           <Route path="companies/editcompany" element={<EditCompanyP1 />} />
           <Route path="viewusers" element={<ViewUserList />} />
+          <Route path="viewusers/newcitizen" element={<CreateUserP1 />} />
           <Route path="viewusers/editcitizen" element={<EditCitizenP1 />} />
           <Route path="interactions" element={<InteractionList />} />
           <Route path="interactions/replycitizen" element={<ReplyCitizen />} />
@@ -85,7 +93,8 @@ function App() {
 
         <Route path="/govt" element={<Govt_Layout />}>
           <Route path="" element={<Govt_Dashboard />} />
-          <Route path="projects" element={<ProjectList />} />
+          <Route path="projects" element={<ProjectListAdminGov />} />
+          <Route path="projects/newproject" element={<CreateProjectGov />} />
           <Route path="projects/viewproject" element={<ViewProjectDetails />} />
           <Route path="projects/editproject" element={<EditProjectDetailGov />} />
 
@@ -111,6 +120,7 @@ function App() {
           <Route path="tenderingprojects/newtender" element={<CreateTender />} />
           <Route path="ourproject" element={<CompanyOurProject />} />
           <Route path="ourproject/viewproject" element={<ViewOurProjectDetails />} />
+          <Route path="ourproject/viewproject/requestfunds" element={<RequestMoreFunds />} />
           
         </Route>
 

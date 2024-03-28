@@ -2,6 +2,7 @@ import { GrView } from "react-icons/gr";
 import { FiEdit } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { LuUserPlus } from "react-icons/lu";
 
 function ViewUserList() {
     return (
@@ -31,6 +32,11 @@ function ViewUserList() {
                     </tr>
                 </table>
             </div>
+            <Link to={"newcitizen"}>
+                <div className="absolute right-9     bottom-10 m-3 p-3 rounded-2xl bg-white border-[2px] border-[#213361]">
+                    <LuUserPlus color="#213361" size={30} />
+                </div>
+            </Link>
         </div>
     )
 }
