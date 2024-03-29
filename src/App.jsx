@@ -44,6 +44,9 @@ import ProjectListAdminGov from "./Components/ProjectListAdminGov"
 import CreateProjectGov from "./Components/CreateProjectGov"
 import CreateCompanyAdminP1 from "./Components/CreateCompanyAdminP1"
 import CreateUserP1 from "./Components/CreateUserP1"
+import UpdateProjectData from "./Company/Content/UpdateProjectData"
+import CompanyNotifications from "./Company/Content/CompanyNotifications"
+import GovtNotifications from "./Govt/content/GovtNotifications"
 
 // import Home from "./pages/Home"
 // import Blogs from "./pages/Blogs"
@@ -93,6 +96,7 @@ function App() {
 
         <Route path="/govt" element={<Govt_Layout />}>
           <Route path="" element={<Govt_Dashboard />} />
+          <Route path="notification" element={<GovtNotifications />} />
           <Route path="projects" element={<ProjectListAdminGov />} />
           <Route path="projects/newproject" element={<CreateProjectGov />} />
           <Route path="projects/viewproject" element={<ViewProjectDetails />} />
@@ -112,6 +116,8 @@ function App() {
 
         <Route path="/company" element={<CompanyLayout />}>
           <Route path="" element={<Dashboard />} />
+          <Route path="editprofile" element={<EditCompanyP1 />} />
+          <Route path="notification" element={<CompanyNotifications />} />
           <Route path="Projects" element={<CompanyViewProjectList />} />
           <Route path="projects/viewproject" element={<ViewProjectDetails />} />
           <Route path="tenderingprojects" element={<CompanyTenderingProjectList />} />
@@ -121,6 +127,7 @@ function App() {
           <Route path="ourproject" element={<CompanyOurProject />} />
           <Route path="ourproject/viewproject" element={<ViewOurProjectDetails />} />
           <Route path="ourproject/viewproject/requestfunds" element={<RequestMoreFunds />} />
+          <Route path="ourproject/viewproject/updateproject" element={<UpdateProjectData />} />
           
         </Route>
 

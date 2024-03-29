@@ -10,6 +10,8 @@ import { FaHamburger, FaSignOutAlt } from "react-icons/fa";
 import { BsLayoutTextSidebarReverse } from "react-icons/bs";
 import { FaRegListAlt } from "react-icons/fa";
 import { IoConstructOutline } from "react-icons/io5";
+import { VscAccount } from "react-icons/vsc";
+import { IoNotificationsCircleOutline  } from "react-icons/io5";
 
 function CompanyLayout() {
     const [selectLink, setSelectLink] = useState('home')
@@ -26,9 +28,10 @@ function CompanyLayout() {
                     <input className="border-[1px] border-[#213361] outline-none px-8 w-full rounded-[20px] items-center pl-5 pr-20" type="search" name="Search" id="" placeholder="Search..." />
                     <IoSearch size={40} className="-mb-9 -ml-14 " />
                 </div>
-                <div className="w-1/4 h-4/5 items-center flex mr-[20px]">
-                    <div className="w-full h-full"></div>
-                    <b>Comapany</b>
+                <div className="w-1/4 h-4/5 flex-row items-center flex mr-[20px] gap-2">
+                    <div className="w-full h-full"></div> 
+                    <Link to={"notification"}><IoNotificationsCircleOutline className="w-10 h-10"/></Link>
+                    <Link to={"editprofile"}><VscAccount className="w-10 h-10"/></Link>
                 </div>
             </div>
             {/* -------------------- */}
@@ -39,10 +42,10 @@ function CompanyLayout() {
                 <div className="fixed rounded-[20px] hidden sm:flex m-3 w-1/5 h-[88.7vh] bg-[#213361] text-[0px] justify-center xl:text-[28px] lg:text-[24px] sm:text-[0px]">
                     <div className="w-full">
                         <ul>
-                            <li onClick={() => setSelectLink('home')} ><Link to={'/company/'}><div className={`${selectLink === 'home' ? 'ms-3 mt-3 mb-3 -me-1 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white  p-2 text-[#213361] sm:text-hidden`}><MdOutlineDashboard size={45} className="ml-3 mr-3" /><b>Dashboard</b></div></Link></li>
-                            <li onClick={() => setSelectLink('projects')} ><Link to={'/company/projects'}><div className={`${selectLink === 'projects' ? 'ms-3 mt-3 mb-3 -me-1 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white  p-2 text-[#213361] sm:text-hidden`}><AiOutlineFundProjectionScreen size={45} className="ml-3 mr-3" /><b>Projects</b></div></Link></li>
-                            <li onClick={() => setSelectLink('tenders')} ><Link to={'/company/tenderingprojects'}><div className={`${selectLink === 'tenders' ? 'ms-3 mt-3 mb-3 -me-1 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white  p-2 text-[#213361] sm:text-hidden`}><FaRegListAlt size={45} className="ml-3 mr-3" /><b>Tenders</b></div></Link></li>
-                            <li onClick={() => setSelectLink('ourprojects')} ><Link to={'/company/ourproject'}><div className={`${selectLink === 'ourprojects' ? 'ms-3 mt-3 mb-3 -me-1 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white  p-2 text-[#213361] sm:text-hidden`}><IoConstructOutline size={45} className="ml-3 mr-3" /><b>Our Projects</b></div></Link></li>
+                            <li onClick={() => setSelectLink('home')} ><Link to={'/company/'}><div className={`${selectLink === 'home' ? 'ms-3 mt-3 mb-3 -me-5 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white  p-2 text-[#213361] sm:text-hidden`}><MdOutlineDashboard size={45} className="ml-3 mr-3" /><b>Dashboard</b></div></Link></li>
+                            <li onClick={() => setSelectLink('projects')} ><Link to={'/company/projects'}><div className={`${selectLink === 'projects' ? 'ms-3 mt-3 mb-3 -me-5 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white  p-2 text-[#213361] sm:text-hidden`}><AiOutlineFundProjectionScreen size={45} className="ml-3 mr-3" /><b>Projects</b></div></Link></li>
+                            <li onClick={() => setSelectLink('tenders')} ><Link to={'/company/tenderingprojects'}><div className={`${selectLink === 'tenders' ? 'ms-3 mt-3 mb-3 -me-5 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white  p-2 text-[#213361] sm:text-hidden`}><FaRegListAlt size={45} className="ml-3 mr-3" /><b>Tenders</b></div></Link></li>
+                            <li onClick={() => setSelectLink('ourprojects')} ><Link to={'/company/ourproject'}><div className={`${selectLink === 'ourprojects' ? 'ms-3 mt-3 mb-3 -me-5 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white  p-2 text-[#213361] sm:text-hidden`}><IoConstructOutline size={45} className="ml-3 mr-3" /><b>Our Projects</b></div></Link></li>
                             <li onClick={() => setSelectLink('signout')} ><Link to={'/'}><div className=" flex items-center bg-white rounded-[20px] p-2 text-[#213361] m-3 mt-[280px]"><FaSignOutAlt size={45} className="ml-3 mr-5 sm:text-hidden" /><b>Sign Out</b></div></Link></li>
                         </ul>
                     </div>

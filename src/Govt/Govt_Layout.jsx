@@ -8,6 +8,7 @@ import { HiOutlineUsers } from "react-icons/hi2";
 import { LuMessagesSquare } from "react-icons/lu";
 import { FaHamburger, FaSignOutAlt } from "react-icons/fa";
 import { BsLayoutTextSidebarReverse } from "react-icons/bs";
+import { IoNotificationsCircleOutline  } from "react-icons/io5";
 
 function Govt_Layout() {
     const [selectLink, setSelectLink] = useState('home')
@@ -24,8 +25,9 @@ function Govt_Layout() {
                     <input className="border-[1px] border-[#213361] outline-none px-8 w-full rounded-[20px] items-center pl-5 pr-20" type="search" name="Search" id="" placeholder="Search..." />
                     <IoSearch size={40} className="-mb-9 -ml-14 " />
                 </div>
-                <div className="w-1/4 h-4/5 items-center flex mr-[20px]">
+                <div className="w-1/4 h-4/5 items-center flex mr-[20px] gap-2">
                     <div className="w-full h-full"></div>
+                    <Link to={"notification"}><IoNotificationsCircleOutline className="w-10 h-10"/></Link>
                     <b>Govt.</b>
                 </div>
             </div>
@@ -37,7 +39,7 @@ function Govt_Layout() {
                 <div className="fixed rounded-[20px] hidden sm:flex m-3 w-1/5 h-[88.7vh] bg-[#213361] text-[0px] justify-center xl:text-[28px] lg:text-[24px] sm:text-[0px]">
                     <div className="w-full">
                         <ul>
-                            <li onClick={() => setSelectLink('home')} ><Link to={'/govt/'}><div className={`${selectLink === 'home' ? 'ms-3 mt-3 mb-3 -me-1 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white  p-2 text-[#213361] sm:text-hidden`}><MdOutlineDashboard size={45} className="ml-3 mr-3" /><b>Dashboard</b></div></Link></li>
+                            <li onClick={() => setSelectLink('home')} ><Link to={'/govt/'}><div className={`${selectLink === 'home' ? 'ms-3 mt-3 mb-3 -me-5 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white  p-2 text-[#213361] sm:text-hidden`}><MdOutlineDashboard size={45} className="ml-3 mr-3" /><b>Dashboard</b></div></Link></li>
                             <li onClick={() => setSelectLink('projects')} ><Link to={'/govt/projects'}><div className={`${selectLink === 'projects' ? 'ms-3 mt-3 mb-3 -me-1 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white  p-2 text-[#213361] sm:text-hidden`}><AiOutlineFundProjectionScreen size={45} className="ml-3 mr-3" /><b>Projects</b></div></Link></li>
                             <li onClick={() => setSelectLink('companies')} ><Link to={'/govt/companies'}><div className={`${selectLink === 'companies' ? 'ms-3 mt-3 mb-3 -me-1 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white p-2 text-[#213361] sm:text-hidden`}><BsBuildings size={45} className="ml-3 mr-3" /><b>Companies</b></div></Link></li>
                             <li onClick={() => setSelectLink('interactions')} ><Link to={'/govt/interactions'}><div className={`${selectLink === 'interactions' ? 'ms-3 mt-3 mb-3 -me-1 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white p-2 text-[#213361] sm:text-hidden`}><LuMessagesSquare size={45} className="ml-3 mr-3" /><b>Interaction</b></div></Link></li>

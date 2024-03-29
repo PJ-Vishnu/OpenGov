@@ -51,10 +51,10 @@ function ProjectListAdminGov() {
                 </table>
             </div>
             <Link to={"newproject"}>
-                    <div className="absolute right-9     bottom-10 m-3 p-3 rounded-2xl bg-white border-[2px] border-[#213361]">
-                        <VscNewFile color="#213361" size={30} />
-                    </div>
-                </Link>
+                <div className="absolute right-9     bottom-10 m-3 p-3 rounded-2xl bg-white border-[2px] border-[#213361]">
+                    <VscNewFile color="#213361" size={30} />
+                </div>
+            </Link>
         </div>
     )
 }
