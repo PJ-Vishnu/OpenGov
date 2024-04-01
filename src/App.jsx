@@ -64,7 +64,7 @@ function App() {
           <Route path="projects/viewproject" element={<ViewProjectDetails />} />
           <Route path="projects/editproject" element={<EditProjectDetailGov />} />
           <Route path="companies" element={<CompanyList />} />
-          <Route path="companies/newcompany" element={<CreateCompanyAdminP1/>} />
+          <Route path="companies/newcompany" element={<CreateCompanyAdminP1 />} />
           <Route path="companies/viewcompany" element={<ViewCompany />} />
           <Route path="companies/editcompany" element={<EditCompanyP1 />} />
           <Route path="viewusers" element={<ViewUserList />} />
@@ -129,7 +129,7 @@ function App() {
           <Route path="ourproject/viewproject" element={<ViewOurProjectDetails />} />
           <Route path="ourproject/viewproject/requestfunds" element={<RequestMoreFunds />} />
           <Route path="ourproject/viewproject/updateproject" element={<UpdateProjectData />} />
-          
+
         </Route>
 
 
