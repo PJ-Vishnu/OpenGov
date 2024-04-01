@@ -87,6 +87,7 @@ function App() {
 
         <Route path="/citizen" element={<CitizenLayout />}>
           <Route path="" element={<Dashboard />} />
+          <Route path="editprofile" element={<EditCitizenP1 />} />
           <Route path="/citizen/projects" element={<CitizenViewProjectList />} />
           <Route path="projects/viewproject" element={<ViewProjectDetails />} />
           <Route path="projects/reportproject" element={<CitizenReportProject />} />

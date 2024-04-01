@@ -6,6 +6,7 @@ import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import { LuMessagesSquare } from "react-icons/lu";
 import { FaHamburger, FaSignOutAlt } from "react-icons/fa";     
 import { BsLayoutTextSidebarReverse } from "react-icons/bs";
+import { VscAccount } from "react-icons/vsc";
 
 function CitizenLayout() {
     const [selectLink, setSelectLink] = useState('home')
@@ -22,9 +23,12 @@ function CitizenLayout() {
                     <input className="border-[1px] border-[#213361] outline-none px-8 w-full rounded-[20px] items-center pl-5 pr-20" type="search" name="Search" id="" placeholder="Search..." />
                     <IoSearch size={40} className="-mb-9 -ml-14 " />
                 </div>
-                <div className="w-1/4 h-4/5 items-center flex mr-[20px]">
+                <div className="w-1/4 h-4/5 items-center flex mr-[20px] gap-2">
                     <div className="w-full h-full"></div>
                     <b>Citizen</b>
+                    <Link to={"editprofile"}>
+                    <VscAccount className="w-10 h-10"/>
+                    </Link>
                 </div>
             </div>
             {/* -------------------- */}
