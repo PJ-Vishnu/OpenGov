@@ -16,12 +16,12 @@ function SignUpPage1() {
         setNext(false)
     }
     return (
-        <div>
+        <div className="flex flex-col w-[98.8%] justify-center">
             <div className="text-center">
                 <b className="text-[36px]">Sign Up</b>
             </div>
             <hr />
-            <div className="flex flex-col w-full h-[79vh] border-[2px] border-[#213361] rounded-[20px] m-3 text-center items-center overflow-scroll overflow-x-hidden">
+            <div className="flex flex-col w-[98.8%] h-[79vh] m-3 self-center border-[2px] border-[#213361] rounded-[20px] text-center items-center overflow-scroll overflow-x-hidden">
                 { next && <div className="flex flex-col w-11/12">
                     <br />
                     <b className="text-[20px] self-start">Username</b>
@@ -44,7 +44,8 @@ function SignUpPage1() {
                 </div>}
                 { userType === 'Citizen' && next === false && <SignUpPage2Citizen/>}
                 { userType === 'Company' && next === false && <SignUpPage2Company/>}
-                    <b className="bg-[#213361] text-white rounded-lg w-auto h-auto p-3 pl-5 pr-5 self-center" onClick={handleNext}><Link >Next</Link></b>
+                    <br />
+                    <b className="bg-[#213361] text-white rounded-lg w-auto h-auto p-3 pl-5 pr-5 self-center" onClick={handleNext}><Link >Next</Link></b><br />
             </div>
         </div>
     )
