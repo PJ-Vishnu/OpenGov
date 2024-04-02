@@ -1,7 +1,6 @@
 import { Link, Outlet } from "react-router-dom"
 function SignInPage(){
     return (
-        <div className="flex justify-center">
             <div className="flex flex-col w-full h-full border-[2px] border-[#213361] rounded-[20px] m-3 text-center items-center">
                 <div className="m-5">
                     <b className="text-[36px]">Login</b>
@@ -20,7 +19,6 @@ function SignInPage(){
                     <b className="self-center underline"><Link to={'/signup'}>Register new User</Link></b>
                 </div>
             </div>
-        </div>
     )
 }
 export default SignInPage
