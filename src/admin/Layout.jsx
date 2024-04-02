@@ -13,10 +13,10 @@ function Layout() {
     const [selectLink, setSelectLink] = useState('home')
     const [activeSideBar, setActiveSideBar] = useState(true)
     return (
-        <div className=" flex">
+        <div className=" flex justify-center">
 
             {/* header */}
-            <div className="fixed w-full text-[#213361] text-sm bg-white h-[75px] flex justify-between border-[2px] border-[#213361] items-center rounded-[20px] m-3 lg:text-2xl xl:text-3xl sm:text-sm">
+            <div className="fixed w-[98.8%] m-3 text-[#213361] text-sm bg-white h-[75px] flex justify-between border-[2px] border-[#213361] items-center rounded-[20px] lg:text-2xl xl:text-3xl sm:text-sm">
                 <div className="items-start flex m-auto ml-[20px] w-1/4 ">
                     <b onClick={() => setSelectLink('home')}> <Link to={'/admin/'}>OpenGov</Link></b>
                 </div>
@@ -70,7 +70,7 @@ function Layout() {
 
 
 
-                <div className=" overflow-scroll m-auto sm:ml-[21.5%]  w-[95%] mt-3 md:w-[78.3vw] h-[88.7vh] border-[2px] border-[#213361] rounded-[20px] bg-white">
+                <div className=" overflow-scroll m-auto sm:ml-[21.5%]  w-[98.8%] mt-3 md:w-[78vw] h-[88.7vh] border-[2px] border-[#213361] rounded-[20px] bg-white">
                     <Outlet />
                 </div>
             </div>

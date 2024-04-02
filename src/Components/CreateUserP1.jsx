@@ -21,7 +21,7 @@ function CreateUserP1() {
                 <b className="text-[36px]">Edit Citizen</b>
             </div>
             <hr />
-            <div className="flex flex-col w-full h-[100vh] border-[2px] border-[#213361] rounded-[20px] m-3 text-center items-center overflow-scroll overflow-x-hidden">
+            <div className="flex flex-col w-[98.8%] h-[100vh] border-[2px] border-[#213361] rounded-[20px] m-3 text-center items-center overflow-scroll overflow-x-hidden">
                 {next && <div className="flex flex-col w-11/12">
                     <br />
                     <b className="text-[20px] self-start">Username</b>

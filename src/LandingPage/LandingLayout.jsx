@@ -4,9 +4,9 @@ import LandingPageCitizen from "./content/LandingPageCitizen"
 function LandingLayout() {
     const [selectLink,setSelectLink] = useState('citizenlanding')
     return (
-        <div>   
+        <div className="justify-center flex">   
             {/* Header Begins */}
-            <div className="fixed w-full text-[#213361] text-sm bg-white h-[75px] flex justify-between border-[2px] border-[#213361] items-center rounded-[20px] m-3 lg:text-2xl xl:text-3xl sm:text-sm">
+            <div className="fixed w-[98.8%] text-[#213361] text-sm bg-white h-[75px] flex justify-between border-[2px] border-[#213361] items-center rounded-[20px] m-3 lg:text-2xl xl:text-3xl sm:text-sm">
                 <div className="items-start flex m-auto ml-[20px] w-1/4">
                     <b><Link to={'/'}>OpenGov</Link></b>
                 </div>

@@ -16,7 +16,7 @@ function CreateCompanyAdminP1() {
         setNext(false)
     }
     return (
-        <div>
+        <div className="justify-center w-[98.8%]">
             <div className="text-center">
                 <b className="text-[36px]">Create new Company</b>
             </div>
