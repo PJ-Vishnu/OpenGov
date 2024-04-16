@@ -7,12 +7,35 @@ import toast from "react-hot-toast";
 import { errorToast, successToast } from "../Toast";
 import { GrSort } from "react-icons/gr";
 import { FiFilter } from "react-icons/fi";
+import { useEffect, useState } from "react";
+import axios from 'axios'
+
 
 
 function ProjectList() {
+
+    const [data,setData] = useState([])
+    useEffect(()=>{
+        // fetchApi()
+        console.log('useeffect is loading..');
+    },[])
+
+    const fetchApi=(async()=>{
+
+        console.log('api calling starting...');
+        try {
+           const response =  await axios.get('http://localhost:4000/projects/getall')
+                    setData(response?.data?.result)
+        } catch (error) {
+            errorToast(error.response.data.message || 'error')
+        }
+    })
+        
+
     return (
         <div>
             <div className="">
+             
                 <div className="  w-[98.2%] h=[20px] flex gap-9 p-3 m-3 border-[3px] border-[#213361] justify-center text-white"><div className="bg-[#313361] p-2 pl-3 pr-3 flex  "><GrSort size={25} className="pr-2" />Sort</div> <div className="bg-[#313361] p-2 pl-3 pr-3 flex"><FiFilter size={25} className="pr-2" />Filter</div></div>
                 <table className="border-collapse font-sans w-[98.2%] m-3 ">
                     <tr className="font-bold text-[#213361]">

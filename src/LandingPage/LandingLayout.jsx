@@ -15,7 +15,7 @@ function LandingLayout() {
                         <li onClick={()=>setSelectLink('citizenlanding')} className={`${selectLink === 'citizenlanding' ? 'border-[2px] border-[#213361] rounded-[20px] p-1':""}`}><Link to={'/'}>Citizens</Link></li>
                         <li onClick={()=>setSelectLink('govtlanding')} className={`${selectLink === 'govtlanding' ? 'border-[2px] border-[#213361] rounded-[20px] p-1':""}`}><Link to={'/govtlanding'}>Govt.</Link></li>
                         <li onClick={()=>setSelectLink('companylanding')} className={`${selectLink === 'companylanding' ? 'border-[2px] border-[#213361] rounded-[20px] p-1':""}`}><Link to={'/companylanding'}>Company</Link></li>
-                        <li onClick={()=>setSelectLink('signin')} className={`${selectLink === 'signin' ? 'border-[2px] border-[#213361] rounded-[20px] p-1':"text-white p-1 rounded-[20px] bg-[#213361]"}`}><Link to={'/signin'}>LogIn / SignUp</Link></li>
+                        <li onClick={()=>setSelectLink('signin')} className={`${selectLink === 'signin' ? 'border-[2px] border-[#213361] rounded-[15px] p-1':"text-white p-1 rounded-[20px] bg-[#213361]"}`}><Link to={'/signin'}>LogIn / SignUp</Link></li>
                     </ul>
                 </div>
             </div>

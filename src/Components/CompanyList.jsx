@@ -3,8 +3,30 @@ import { FiEdit } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { BsBuildingAdd } from "react-icons/bs";
+import { useEffect, useState } from "react";
+import { errorToast } from "../Toast";
+import axios from "axios";
 
 function CompanyList() {
+
+    const [data, setData] = useState([])
+    useEffect(() => {
+        fetchApi()
+        console.log('useeffect is loading..');
+    }, [])
+
+    const fetchApi = (async () => {
+
+        console.log('api calling starting...');
+        try {
+            const response = await axios.get('http://localhost:4000/register/getallcompany')
+            console.log(response)
+            setData(response?.data?.result)
+        } catch (error) {
+            errorToast(error.response.data.message || 'error')
+        }
+    })
+
     return (
         <div>
             <div>
@@ -17,20 +39,27 @@ function CompanyList() {
                         <th className="border pt-3 pb-3s" >Phone</th>
                         <th className="border pt-3 pb-3s" >View/Edit/Delete</th>
                     </tr>
-                    <tr className="text-center">
-                        <td className="border pt-3 pb-3 ">ID</td>
-                        <td className="border pt-3 pb-3 ">Company1</td>
-                        <td className="border pt-3 pb-3 ">Addressofcompany1</td>
-                        <td className="border pt-3 pb-3 ">company1@gmail.com</td>
-                        <td className="border pt-3 pb-3 ">0123456789</td>
-                        <td className="border pt-3 pb-3 ">
-                            <div className="flex align-middle w-full justify-center items-center gap-8">
-                                <Link to={'viewcompany'}><GrView color="#213361" size={25} /></Link>
-                                <Link to={'editcompany'}><FiEdit color="#213361" size={25} /></Link>
-                                <MdDeleteOutline color="#ff6060" size={25} />
-                            </div>
-                        </td>
-                    </tr>
+                    {
+                        data && data.map((item) => { //map data to page elements
+                            return (
+                                <tr className="text-center">
+                                    <td className="border pt-3 pb-3 ">{item._id}</td>
+                                    <td className="border pt-3 pb-3 ">{item.username}</td>
+                                    <td className="border pt-3 pb-3 ">{item.address}</td>
+                                    <td className="border pt-3 pb-3 ">{item.email}</td>
+                                    <td className="border pt-3 pb-3 ">{item.phone}</td>
+                                    <td className="border pt-3 pb-3 ">
+                                        <div className="flex align-middle w-full justify-center items-center gap-8">
+                                            <Link to={'viewcompany'}><GrView color="#213361" size={25} /></Link>
+                                            <Link to={'editcompany'}><FiEdit color="#213361" size={25} /></Link>
+                                            <MdDeleteOutline color="#ff6060" size={25} />
+                                        </div>
+                                    </td>
+                                </tr>
+                            )
+                        }
+                        )
+                    }
                 </table>
             </div>
             <Link to={"newcompany"}>
