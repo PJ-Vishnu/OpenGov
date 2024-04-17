@@ -2,8 +2,6 @@ import { useState } from "react"
 
 function SignUpPage2Citizen({handleChangeEvent,formdata,handleSubmit}) {
 
-    
-
     const handleChange = (e)=>{
         setGender(e.target.value)
     }

@@ -8,24 +8,29 @@ import { errorToast } from "../Toast";
 import axios from "axios";
 
 function CompanyList() {
+    const [data, setData] = useState([]);
 
-    const [data, setData] = useState([])
     useEffect(() => {
-        fetchApi()
-        console.log('useeffect is loading..');
-    }, [])
+        fetchCompanies();
+    }, []);
 
-    const fetchApi = (async () => {
-
-        console.log('api calling starting...');
+    const fetchCompanies = async () => {
         try {
-            const response = await axios.get('http://localhost:4000/register/getallcompany')
-            console.log(response)
-            setData(response?.data?.result)
+            const response = await axios.get('http://localhost:4000/register/getallcompany');
+            setData(response?.data?.result);
         } catch (error) {
-            errorToast(error.response.data.message || 'error')
+            errorToast(error.response.data.message || 'Error fetching companies');
         }
-    })
+    };
+
+    const deleteCompany = async (companyId) => {
+        try {
+            await axios.delete(`http://localhost:4000/register/deleteuser/${companyId}`);
+            setData(data.filter(company => company._id !== companyId));
+        } catch (error) {
+            errorToast(error.response.data.message || 'Error deleting company');
+        }
+    };
 
     return (
         <div>
@@ -51,8 +56,10 @@ function CompanyList() {
                                     <td className="border pt-3 pb-3 ">
                                         <div className="flex align-middle w-full justify-center items-center gap-8">
                                             <Link to={'viewcompany'}><GrView color="#213361" size={25} /></Link>
-                                            <Link to={'editcompany'}><FiEdit color="#213361" size={25} /></Link>
-                                            <MdDeleteOutline color="#ff6060" size={25} />
+                                            <Link to={`/admin/companies/editcompany/${item._id}`}>
+                                                <FiEdit color="#213361" size={25} />
+                                            </Link>
+                                            <MdDeleteOutline color="#ff6060" size={25} onClick={() => deleteCompany(item._id)} style={{ cursor: 'pointer' }} />
                                         </div>
                                     </td>
                                 </tr>

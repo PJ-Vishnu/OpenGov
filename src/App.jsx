@@ -66,10 +66,10 @@ function App() {
           <Route path="companies" element={<CompanyList />} />
           <Route path="companies/newcompany" element={<CreateCompanyAdminP1 />} />
           <Route path="companies/viewcompany" element={<ViewCompany />} />
-          <Route path="companies/editcompany" element={<EditCompanyP1 />} />
+          <Route path="companies/editcompany/:id" element={<EditCompanyP1 />} />
           <Route path="viewusers" element={<ViewUserList />} />
           <Route path="viewusers/newcitizen" element={<CreateUserP1 />} />
-          <Route path="viewusers/editcitizen" element={<EditCitizenP1 />} />
+          <Route path="viewusers/editcitizen/:id" element={<EditCitizenP1 />} />
           <Route path="interactions" element={<InteractionList />} />
           <Route path="interactions/replycitizen" element={<ReplyCitizen />} />
 
