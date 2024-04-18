@@ -1,10 +1,11 @@
-function EditCompanyP2({ handleChangeEvent, formdata, handleSubmit }) {
+function EditCompanyP2({ handleChangeEvent, formdata, handleSubmit, imgPreview }) {
     return (
         <div className="flex flex-col w-11/12">
             <br />
             <b className="text-[20px] self-start">Profile Picture</b>
-            <input type="file" name="avatar" value={formdata.avatar} onChange={handleChangeEvent} src="" alt="Choose Image" className="h-[15vh] w-[15vh] self-center text-center" />
-            <br />
+            <input type="file" name="avatar" onChange={handleChangeEvent} src="" alt="Choose Image" className="h-[15vh] w-[15vh] self-center text-center"/>
+                   { formdata?.avatar &&  <img src={imgPreview?URL.createObjectURL(formdata?.avatar):`http://localhost:4000/${formdata?.avatar}`} alt="" className="w-36 h-36 self-center" />
+                   }                <br />
             <b className="text-[20px] self-start">Organisation Name</b>
             <input type="text" name="organisationName" value={formdata.organisationName} onChange={handleChangeEvent} id="" placeholder="Enter the Organisation Name" className="border-[2px] border-[#213361] rounded-lg w-full h-9 pl-3" />
             <br />

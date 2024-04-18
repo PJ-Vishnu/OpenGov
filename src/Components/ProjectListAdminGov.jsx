@@ -26,12 +26,25 @@ function ProjectListAdminGov() {
 
         console.log('api calling starting...');
         try {
-            const response = await axios.get('http://localhost:4000/projects/getall')
+            const response = await axios.get('http://localhost:4000/projects/projects')
             setData(response?.data?.result)
         } catch (error) {
             errorToast(error.response.data.message || 'error')
         }
     })
+
+    const deleteProject = async (projectID) => {
+        try {
+            await axios.delete(`http://localhost:4000/projects/deleteProject/${projectID}`);
+            // Remove the deleted user from the state
+            setData(data.filter(project => project._id !== projectID));
+            // Optionally, show a success message
+            successToast('Project deleted successfully')
+        } catch (error) {
+            console.log();
+            errorToast(error.response.data.message || 'Error deleting Project');
+        }
+    };
 
 
 
@@ -70,11 +83,8 @@ function ProjectListAdminGov() {
                                     <td className="border pt-3 pb-3 ">
                                         <div className="flex align-middle w-full justify-center items-center gap-8">
                                             <Link to={'viewproject'}><GrView color="#213361" size={25} /></Link>
-                                            <Link to={'editproject'}><FiEdit color="#213361" size={25} /></Link>
-                                            <MdDeleteOutline onClick={() => {
-                                                successToast("Hello")
-                                                errorToast("Error")
-                                            }} className="cursor-pointer" color="#ff6060" size={25} />
+                                            <Link to={`/admin/projects/editproject/${item._id}`}><FiEdit color="#213361" size={25} /></Link>
+                                            <MdDeleteOutline color="#ff6060" size={25} onClick={() => deleteProject(item._id)} style={{ cursor: 'pointer' }} />
                                         </div>
                                     </td>
                                 </tr>

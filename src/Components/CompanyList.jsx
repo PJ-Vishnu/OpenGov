@@ -37,6 +37,7 @@ function CompanyList() {
             <div>
                 <table className="border-collapse font-sans w-[98.2%] m-3 ">
                     <tr className="font-bold text-[#213361]">
+                        <th className="border pt-3 pb-3s" >Profile</th>
                         <th className="border pt-3 pb-3s" >Company ID</th>
                         <th className="border pt-3 pb-3s" >Company Name</th>
                         <th className="border pt-3 pb-3s" >Address</th>
@@ -48,6 +49,9 @@ function CompanyList() {
                         data && data.map((item) => { //map data to page elements
                             return (
                                 <tr className="text-center">
+                                    <td className="border pt-3 pb-3 ">
+                                        <img src={`http://localhost:4000/${item?.avatar}`} alt="avatar" />
+                                    </td>
                                     <td className="border pt-3 pb-3 ">{item._id}</td>
                                     <td className="border pt-3 pb-3 ">{item.username}</td>
                                     <td className="border pt-3 pb-3 ">{item.address}</td>

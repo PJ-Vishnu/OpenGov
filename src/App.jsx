@@ -62,7 +62,7 @@ function App() {
           <Route path="projects" element={<ProjectListAdminGov />} />
           <Route path="projects/newproject" element={<CreateProjectGov />} />
           <Route path="projects/viewproject" element={<ViewProjectDetails />} />
-          <Route path="projects/editproject" element={<EditProjectDetailGov />} />
+          <Route path="projects/editproject/:id" element={<EditProjectDetailGov />} />
           <Route path="companies" element={<CompanyList />} />
           <Route path="companies/newcompany" element={<CreateCompanyAdminP1 />} />
           <Route path="companies/viewcompany" element={<ViewCompany />} />

@@ -23,6 +23,8 @@ function EditCitizenP1() {
 
     const { id } = useParams();
 
+    const [imgPreview, setImgPreview] = useState(false)
+
     useEffect(() => {
         const fetchUserData = async () => {
             try {
@@ -38,7 +40,12 @@ function EditCitizenP1() {
     }, [id]);
 
     const handleChangeEvent = (e) => {
-        setFormdata({ ...formdata, [e.target.name]: e.target.value });
+        if(e.target.name === 'avatar'){
+            setImgPreview(true)
+            setFormdata({...formdata,[e.target.name]:e.target.files[0]})
+        }else{
+            setFormdata({...formdata,[e.target.name]:e.target.value})
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -94,7 +101,7 @@ function EditCitizenP1() {
                     </div>
                     <button className="bg-[#213361] text-white rounded-lg w-auto h-auto p-3 pl-5 pr-5 self-center" onClick={handleNext}>Next</button><br />
                 </div>}
-                {formdata.role === 'citizen' && !next && <EditCitizenP2 handleChangeEvent={handleChangeEvent} formdata={formdata}  handleSubmit={handleSubmit} />}
+                {formdata.role === 'citizen' && !next && <EditCitizenP2 handleChangeEvent={handleChangeEvent} formdata={formdata}  handleSubmit={handleSubmit} imgPreview={imgPreview}/>}
             </div>
         </div>
     );

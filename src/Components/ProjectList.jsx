@@ -16,7 +16,7 @@ function ProjectList() {
 
     const [data,setData] = useState([])
     useEffect(()=>{
-        // fetchApi()
+        fetchApi()
         console.log('useeffect is loading..');
     },[])
 

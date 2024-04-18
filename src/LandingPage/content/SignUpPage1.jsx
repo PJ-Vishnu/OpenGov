@@ -36,8 +36,14 @@ function SignUpPage1() {
 
 
     const handleChangeEvent=(e)=>{
-        setFormdata({...formdata,[e.target.name]:e.target.value})
+        if(e.target.name === 'avatar'){
+            setFormdata({...formdata,[e.target.name]:e.target.files[0]})
+        }else{
+            setFormdata({...formdata,[e.target.name]:e.target.value})
+        }
     }
+
+    console.log(formdata,'from');
     // --------------------------------
 
     const handleChange = (e)=>{
@@ -48,8 +54,20 @@ function SignUpPage1() {
     const handleSubmit = async(e)=>{
         try {
             let data=formdata
-            const response =  await axios.post('http://localhost:4000/register/newuser',data)
-       navigate('/signin')
+
+            const formData = new FormData();
+            
+            Object.entries(formdata).forEach(([key, value]) => {
+                formData.append(key, value);
+            });
+
+            console.log(formData,'----');
+
+
+            
+         
+            const response =  await axios.post('http://localhost:4000/register/newuser',formData)
+    
             
         } catch (error) {
             

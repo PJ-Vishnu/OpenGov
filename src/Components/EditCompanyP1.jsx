@@ -21,6 +21,8 @@ function EditCompanyP1() {
         confirmpass: ''
     });
 
+    const [imgPreview, setImgPreview] = useState(false)
+
     const { id } = useParams();
 
     useEffect(() => {
@@ -38,7 +40,12 @@ function EditCompanyP1() {
     }, [id]);
 
     const handleChangeEvent = (e) => {
-        setFormdata({ ...formdata, [e.target.name]: e.target.value });
+        if(e.target.name === 'avatar'){
+            setImgPreview(true)
+            setFormdata({...formdata,[e.target.name]:e.target.files[0]})
+        }else{
+            setFormdata({...formdata,[e.target.name]:e.target.value})
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -55,6 +62,7 @@ function EditCompanyP1() {
 
     const handleChange = (e) => {
         setUserType(e.target.value);
+        
         setFormdata({ ...formdata, role: e.target.value });
     };
 
@@ -93,7 +101,7 @@ function EditCompanyP1() {
                     </div>
                     <button className="bg-[#213361] text-white rounded-lg w-auto h-auto p-3 pl-5 pr-5 self-center" onClick={handleNext}>Next</button><br />
                 </div>}
-                {formdata.role === 'company' && next === false && <EditCompanyP2 handleChangeEvent={handleChangeEvent} formdata={formdata}  handleSubmit={handleSubmit} />}
+                {formdata.role === 'company' && next === false && <EditCompanyP2 handleChangeEvent={handleChangeEvent} formdata={formdata}  handleSubmit={handleSubmit} imgPreview={imgPreview}/>}
             </div>
         </div>
     )
