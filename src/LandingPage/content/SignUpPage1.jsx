@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import axios from "axios"
 import SignUpPage2Citizen from "./SignUpPage2Citizen";
 import SignUpPage2Company from "./SignUpPage2Company";
+import { warningToast } from "../../Toast";
 function SignUpPage1() {
 
     const [next,setNext] = useState(true)
@@ -52,6 +53,7 @@ function SignUpPage1() {
     }
 
     const handleSubmit = async(e)=>{
+        
         try {
             let data=formdata
 
@@ -76,6 +78,30 @@ function SignUpPage1() {
     }
 
     const handleNext = ()=>{
+        if (!formdata.username) {
+            warningToast("Please enter a username.");
+            return;
+        }
+        if (!formdata.email) {
+            warningToast("Please enter an email.");
+            return;
+        }
+        if (!formdata.password) {
+            warningToast("Please enter a password.");
+            return;
+        }
+        if (!formdata.confirmpass) {
+            warningToast("Please confirm your password.");
+            return;
+        }
+        if (formdata.password !== formdata.confirmpass) {
+            warningToast("Passwords do not match.");
+            return;
+        }
+        if (!formdata.role) {
+            warningToast("Please select a user type (Citizen or Company).");
+            return;
+        }
         if (formdata.role === "") {
             alert("Please select a user type (Citizen or Company).");
             return; // Prevent further processing if no user type is selected

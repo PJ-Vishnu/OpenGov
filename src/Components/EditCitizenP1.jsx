@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import EditCitizenP2 from "./EditCitizenP2";
 import axios from "axios";
+import { successToast } from "../Toast";
 
 function EditCitizenP1() {
     const [userType, setUserType] = useState('');
@@ -53,6 +54,7 @@ function EditCitizenP1() {
         try {
             const response = await axios.put(`http://localhost:4000/register/updateuser/${id}`, formdata);
             console.log('User data updated successfully:', response.data);
+            successToast(response.data.message)
             // Redirect or show success message
         } catch (error) {
             console.error('Error updating user data:', error);

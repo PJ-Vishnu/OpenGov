@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { successToast, errorToast } from "../Toast";
+import { useParams } from "react-router-dom";
 
 function EditProjectDetailGov() {
     const [formData, setFormData] = useState({
@@ -20,7 +21,7 @@ function EditProjectDetailGov() {
         const fetchProjectData = async () => {
             try {
                 const response = await axios.get(`http://localhost:4000/projects/updateProject/${id}`);
-                const projectData = response.data.result; 
+                const projectData = response.data.result;
                 setFormData(projectData);
             } catch (error) {
                 console.error('Error fetching Project data:', error);
@@ -40,7 +41,7 @@ function EditProjectDetailGov() {
         try {
             const response = await axios.put(`http://localhost:4000/projects/updateProject/${id}`, formData);
             console.log('Project details updated successfully:', response.data);
-            successToast(response.data)
+            successToast(response.data.message)
             // Redirect or show success message
         } catch (error) {
             console.error('Error updating Project details:', error);
@@ -70,10 +71,25 @@ function EditProjectDetailGov() {
                     </select><br />
                     <b className=" self-start pl-">Budget:</b>
                     <input type="number" name="budget" value={formData.budget} onChange={(e) => setBudget(e.target.value)} id="" className="border-[2px] border-[rgb(33,51,97)] w-full h-10 self-center rounded-[20px] pl-3 pr-3" /><br />
-                    <b className=" self-start pl-">Tendering Last Date:</b>
-                    <input type="date" name="tenderingDate" value={formData.tenderingLastDate} onChange={handleChange} id="" className="border-[2px] border-[rgb(33,51,97)] w-full h-10 self-center rounded-[20px] pl-3 pr-3" /><br />
-                    <b className=" self-start pl-">Project End Date:</b>
-                    <input type="date" name="projectEndDate" value={formData.projectEndDate} onChange={handleChange} id="" className="border-[2px] border-[rgb(33,51,97)] w-full h-10 self-center rounded-[20px] pl-3 pr-3" /><br />
+                    <b className="self-start pl-">Tendering Last Date:</b>
+                    <input
+                        type="date"
+                        name="tenderingLastDate"
+                        value={formData.tenderingLastDate ? new Date(formData.tenderingLastDate).toISOString().split('T')[0] : ''}
+                        onChange={handleChange}
+                        id="" 
+                        className="border-[2px] border-[rgb(33,51,97)] w-full h-10 self-center rounded-[20px] pl-3 pr-3"
+                    />
+                    <br />
+                    <b className="self-start pl-">Project End Date:</b>
+                    <input
+                        type="date"
+                        name="projectEndDate"
+                        value={formData.projectEndDate ? new Date(formData.projectEndDate).toISOString().split('T')[0] : ''}
+                        onChange={handleChange}
+                        id=""
+                        className="border-[2px] border-[rgb(33,51,97)] w-full h-10 self-center rounded-[20px] pl-3 pr-3"
+                    />
                     <b className=" self-start pl-">Location:</b>
                     <input type="text" name="project_location" value={formData.location} onChange={handleChange} id="" className="border-[2px] border-[rgb(33,51,97)] w-full self-center rounded-[20px] pl-3" /><br />
                     <b className=" self-start pl-">Location Map Url:</b>

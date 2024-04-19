@@ -6,3 +6,8 @@ export const successToast= (message)=>{
 export const errorToast= (message)=>{
     toast.error(message)
 }
+export const warningToast=(message)=>{
+    toast(message, {
+        icon: '⚠️',
+      });
+}

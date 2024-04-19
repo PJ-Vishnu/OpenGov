@@ -61,7 +61,7 @@ function App() {
           {/* <Route path="companies" element={<Contact />} /> */}
           <Route path="projects" element={<ProjectListAdminGov />} />
           <Route path="projects/newproject" element={<CreateProjectGov />} />
-          <Route path="projects/viewproject" element={<ViewProjectDetails />} />
+          <Route path="projects/viewproject/:id" element={<ViewProjectDetails />} />
           <Route path="projects/editproject/:id" element={<EditProjectDetailGov />} />
           <Route path="companies" element={<CompanyList />} />
           <Route path="companies/newcompany" element={<CreateCompanyAdminP1 />} />
@@ -120,12 +120,12 @@ function App() {
           <Route path="editprofile" element={<EditCompanyP1 />} />
           <Route path="notification" element={<CompanyNotifications />} />
           <Route path="Projects" element={<CompanyViewProjectList />} />
-          <Route path="projects/viewproject" element={<ViewProjectDetails />} />
+          <Route path="projects/viewproject/:id" element={<ViewProjectDetails />} />
           <Route path="tenderingprojects" element={<CompanyTenderingProjectList />} />
-          <Route path="tenderingprojects/viewproject" element={<ViewProjectDetails />} />
+          <Route path="tenderingprojects/viewproject/:id" element={<ViewProjectDetails />} />
 
-          <Route path="tenderingprojects/newtender" element={<CreateTender />} />
-          <Route path="ourproject" element={<CompanyOurProject />} />
+          <Route path="tenderingprojects/newtender/:id" element={<CreateTender />} />
+          <Route path="ourproject/" element={<CompanyOurProject />} />
           <Route path="ourproject/viewproject" element={<ViewOurProjectDetails />} />
           <Route path="ourproject/viewproject/requestfunds" element={<RequestMoreFunds />} />
           <Route path="ourproject/viewproject/updateproject" element={<UpdateProjectData />} />

@@ -17,6 +17,9 @@ function SignInPage() {
   useEffect(() => {
     switch (userRole) {
       case 'admin':
+
+
+    
         navigate('/admin');
         break;
       case 'company':
@@ -46,6 +49,19 @@ function SignInPage() {
       const response = await axios.post('http://localhost:4000/auth/login', data);
       const userRole = response.data.result?.role; // Use optional chaining for safety
       console.log(userRole,'userRole');
+      if(response.data.result.role === 'admin'){
+        localStorage.setItem('admin-id',response.data.result.role)
+      }
+      if(response.data.result.role === 'company'){
+        localStorage.setItem('company-id',response.data.result.role)
+      }
+      if(response.data.result.role === 'govt'){
+        localStorage.setItem('govt-id',response.data.result.role)
+      }
+      if(response.data.result.role === 'citizen'){
+        localStorage.setItem('citizen-id',response.data.result.role)
+      }
+      // console.log(response.data,'userRole');
 setUserRole(userRole)
       if (!userRole) {
         errorToast('Missing or invalid role in response');

@@ -7,7 +7,7 @@ function EditCitizenP2({ handleChangeEvent, formdata, handleSubmit, imgPreview }
                    { formdata?.avatar &&  <img src={imgPreview?URL.createObjectURL(formdata?.avatar):`http://localhost:4000/${formdata?.avatar}`} alt="" className="w-36 h-36 self-center" />
                    }                <br />
             <label htmlFor="dob" className="text-[20px] self-start">Date of Birth</label>
-            <input type="date" name="dob" id="dob" placeholder="Enter your D.O.B" value={formdata.dob} onChange={handleChangeEvent} className="border-[2px] border-[#213361] rounded-lg w-full h-9 pl-3" />
+            <input type="date" name="dob" id="dob" placeholder="Enter your D.O.B" value={new Date(formdata.dob).toISOString().split('T') [0] } onChange={handleChangeEvent} className="border-[2px] border-[#213361] rounded-lg w-full h-9 pl-3" />
             <br />
             <label htmlFor="phone" className="text-[20px] self-start">Phone</label>
             <input type="text" name="phone" id="phone" placeholder="Enter your Phone Number" value={formdata.phone} onChange={handleChangeEvent} className="border-[2px] border-[#213361] rounded-lg w-full h-9 pl-3" />
