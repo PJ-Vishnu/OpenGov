@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { Link, Outlet } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { Link, Outlet, useNavigate } from "react-router-dom"
 import { IoClose, IoSearch } from "react-icons/io5";
 import { MdOutlineDashboard } from "react-icons/md";
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
@@ -8,8 +8,40 @@ import { HiOutlineUsers } from "react-icons/hi2";
 import { LuMessagesSquare } from "react-icons/lu";
 import { FaHamburger, FaSignOutAlt } from "react-icons/fa";
 import { BsLayoutTextSidebarReverse } from "react-icons/bs";
+import axios from "axios";
 
 function Layout() {
+
+
+    const navigate = useNavigate()
+
+    useEffect(()=>{
+        if(!localStorage.getItem("admin-id")){
+                navigate('/signin')
+        }
+    },[navigate])
+
+
+    useEffect(() => {
+        fetchApi()
+        console.log('useeffect is loading..');
+    }, [])
+
+    const logout = ()=>{
+        localStorage.removeItem('admin-id')
+        navigate('/')
+    }
+    const fetchApi = (async () => {
+
+        console.log('api calling starting...');
+        try {
+            const response = await axios.get(`http://localhost:4000/projects/projects/${localStorage.getItem("admin-id")}`)
+            setData(response?.data?.result)
+        } catch (error) {
+            errorToast(error.response.data.message || 'error')
+        }
+    })
+
     const [selectLink, setSelectLink] = useState('home')
     const [activeSideBar, setActiveSideBar] = useState(true)
     return (
@@ -42,7 +74,7 @@ function Layout() {
                             <li onClick={() => setSelectLink('companies')} ><Link to={'/admin/companies'}><div className={`${selectLink === 'companies' ? 'ms-3 mt-3 mb-3 -me-5 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white p-2 text-[#213361] sm:text-hidden`}><BsBuildings size={45} className="ml-3 mr-3" /><b>Companies</b></div></Link></li>
                             <li onClick={() => setSelectLink('citizen')} ><Link to={'/admin/viewusers'}><div className={`${selectLink === 'citizen' ? 'ms-3 mt-3 mb-3 -me-5 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white p-2 text-[#213361] sm:text-hidden`}><HiOutlineUsers size={45} className="ml-3 mr-3" /><b>Citizens</b></div></Link></li>
                             <li onClick={() => setSelectLink('interactions')} ><Link to={'/admin/interactions'}><div className={`${selectLink === 'interactions' ? 'ms-3 mt-3 mb-3 -me-5 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white p-2 text-[#213361] sm:text-hidden`}><LuMessagesSquare size={45} className="ml-3 mr-3" /><b>Interaction</b></div></Link></li>
-                            <li onClick={() => setSelectLink('signout')} ><Link to={'/'}><div className=" flex items-center bg-white rounded-[20px] p-2 text-[#213361] m-3 mt-[280px]"><FaSignOutAlt size={45} className="ml-3 mr-5 sm:text-hidden" /><b>Sign Out</b></div></Link></li>
+                            <li onClick={() => setSelectLink('signout')} ><p  onClick={logout}><div className=" flex items-center bg-white rounded-[20px] p-2 text-[#213361] m-3 mt-[280px]"><FaSignOutAlt size={45} className="ml-3 mr-5 sm:text-hidden" /><b>Sign Out</b></div></p></li>
                         </ul>
                     </div>
                 </div>
@@ -62,7 +94,7 @@ function Layout() {
                             <li onClick={() => setSelectLink('companies')} ><Link to={'/admin/companies'}><div className=' flex items-center bg-white  p-2 text-[#213361]'><BsBuildings size={45} className="ml-3 mr-3" /></div></Link></li>
                             <li onClick={() => setSelectLink('citizen')} ><Link to={'/admin/viewusers'}><div className=' flex items-center bg-white  p-2 text-[#213361]'><HiOutlineUsers size={45} className="ml-3 mr-3" /></div></Link></li>
                             <li onClick={() => setSelectLink('interactions')} ><Link to={'/admin/interactions'}><div className=' flex items-center bg-white  p-2 text-[#213361]'><LuMessagesSquare size={45} className="ml-3 mr-3" /></div></Link></li>
-                            <li onClick={() => setSelectLink('signout')} ><Link to={'/'}><div className=' flex items-center bg-white  p-2 text-[#213361]'><FaSignOutAlt size={45} className="ml-3 mr-5" /></div></Link></li>
+                            <li onClick={() => setSelectLink('signout')} ><p><div onClick={logout} className=' flex items-center bg-white  p-2 text-[#213361]'><FaSignOutAlt size={45} className="ml-3 mr-5" /></div></p></li>
                         </ul>
                     </div>
 

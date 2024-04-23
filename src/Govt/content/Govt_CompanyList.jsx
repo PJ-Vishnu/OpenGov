@@ -2,8 +2,25 @@ import { GrView } from "react-icons/gr";
 import { FiEdit } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { errorToast } from "../../Toast";
 
 function Govt_CompanyList() {
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        fetchCompanies();
+    }, []);
+
+    const fetchCompanies = async () => {
+        try {
+            const response = await axios.get('http://localhost:4000/register/getallcompany');
+            setData(response?.data?.result);
+        } catch (error) {
+            errorToast(error.response.data.message || 'Error fetching companies');
+        }
+    };
     return (
         <div>
             <div>
@@ -16,18 +33,28 @@ function Govt_CompanyList() {
                         <th className="border pt-3 pb-3s" >Phone</th>
                         <th className="border pt-3 pb-3s" >View</th>
                     </tr>
-                    <tr className="text-center">
-                        <td className="border pt-3 pb-3 ">ID</td>
-                        <td className="border pt-3 pb-3 ">Company1</td>
-                        <td className="border pt-3 pb-3 ">Addressofcompany1</td>
-                        <td className="border pt-3 pb-3 ">company1@gmail.com</td>
-                        <td className="border pt-3 pb-3 ">0123456789</td>
-                        <td className="border pt-3 pb-3 ">
-                            <div className="flex align-middle w-full justify-center items-center gap-8">
-                                <Link to={'viewcompany'}><GrView color="#213361" size={25} /></Link>
-                            </div>
-                        </td>
-                    </tr>
+                    {
+                        data && data.map((item) => { //map data to page elements
+                            return (
+                                <tr className="text-center">
+                                    <td className="border pt-3 pb-3 ">
+                                        <img src={`http://localhost:4000/${item?.avatar}`} className="w-32 h-32" alt="avatar" />
+                                    </td>
+                                    <td className="border pt-3 pb-3 ">{item._id}</td>
+                                    <td className="border pt-3 pb-3 ">{item.username}</td>
+                                    <td className="border pt-3 pb-3 ">{item.address}</td>
+                                    <td className="border pt-3 pb-3 ">{item.email}</td>
+                                    <td className="border pt-3 pb-3 ">{item.phone}</td>
+                                    <td className="border pt-3 pb-3 ">
+                                        <div className="flex align-middle w-full justify-center items-center gap-8">
+                                            <Link to={`viewcompany/${item._id}`}><GrView color="#213361" size={25} /></Link>
+                                        </div>
+                                    </td>
+                                </tr>
+                            )
+                        }
+                        )
+                    }
                 </table>
             </div>
         </div>

@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { Link, Outlet } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { Link, Outlet, useNavigate } from "react-router-dom"
 import { IoClose, IoSearch } from "react-icons/io5";
 import { MdOutlineDashboard } from "react-icons/md";
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
@@ -9,6 +9,18 @@ import { BsLayoutTextSidebarReverse } from "react-icons/bs";
 import { VscAccount } from "react-icons/vsc";
 
 function CitizenLayout() {
+    const navigate = useNavigate()
+    useEffect(()=>{
+        if(!localStorage.getItem("citizen-id")){
+                navigate('/signin')
+        }
+    },[navigate])
+
+    const logout = ()=>{
+        localStorage.removeItem('citizen-id')
+        navigate('/')
+    }
+
     const [selectLink, setSelectLink] = useState('home')
     const [activeSideBar, setActiveSideBar] = useState(true)
     return (
@@ -42,7 +54,7 @@ function CitizenLayout() {
                             <li onClick={() => setSelectLink('home')} ><Link to={'/citizen/'}><div className={`${selectLink === 'home' ? 'ms-3 mt-3 mb-3 -me-5 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white  p-2 text-[#213361] sm:text-hidden`}><MdOutlineDashboard size={45} className="ml-3 mr-3" /><b>Dashboard</b></div></Link></li>
                             <li onClick={() => setSelectLink('projects')} ><Link to={'/citizen/projects'}><div className={`${selectLink === 'projects' ? 'ms-3 mt-3 mb-3 -me-5 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white  p-2 text-[#213361] sm:text-hidden`}><AiOutlineFundProjectionScreen size={45} className="ml-3 mr-3" /><b>Projects</b></div></Link></li>
                             <li onClick={() => setSelectLink('interactions')} ><Link to={'/citizen/interactions'}><div className={`${selectLink === 'interactions' ? 'ms-3 mt-3 mb-3 -me-5 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white p-2 text-[#213361] sm:text-hidden`}><LuMessagesSquare size={45} className="ml-3 mr-3" /><b>Interaction</b></div></Link></li>
-                            <li onClick={() => setSelectLink('signout')} ><Link to={'/'}><div className=" flex items-center bg-white rounded-[20px] p-2 text-[#213361] m-3 mt-[280px]"><FaSignOutAlt size={45} className="ml-3 mr-5 sm:text-hidden" /><b>Sign Out</b></div></Link></li>
+                            <li onClick={logout} ><Link to={'/'}><div className=" flex items-center bg-white rounded-[20px] p-2 text-[#213361] m-3 mt-[280px]"><FaSignOutAlt size={45} className="ml-3 mr-5 sm:text-hidden" /><b>Sign Out</b></div></Link></li>
                         </ul>
                     </div>
                 </div>
@@ -60,7 +72,7 @@ function CitizenLayout() {
                             <li onClick={() => setSelectLink('home')} ><Link to={'/citizen/'}><div className=' flex items-center bg-white  p-2 text-[#213361]'><MdOutlineDashboard size={45} className="ml-3 mr-3" /></div></Link></li>
                             <li onClick={() => setSelectLink('projects')} ><Link to={'/citizen/projects'}><div className=' flex items-center bg-white  p-2 text-[#213361]'><AiOutlineFundProjectionScreen size={45} className="ml-3 mr-3" /></div></Link></li>
                             <li onClick={() => setSelectLink('interactions')} ><Link to={'/citizen/interactions'}><div className=' flex items-center bg-white  p-2 text-[#213361]'><LuMessagesSquare size={45} className="ml-3 mr-3" /></div></Link></li>
-                            <li onClick={() => setSelectLink('signout')} ><Link to={'/'}><div className=' flex items-center bg-white  p-2 text-[#213361]'><FaSignOutAlt size={45} className="ml-3 mr-5" /></div></Link></li>
+                            <li onClick={logout} ><Link to={'/'}><div className=' flex items-center bg-white  p-2 text-[#213361]'><FaSignOutAlt size={45} className="ml-3 mr-5" /></div></Link></li>
                         </ul>
                     </div>
 

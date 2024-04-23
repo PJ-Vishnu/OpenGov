@@ -89,7 +89,7 @@ function App() {
           <Route path="" element={<Dashboard />} />
           <Route path="editprofile" element={<EditCitizenP1 />} />
           <Route path="/citizen/projects" element={<CitizenViewProjectList />} />
-          <Route path="projects/viewproject" element={<ViewProjectDetails />} />
+          <Route path="projects/viewproject/:id" element={<ViewProjectDetails />} />
           <Route path="projects/reportproject" element={<CitizenReportProject />} />
           <Route path="/citizen/interactions" element={<Citizen_Interactions />} />
           <Route path="/citizen/message" element={<Citizen_QueryReply />} />
@@ -100,8 +100,8 @@ function App() {
           <Route path="notification" element={<GovtNotifications />} />
           <Route path="projects" element={<ProjectListAdminGov />} />
           <Route path="projects/newproject" element={<CreateProjectGov />} />
-          <Route path="projects/viewproject" element={<ViewProjectDetails />} />
-          <Route path="projects/editproject" element={<EditProjectDetailGov />} />
+          <Route path="projects/viewproject/:id" element={<ViewProjectDetails />} />
+          <Route path="projects/editproject/:id" element={<EditProjectDetailGov />} />
 
           <Route path="tendering" element={<GovtTenderingProjectList />} />
           <Route path="tendering/project" element={<GovtProjectTenders />} />
@@ -109,7 +109,7 @@ function App() {
 
 
           <Route path="companies" element={<Govt_CompanyList />} />
-          <Route path="companies/viewcompany" element={<ViewCompany />} />
+          <Route path="companies/viewcompany/:id" element={<ViewCompany />} />
 
           <Route path="interactions" element={<InteractionList />} />
           <Route path="interactions/replycitizen" element={<ReplyCitizen />} />

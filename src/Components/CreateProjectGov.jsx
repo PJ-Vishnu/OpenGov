@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { successToast, errorToast } from "../Toast";
 
@@ -11,8 +11,8 @@ function CreateProjectGov() {
         tenderingLastDate: "",
         projectEndDate: "",
         location: "",
-        locationMapURL: ""
-    });
+        locationMapURL: "",
+    }); 
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -20,6 +20,8 @@ function CreateProjectGov() {
     };
 
     const handleSubmit = async (e) => {
+        const level = localStorage.getItem('level');
+        setFormData(prevFormData => ({ ...prevFormData, initiator: level }));
         e.preventDefault();
         try {
             const response = await axios.post(
@@ -48,7 +50,7 @@ function CreateProjectGov() {
                     <b className=" self-start pl-">Project Description:</b>
                     <textarea name="projectDescription" value={formData.projectDescription} onChange={handleChange} id="" cols="30" rows="10" className="border-[2px] border-[rgb(33,51,97)] w-full h-1/4self-center rounded-[20px] pl-3 "></textarea><br />
                     <b className=" self-start pl-">Project Type:</b>
-                    <select name="type" value={formData.type} onChange={handleChange} id="" className="border-[2px] border-[rgb(33,51,97)] w-full h-1/4self-center rounded-[20px] pl-3 ">
+                    <select name="type" value={formData.type} onLoad={handleChange} onChange={handleChange} id="" className="border-[2px] border-[rgb(33,51,97)] w-full h-1/4self-center rounded-[20px] pl-3 ">
                         <option value="Road">Road</option>
                         <option value="Building">Building</option>
                         <option value="Bridge">Bridge</option>

@@ -50,16 +50,17 @@ function SignInPage() {
       const userRole = response.data.result?.role; // Use optional chaining for safety
       console.log(userRole,'userRole');
       if(response.data.result.role === 'admin'){
-        localStorage.setItem('admin-id',response.data.result.role)
+        localStorage.setItem('admin-id',response.data.result._id)
       }
       if(response.data.result.role === 'company'){
-        localStorage.setItem('company-id',response.data.result.role)
+        localStorage.setItem('company-id',response.data.result._id)
       }
       if(response.data.result.role === 'govt'){
-        localStorage.setItem('govt-id',response.data.result.role)
+        localStorage.setItem('govt-id',response.data.result._id)
+        localStorage.setItem('level', response.data.result.level)
       }
       if(response.data.result.role === 'citizen'){
-        localStorage.setItem('citizen-id',response.data.result.role)
+        localStorage.setItem('citizen-id',response.data.result._id)
       }
       // console.log(response.data,'userRole');
 setUserRole(userRole)

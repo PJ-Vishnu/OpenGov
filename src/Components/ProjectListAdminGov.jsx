@@ -78,12 +78,12 @@ function ProjectListAdminGov() {
                                     <td className="border pt-3 pb-3 ">{item._id}</td>
                                     <td className="border pt-3 pb-3 ">{item.projectName}</td>
                                     <td className="border pt-3 pb-3 ">{item.location}</td>
-                                    <td className="border pt-3 pb-3 ">{item.Initiator}</td>
+                                    <td className="border pt-3 pb-3 ">{item.initiator}</td>
                                     <td className="border pt-3 pb-3 ">{item.budget}</td>
                                     <td className="border pt-3 pb-3 ">
                                         <div className="flex align-middle w-full justify-center items-center gap-8">
-                                            <Link to={`/admin/projects/viewproject/${item._id}`}><GrView color="#213361" size={25} /></Link>
-                                            <Link to={`/admin/projects/editproject/${item._id}`}><FiEdit color="#213361" size={25} /></Link>
+                                            <Link to={`/govt/projects/viewproject/${item._id}`}><GrView color="#213361" size={25} /></Link>
+                                            <Link to={`/govt/projects/editproject/${item._id}`}><FiEdit color="#213361" size={25} /></Link>
                                             <MdDeleteOutline color="#ff6060" size={25} onClick={() => deleteProject(item._id)} style={{ cursor: 'pointer' }} />
                                         </div>
                                     </td>

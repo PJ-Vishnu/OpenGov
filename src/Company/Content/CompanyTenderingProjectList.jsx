@@ -18,12 +18,21 @@ function CompanyTenderingProjectList() {
     const fetchApi = async () => {
         try {
             const response = await axios.get('http://localhost:4000/projects/projects');
-            setData(response?.data?.result);
+            const currentDate = new Date();
+            const tenderingProjects = response.data.result.filter(project => {
+                return project.status === "tendering" && new Date(project.tenderingLastDate) > currentDate;
+            });
+            setData(tenderingProjects);
             setLoading(false);
         } catch (error) {
             errorToast(error.response?.data?.message || 'Error');
             setLoading(false);
         }
+    };
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.toISOString().split('T')[0]; // Get only the date part
     };
 
     return (
@@ -65,7 +74,7 @@ function CompanyTenderingProjectList() {
                                 <td className="border pt-3 pb-3">{item.location}</td>
                                 <td className="border pt-3 pb-3">{item.Initiator}</td>
                                 <td className="border pt-3 pb-3">{item.budget}</td>
-                                <td className="border pt-3 pb-3">{item.tenderingLastDate}</td>
+                                <td className="border pt-3 pb-3">{formatDate(item.tenderingLastDate)}</td>
                                 <td className="border pt-3 pb-3">
                                     <div className="flex align-middle w-full justify-center items-center gap-8">
                                         <Link to={`viewproject/${item._id}`}>
