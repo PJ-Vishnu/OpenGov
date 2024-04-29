@@ -60,6 +60,9 @@ function ViewUserList() {
                         data.map((item) => (
                             <tr key={item._id} className="text-center">
                                 <td className="border pt-3 pb-3">{item._id}</td>
+                                <td className="border pt-3 pb-3">
+                                    <img src={`http://localhost:4000/${item?.avatar}`} className="w-32 h-32" alt="avatar" />
+                                </td>
                                 <td className="border pt-3 pb-3">{item.username}</td>
                                 <td className="border pt-3 pb-3">{item.address}</td>
                                 <td className="border pt-3 pb-3">{item.email}</td>

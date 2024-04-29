@@ -55,6 +55,15 @@ function SignUpPage1() {
     const handleSubmit = async(e)=>{
         
         try {
+
+            const emailCheckResponse = await axios.get(`http://localhost:4000/register/check-email/${formdata.email}`);
+
+        // If email is already in use, display an error message
+        if (emailCheckResponse.data.exists) {
+            warningToast("Email ID is already in use.");
+            return;
+        }
+
             let data=formdata
 
             const formData = new FormData();

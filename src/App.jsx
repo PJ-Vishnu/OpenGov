@@ -105,7 +105,7 @@ function App() {
 
           <Route path="tendering" element={<GovtTenderingProjectList />} />
           <Route path="tendering/project" element={<GovtProjectTenders />} />
-          <Route path="tendering/project/tenderdetails" element={<ViewTenderDetails />} />
+          <Route path="tendering/project/tenderdetails/:id" element={<ViewTenderDetails />} />
 
 
           <Route path="companies" element={<Govt_CompanyList />} />

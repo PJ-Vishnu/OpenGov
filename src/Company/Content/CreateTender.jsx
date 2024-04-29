@@ -2,17 +2,29 @@ import { Link, useParams } from "react-router-dom";
 import { IoMdAdd, IoMdRemove } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { MdOutlineCurrencyRupee } from "react-icons/md";
+import axios from 'axios'; // Import Axios
 
 function CreateTender() {
     const { id } = useParams(); // Get project ID from route params
+    const companyId = localStorage.getItem("company-id");
 
-    const [dynamicForm, setDynamic] = useState([]);
+    const [dynamicForm, setDynamic] = useState([{ name: '', amount: 0 }]);
+    const [requestLetter, setRequestLetter] = useState("");
+    const [totalBudget, setTotalBudget] = useState(0);
 
     useEffect(() => {
+        let sum = 0;
+        dynamicForm.forEach(item => {
+            sum += parseFloat(item.amount);
+        });
+        setTotalBudget(sum);
     }, [dynamicForm]);
 
     const addDynamicForm = () => {
-        setDynamic([...dynamicForm, { name: '', amount: 0 }]);
+        const lastItem = dynamicForm[dynamicForm.length - 1];
+        if (lastItem.name !== '' && lastItem.amount !== 0) {
+            setDynamic([...dynamicForm, { name: '', amount: 0 }]);
+        }
     };
 
     const deleteDynamicForm = (indexOf) => {
@@ -21,7 +33,30 @@ function CreateTender() {
         setDynamic(updatedForm);
     };
 
-    const formui = dynamicForm.map((item, index, array) => {
+    const handleFileUpload = (event) => {
+        // Handle file upload here
+    };
+
+    const handleSend = () => {
+        const tenderData = {
+            projectId: id,
+            companyId: companyId,
+            requestLetter: requestLetter,
+            tenderEstimate: JSON.stringify(dynamicForm), // Convert dynamicForm to JSON string
+            totalBudget: totalBudget
+        };
+
+        // Send tenderData to backend server using Axios
+        axios.post('http://localhost:4000/tenders/createTender', tenderData)
+            .then(response => {
+                // Handle response
+            })
+            .catch(error => {
+                console.error('Error sending tender data:', error);
+            });
+    };
+
+    const formui = dynamicForm.map((item, index) => {
         return (
             <div className="gap-2 flex m-3 items-center" key={index}>
                 <input
@@ -59,8 +94,8 @@ function CreateTender() {
                 <b className="text-[36px]">Create new Tender</b>
                 <br />
                 <hr />
-                <b className="text-[20px] self-start">Project ID:</b> {/* Display project ID */}
-                <input type="text" placeholder="Project ID" value={id}readOnly />
+                <b className="text-[20px] self-start">Project ID:</b>
+                <input type="text" placeholder="Project ID" value={id} readOnly />
                 <br />
                 <b className="text-[20px] self-start">Request Letter</b>
                 <textarea
@@ -68,6 +103,8 @@ function CreateTender() {
                     cols="30"
                     rows="10"
                     placeholder="Write your request here"
+                    value={requestLetter}
+                    onChange={(e) => setRequestLetter(e.target.value)}
                     className="border-[2px] border-[#213361] rounded-lg w-full h-20 pl-3"
                 ></textarea>
                 <br />
@@ -82,10 +119,24 @@ function CreateTender() {
                 </div>
                 <br />
                 <br />
-                <b className="text-[20px] self-start">Upload Estimate</b>
-                <input type="file" name="" id="" className="border-[2px] border-[#213361] rounded-lg w-full h-9 pl-3" />
+                <b className="text-[20px] self-start">Total Budget:</b>
+                <input
+                    type="text"
+                    value={totalBudget}
+                    readOnly
+                    className="bg-white shadow-lg px-5 py-3 hover:underline w-full hover:bg-slate-200 border"
+                />
                 <br />
-                <Link>
+                <br />
+                <b className="text-[20px] self-start">Upload Estimate</b>
+                <input
+                    type="file"
+                    name="estimateFile"
+                    onChange={handleFileUpload}
+                    className="border-[2px] border-[#213361] rounded-lg w-full h-9 pl-3"
+                />
+                <br />
+                <Link onClick={handleSend}>
                     <div className="bg-[#213361] text-white rounded-lg w-fit h-fit p-3 pl-5 pr-5 self-center">
                         <b>Send</b>
                     </div>
