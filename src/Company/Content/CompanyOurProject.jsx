@@ -6,9 +6,35 @@ import toast from "react-hot-toast";
 import { errorToast, successToast } from "../../Toast";
 import { GrSort } from "react-icons/gr";
 import { FiFilter } from "react-icons/fi";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 
 function CompanyOurProject() {
+
+    const [data, setData] = useState([])
+    useEffect(() => {
+        fetchApi()
+        console.log('useeffect is loading..');
+    }, [])
+
+    const fetchApi = (async () => {
+        
+        console.log('api calling starting...');
+        try {
+            const companyId=localStorage.getItem('company-id')
+            const response = await axios.get(`http://localhost:4000/contracts/ourProjects/${companyId}`)
+            setData(response?.data?.result)
+            console.log(response.data);
+        } catch (error) {
+            errorToast(error.response.data.message || 'error')
+        }
+    })
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.toISOString().split('T')[0]; // Get only the date part
+    };
+
     return (
         <div>
             <div className="">
@@ -19,21 +45,27 @@ function CompanyOurProject() {
                         <th className="border pt-3 pb-3s" >Project Name</th>
                         <th className="border pt-3 pb-3s" >Location</th>
                         <th className="border pt-3 pb-3s" >Initiator</th>
-                        <th className="border pt-3 pb-3s" >Budget</th>
+                        <th className="border pt-3 pb-3s" >Project End Date</th>
                         <th className="border pt-3 pb-3s" >View/Edit</th>
                     </tr>
-                    <tr className="text-center">
-                        <td className="border pt-3 pb-3 "></td>
-                        <td className="border pt-3 pb-3 "></td>
-                        <td className="border pt-3 pb-3 "></td>
-                        <td className="border pt-3 pb-3 "></td>
-                        <td className="border pt-3 pb-3 "></td>
-                        <td className="border pt-3 pb-3 ">
-                            <div className="flex align-middle w-full justify-center items-center gap-8">
-                                <Link to={'viewproject'}><GrView color="#213361" size={25} /></Link>
-                            </div>
-                        </td>
-                    </tr>
+                    {
+                        data.map((item) => {
+                            return (
+                                <tr className="text-center">
+                                    <td className="border pt-3 pb-3 ">{item._id}</td>
+                                    <td className="border pt-3 pb-3 ">{item.projectName}</td>
+                                    <td className="border pt-3 pb-3 ">{item.Location}</td>
+                                    <td className="border pt-3 pb-3 ">{item.initiator}</td>
+                                    <td className="border pt-3 pb-3 ">{formatDate(item.projectEndDate)}</td>
+                                    <td className="border pt-3 pb-3 ">
+                                        <div className="flex align-middle w-full justify-center items-center gap-8">
+                                            <Link to={'viewproject'}><GrView color="#213361" size={25} /></Link>
+                                        </div>
+                                    </td>
+                                </tr>
+                            )
+                        })
+                    }
 
 
                 </table>

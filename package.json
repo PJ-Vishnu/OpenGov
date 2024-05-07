@@ -10,12 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^3.4.4",
     "axios": "^1.6.8",
+    "pdfjs": "^2.5.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^5.0.1",
     "react-loader-spinner": "^6.1.6",
+    "react-pdf": "^8.0.0",
     "react-router-dom": "^6.22.3",
     "swiper": "^11.0.7"
   },
@@ -30,6 +33,7 @@
     "eslint-plugin-react-refresh": "^0.4.5",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
-    "vite": "^5.1.4"
+    "vite": "^5.1.4",
+    "vite-plugin-static-copy": "^1.0.4"
   }
 }

@@ -72,7 +72,8 @@ function GovtTenderingProjectList() {
                                 <td className="border pt-3 pb-3">{formatDate(item.tenderingLastDate)}</td>
                                 <td className="border pt-3 pb-3">
                                     <div className="flex align-middle w-full justify-center items-center gap-8">
-                                        <Link to={`project/tenderdetails/${item._id}`}>
+                                        <Link to={`project/${item._id}`}>
+                                            
                                             <GrView color="#213361" size={25} />
                                         </Link>
                                         <Link to={`deletetender/${item._id}`}>

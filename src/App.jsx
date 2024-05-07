@@ -104,7 +104,7 @@ function App() {
           <Route path="projects/editproject/:id" element={<EditProjectDetailGov />} />
 
           <Route path="tendering" element={<GovtTenderingProjectList />} />
-          <Route path="tendering/project" element={<GovtProjectTenders />} />
+          <Route path="tendering/project/:id" element={<GovtProjectTenders />} />
           <Route path="tendering/project/tenderdetails/:id" element={<ViewTenderDetails />} />
 
 

@@ -2,15 +2,17 @@ import { Link, useParams } from "react-router-dom";
 import { IoMdAdd, IoMdRemove } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { MdOutlineCurrencyRupee } from "react-icons/md";
-import axios from 'axios'; // Import Axios
+import axios from 'axios';
+import { warningToast } from "../../Toast";
 
 function CreateTender() {
-    const { id } = useParams(); // Get project ID from route params
+    const { id } = useParams();
     const companyId = localStorage.getItem("company-id");
 
     const [dynamicForm, setDynamic] = useState([{ name: '', amount: 0 }]);
     const [requestLetter, setRequestLetter] = useState("");
     const [totalBudget, setTotalBudget] = useState(0);
+    const [tenderFile, setTenderFile] = useState(null);
 
     useEffect(() => {
         let sum = 0;
@@ -25,6 +27,9 @@ function CreateTender() {
         if (lastItem.name !== '' && lastItem.amount !== 0) {
             setDynamic([...dynamicForm, { name: '', amount: 0 }]);
         }
+        else{
+            warningToast("Please fill the data first!")
+        }
     };
 
     const deleteDynamicForm = (indexOf) => {
@@ -34,7 +39,7 @@ function CreateTender() {
     };
 
     const handleFileUpload = (event) => {
-        // Handle file upload here
+        setTenderFile(event.target.files[0]);
     };
 
     const handleSend = () => {
@@ -42,18 +47,28 @@ function CreateTender() {
             projectId: id,
             companyId: companyId,
             requestLetter: requestLetter,
-            tenderEstimate: JSON.stringify(dynamicForm), // Convert dynamicForm to JSON string
+            tenderEstimate: JSON.stringify(dynamicForm),
             totalBudget: totalBudget
         };
-
-        // Send tenderData to backend server using Axios
-        axios.post('http://localhost:4000/tenders/createTender', tenderData)
-            .then(response => {
-                // Handle response
-            })
-            .catch(error => {
-                console.error('Error sending tender data:', error);
-            });
+    
+        const formData = new FormData();
+        formData.append('estimateFile', tenderFile); // Use 'estimateFile' as the field name
+    
+        for (let key in tenderData) {
+            formData.append(key, tenderData[key]);
+        }
+    
+        axios.post('http://localhost:4000/tenders/createTender', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        .then(response => {
+            console.log('Tender data sent successfully:', response);
+        })
+        .catch(error => {
+            console.error('Error sending tender data:', error);
+        });
     };
 
     const formui = dynamicForm.map((item, index) => {
@@ -136,11 +151,9 @@ function CreateTender() {
                     className="border-[2px] border-[#213361] rounded-lg w-full h-9 pl-3"
                 />
                 <br />
-                <Link onClick={handleSend}>
-                    <div className="bg-[#213361] text-white rounded-lg w-fit h-fit p-3 pl-5 pr-5 self-center">
-                        <b>Send</b>
-                    </div>
-                </Link>
+                <button onClick={handleSend} className="bg-[#213361] text-white rounded-lg w-fit h-fit p-3 pl-5 pr-5 self-center">
+                    <b>Submit</b>
+                </button>
             </div>
         </div>
     );
