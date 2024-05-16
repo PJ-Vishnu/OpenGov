@@ -126,9 +126,9 @@ function App() {
 
           <Route path="tenderingprojects/newtender/:id" element={<CreateTender />} />
           <Route path="ourproject/" element={<CompanyOurProject />} />
-          <Route path="ourproject/viewproject" element={<ViewOurProjectDetails />} />
+          <Route path="ourproject/viewproject/:id" element={<ViewOurProjectDetails />} />
           <Route path="ourproject/viewproject/requestfunds" element={<RequestMoreFunds />} />
-          <Route path="ourproject/viewproject/updateproject" element={<UpdateProjectData />} />
+          <Route path="ourproject/viewproject/:id/updateproject" element={<UpdateProjectData />} />
 
         </Route>
 

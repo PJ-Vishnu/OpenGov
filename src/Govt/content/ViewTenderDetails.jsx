@@ -71,7 +71,7 @@ function ViewTenderDetails() {
                             <p className="text-center text-gray-600 mt-10">Additional Information</p>
                         </div>
                     </div>
-                    <div className="border-[2px] border-[#213361] rounded-[20px] m-5  h-[100vh] p-3 text-xl h-fit flex flex-col">
+                    <div className="border-[2px] border-[#213361] rounded-[20px] m-5  p-3 text-xl h-fit flex flex-col">
                         <div className='text-xl'>
                             <b>Request Letter: </b>
                             <hr className='border border-[#213361] rounded-[20px]' /><br />

@@ -9,7 +9,7 @@ function ViewProjectDetails() {
     useEffect(() => {
         const fetchProjectDetails = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/projects/viewProject/${id}`);
+                const response = await axios.get(`http://localhost:4000/contracts/projectOrContract/${id}`);
                 const projectData = response.data.result;
                 setProjectDetails(projectData);
             } catch (error) {

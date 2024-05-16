@@ -9,7 +9,7 @@ function CreateTender() {
     const { id } = useParams();
     const companyId = localStorage.getItem("company-id");
 
-    const [dynamicForm, setDynamic] = useState([{ name: '', amount: 0 }]);
+    const [dynamicForm, setDynamic] = useState([{ name: '', amount: '' }]);
     const [requestLetter, setRequestLetter] = useState("");
     const [totalBudget, setTotalBudget] = useState(0);
     const [tenderFile, setTenderFile] = useState(null);
@@ -25,7 +25,7 @@ function CreateTender() {
     const addDynamicForm = () => {
         const lastItem = dynamicForm[dynamicForm.length - 1];
         if (lastItem.name !== '' && lastItem.amount !== 0) {
-            setDynamic([...dynamicForm, { name: '', amount: 0 }]);
+            setDynamic([...dynamicForm, { name: '', amount: '' }]);
         }
         else{
             warningToast("Please fill the data first!")

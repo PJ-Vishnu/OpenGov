@@ -45,16 +45,20 @@ function GovtProjectTenders() {
         }
     };
     
-    const handleApprove=async (tenderId)=>{
-        console.log("Aproving tender with ID:", tenderId);
+    const handleApprove = async (tenderId) => {
+        console.log("Approving tender with ID:", tenderId);
         try {
-            const response =await axios.post(`http://localhost:4000/contracts/approveTender/${tenderId}`);
-            successToast(response.data.message)
+            const response = await axios.post(`http://localhost:4000/contracts/approveTender/${tenderId}`);
+            successToast(response.data.message);
         } catch (error) {
-            console.error('Error Aproving tender:', error);
-            errorToast(response.data.message);
+            console.error('Error Approving tender:', error);
+            if (error.response && error.response.data && error.response.data.message) {
+                errorToast(error.response.data.message);
+            } else {
+                errorToast('An error occurred while approving the tender.');
+            }
         }
-    }
+    };
     // Function to format date without time
     const formatDate = (dateString) => {
         const date = new Date(dateString);
