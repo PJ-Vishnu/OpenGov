@@ -1,13 +1,16 @@
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 function RequestMoreFunds(){
+
+    const { id } = useParams();
+    
     return(
         <div>
             <div className="flex flex-col m-3">
                 <b className="text-[36px]">Create new Request for Funds</b><br />
                 <hr />
                 <b className="text-[20px] self-start">Project ID</b>
-                <input type="text" placeholder="Project ID" className="border-[2px] border-[#213361] rounded-lg w-full h-9 pl-3" readOnly />
+                <input type="text" placeholder="Project ID" className="border-[2px] border-[#213361] rounded-lg w-full h-9 pl-3" readOnly value={id}/>
                 <br />
 
                 <b className="text-[20px] self-start">Request Letter</b>
