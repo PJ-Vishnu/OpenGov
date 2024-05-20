@@ -10,6 +10,7 @@ function ViewOurProjectDetails() {
     const { id } = useParams();
     const [projectDetails, setProjectDetails] = useState(null); // Initialize to null
     const [expenses, setExpenses] = useState([]);
+    const [expensesArray, setExpensesArray] = useState([]);
     const [resourceDetails, setResourceDetails] = useState([]);
     const [remainingBudget, setRemainingBudget] = useState(0);
 
@@ -33,8 +34,9 @@ function ViewOurProjectDetails() {
         const fetchExpenses = async () => {
             try {
                 const response = await axios.get(`http://localhost:4000/expenses/getExpenses/${id}`);
-                const { expenseArray, remainingProjectBudget, resourceDetails } = response.data;
-                setExpenses(expenseArray);
+                const { expenseArray, remainingProjectBudget, resourceDetails, expenses } = response.data;
+                setExpenses(expenses)
+                setExpensesArray(expenseArray);
                 setRemainingBudget(remainingProjectBudget);
                 setResourceDetails(resourceDetails)
             } catch (error) {
@@ -57,11 +59,11 @@ function ViewOurProjectDetails() {
 
     const completionPercentagePie = [
         {
-            name: 'EstimateBudget',
+            name: 'Estimate Budget',
             value: proposedBudget
         },
         {
-            name: 'TotalExpense',
+            name: 'Total Expense',
             value: totalExpense,
         }
     ];
@@ -70,8 +72,9 @@ function ViewOurProjectDetails() {
     // Prepare data for horizontal stacked bar chart
     const resourceData = projectDetails.tenderEstimate.map(item => ({
         name: item.name,
-        total: parseFloat(item.amount),
-        used: expenses.find(expense => expense.name === item.name) ? expenses.find(expense => expense.name === item.name).amount : 0
+        used: expensesArray.find(expense => expense.name === item.name) ? expensesArray.find(expense => expense.name === item.name).amount : 0,
+        Remaining: (parseFloat(item.amount) - (expensesArray.find(expense => expense.name === item.name) ? expensesArray.find(expense => expense.name === item.name).amount : 0)),
+        Budget: parseFloat(item.amount)
     }));
 
     // Prepare data for line charts
@@ -124,7 +127,7 @@ function ViewOurProjectDetails() {
                         </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                        {expenses.map((expense, index) => (
+                        {expensesArray.map((expense, index) => (
                             <tr key={index}>
                                 <td className="px-6 py-4 whitespace-nowrap">{expense.name}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{expense.units}</td>
@@ -141,25 +144,29 @@ function ViewOurProjectDetails() {
                 </table>
                 <br />
                 <div className="m-4">
-                    <h2>Resource Usage</h2>
+                    <b>Resource Usage</b>
                     <BarChart width={800} height={400} data={resourceData} layout="vertical">
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis type="number" />
                         <YAxis type="category" dataKey="name" />
-                        <Tooltip />
+                        <Tooltip
+                            payload={[{ name: 'Budget', color: '#1100ff' }]} // Add this line
+                        />
                         <Legend />
-                        <Bar dataKey="total" stackId="a" fill="#6595ed" />
+                        <Bar dataKey="Remaining" stackId="a" fill="#6595ed" />
                         <Bar dataKey="used" stackId="a" fill="#ff6050" />
+                        <Bar dataKey="Budget" stackId="a" fill="#1100ff" opacity={0} />
                     </BarChart>
                 </div>
                 <div>
-                    <h2 className="">Resource Expenses Over Time</h2>
+                    <b className="m-3">Resource Expenses Over Time</b>
                     {resourceLineChartData.map((data, index) => (
                         <div key={index}>
-                            <h3 className="text-center text-xl underline">{data.resource}</h3>
+                            <br />
+                            <b className="m-3 text-lg underline">{data.resource}</b>
                             <LineChart width={800} height={300} data={data.data}>
                                 <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="date" reversed={true}/>
+                                <XAxis dataKey="date" reversed={true} />
                                 <YAxis />
                                 <Tooltip />
                                 <Legend />
@@ -169,7 +176,48 @@ function ViewOurProjectDetails() {
                         </div>
                     ))}
                 </div>
-                <b>hello</b>
+                <b className="m-3">Project Expense Recipts</b>
+                <div>
+                    <table className="min-w-full divide-y divide-gray-200 m-3 border-2">
+                        <thead className="bg-gray-50">
+                            <tr>
+                                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Time</th>
+                                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Download Receipt</th>
+                            </tr>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                            {expenses.map((expense, index) => {
+                                const dateParts = expense.date.split('T');
+                                const date = dateParts[0];
+                                const timeParts = dateParts[1].split(':');
+                                const hours = parseInt(timeParts[0], 10);
+                                const minutes = parseInt(timeParts[1], 10);
+                                const amOrPm = hours >= 12 ? 'PM' : 'AM';
+                                const formattedHours = hours % 12 || 12;
+                                const formattedMinutes = minutes.toString().padStart(2, '0');
+
+                                return (
+                                    <tr key={index}>
+                                        <td className="px-6 py-4 whitespace-nowrap text-center">{date}</td> {/* Date column */}
+                                        <td className="px-6 py-4 whitespace-nowrap text-center">{`${formattedHours}:${formattedMinutes} ${amOrPm}`}</td> {/* Time column */}
+                                        <td className="px-6 py-4 whitespace-nowrap text-center">
+                                            {expense.receiptFile ? (
+                                                <button onClick={() => window.open(`http://localhost:4000/${expense.receiptFile}`, '_blank')}>
+                                                    Download Receipt
+                                                </button>
+                                            ) : (
+                                                <span>No receipt available</span>
+                                            )}
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+
+
+                </div>
             </div>
             <Link to={"requestfunds"}>
                 <div className="absolute right-9 flex flex-col justify-center items-center    bottom-10 m-3 p-3 rounded-2xl bg-white border-[2px] border-[#213361]">

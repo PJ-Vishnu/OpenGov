@@ -44,7 +44,7 @@ function UpdateProjectData() {
 
     const addDynamicForm = () => {
         const lastItem = dynamicForm[dynamicForm.length - 1];
-        if (lastItem.name !== '' && lastItem.quantity !== '' && lastItem.unitPrice !== '') {
+        if (lastItem?.name !== '' && lastItem?.quantity !== '' && lastItem?.unitPrice !== '') {
             setDynamic([...dynamicForm, { name: '', quantity: '', unitPrice: '', amount: '' }]);
         }
         else {
