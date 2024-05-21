@@ -14,11 +14,12 @@ function RequestMoreFunds(){
     const [newTenderEstimate, setNewTenderEstimate] = useState('');
     const [tenderEstimateAmounts, setTenderEstimateAmounts] = useState({});
     const [tenderFile, setTenderFile] = useState(null); // State to hold uploaded file
-    
+    const [deletableFields, setDeletableFields] = useState([]);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/contracts/viewProject/${id}`);
+                const response = await axios.get(`http://localhost:4000/contracts/viewProjectCompany/${id}`);
                 if (response.data.result && response.data.result.tenderEstimate) {
                     const options = response.data.result.tenderEstimate;
                     setDynamic(options);
@@ -31,6 +32,10 @@ function RequestMoreFunds(){
                         });
                         setTenderEstimateAmounts(amounts);
                     }
+
+                    // Initialize deletableFields array based on whether the field name exists in tenderEstimateOptions
+                    const initialDeletableFields = options.map(option => !options.some(existingOption => existingOption.name === option.name));
+                    setDeletableFields(initialDeletableFields);
                 }
             } catch (error) {
                 console.error('Error fetching tender data:', error);
@@ -38,12 +43,13 @@ function RequestMoreFunds(){
         };
 
         fetchData();
-    }, [id, tenderEstimateAmounts]);    
+    }, [id, tenderEstimateAmounts]);
 
     const addDynamicForm = () => {
         const lastItem = dynamicForm[dynamicForm.length - 1];
         if (lastItem?.name !== '' ) {
             setDynamic([...dynamicForm, { name: '', amount: '' }]);
+            setDeletableFields([...deletableFields, true]);
         }
         else {
             warningToast("Please fill the data first!");
@@ -51,9 +57,18 @@ function RequestMoreFunds(){
     };
 
     const deleteDynamicForm = (indexOf) => {
-        const updatedForm = [...dynamicForm];
-        updatedForm.splice(indexOf, 1);
-        setDynamic(updatedForm);
+        if (deletableFields[indexOf]) {
+            const updatedForm = [...dynamicForm];
+            updatedForm.splice(indexOf, 1);
+            setDynamic(updatedForm);
+            setDeletableFields(prev => {
+                const updatedDeletableFields = [...prev];
+                updatedDeletableFields.splice(indexOf, 1);
+                return updatedDeletableFields;
+            });
+        } else {
+            warningToast("This field cannot be deleted because it's part of the tender estimate.");
+        }
     };
 
     const handleNameChange = (index, value) => {
@@ -65,19 +80,20 @@ function RequestMoreFunds(){
     const handleAmountChange = (index, value) => {
         const updatedForm = [...dynamicForm];
         const tenderEstimateAmount = tenderEstimateAmounts[updatedForm[index].name] || 0;
-
-        if (value < tenderEstimateAmount) {
-            warningToast(`Amount should be above the tender estimate amount (${tenderEstimateAmount}) for ${updatedForm[index].name}`);
-            return;
-        }
-
+    
         updatedForm[index].amount = value;
-        setDynamic(updatedForm);
+    
+        // Check if the entered amount is less than the tender estimate amount when the input field loses focus
+        if (value !== '' && value < tenderEstimateAmount) {
+            // Show warning toast when the input field loses focus
+            warningToast(`Amount should be above the tender estimate amount (${tenderEstimateAmount}) for ${updatedForm[index].name}`);
+        } else {
+            setDynamic(updatedForm);
+        }
     };
     
     
-
-
+    
     const handleFileUpload = (event) => {
         setTenderFile(event.target.files[0]);
     };
@@ -108,17 +124,16 @@ function RequestMoreFunds(){
     };
 
     const formui = dynamicForm.map((item, index) => {
-        const isTenderEstimateField = index < tenderEstimateOptions.length; // Check if the field is from tenderEstimate
-        const isEditableNameField = !isTenderEstimateField; // Check if the name field should be editable
-        
+        const isEditableNameField = deletableFields[index];
+
         return (
             <div className="gap-2 flex m-3 items-center" key={index}>
                 <input
                     value={item.name}
                     name="name"
                     placeholder="Enter resource name"
-                    readOnly={!isEditableNameField} // Set readOnly based on whether it's editable or not
-                    onChange={(e) => handleNameChange(index, e.target.value)} // Allow editing for new resources
+                    readOnly={!isEditableNameField}
+                    onChange={(e) => handleNameChange(index, e.target.value)}
                     className="bg-white shadow-lg px-5 py-3 hover:underline w-1/2 hover:bg-slate-200 border"
                 />
                 <input
@@ -130,16 +145,12 @@ function RequestMoreFunds(){
                     className="bg-white shadow-lg px-5 py-3 hover:underline w-1/2 hover:bg-slate-200 border"
                 />
                 <MdOutlineCurrencyRupee size={25} />
-                {!isTenderEstimateField && ( // Render the remove button only if it's not from tenderEstimate
+                {isEditableNameField && (
                     <IoMdRemove size={25} onClick={() => deleteDynamicForm(index)} />
                 )}
             </div>
         );
     });
-    
-    
-
-    
 
     return (
         <div>

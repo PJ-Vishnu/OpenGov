@@ -17,7 +17,7 @@ function ViewOurProjectDetails() {
     useEffect(() => {
         const fetchProjectDetails = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/contracts/viewProject/${id}`);
+                const response = await axios.get(`http://localhost:4000/contracts/viewProjectCompany/${id}`);
 
                 const projectData = response.data.result;
                 setProjectDetails(projectData);

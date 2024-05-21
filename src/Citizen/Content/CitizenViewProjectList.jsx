@@ -23,7 +23,7 @@ function CitizenViewProjectList() {
     
         console.log('API calling starting...');
         try {
-            const response = await axios.get(`http://localhost:4000/projects/projects/`)
+            const response = await axios.get(`http://localhost:4000/contracts/allProjects`)
             setData(response?.data?.result)
             console.log(response.data);
         } catch (error) {
