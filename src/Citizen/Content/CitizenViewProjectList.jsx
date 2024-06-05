@@ -54,7 +54,7 @@ function CitizenViewProjectList() {
                         data.map((item) => {
                             return (
                                 <tr className="text-center" key={item._id}>
-                                    <td className="border pt-3 pb-3 ">{item._id}</td>
+                                    <td className="border pt-3 pb-3 ">{item.projectId}</td>
                                     <td className="border pt-3 pb-3 ">{item.projectName}</td>
                                     <td className="border pt-3 pb-3 ">{item.location}</td>
                                     <td className="border pt-3 pb-3 ">{item.initiator}</td>
@@ -62,8 +62,8 @@ function CitizenViewProjectList() {
                                     <td className="border pt-3 pb-3 ">{formatDate(item.projectEndDate)}</td>
                                     <td className="border pt-3 pb-3 ">
                                         <div className="flex align-middle w-full justify-center items-center gap-8">
-                                            <Link to={`viewproject/${item._id}`}><GrView color="#213361" size={25} /></Link>
-                                            <Link to={`reportproject/`}><VscReport color="#213361" size={25} /></Link>
+                                            <Link to={`viewproject/${item.projectId}`}><GrView color="#213361" size={25} /></Link>
+                                            <Link to={`reportproject/${item._id}`}><VscReport color="#213361" size={25} /></Link>
                                         </div>
                                     </td>
                                 </tr>

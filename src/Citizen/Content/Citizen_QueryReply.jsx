@@ -8,10 +8,10 @@ function Citizen_QueryReply() {
                 <b className="text-[36px]">Send Querry</b><br />
                 <hr />
                 <b className="text-[20px] self-start">Querry Type</b>
-                <select name="" id="" className="border-[2px] border-[#213361] rounded-lg w-full h-10 pl-3">
+                <optgroup>
                     <option value="Querry">Querry</option>
                     <option value="Suggestion">Suggestion</option>
-                </select>
+                </optgroup>
                 <br />
 
                 <b className="text-[20px] self-start">Querry/Suggestion</b>

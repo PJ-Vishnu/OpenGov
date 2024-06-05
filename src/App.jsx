@@ -47,6 +47,8 @@ import CreateUserP1 from "./Components/CreateUserP1"
 import UpdateProjectData from "./Company/Content/UpdateProjectData"
 import CompanyNotifications from "./Company/Content/CompanyNotifications"
 import GovtNotifications from "./Govt/content/GovtNotifications"
+import ViewTenderingProjectDetails from "./Components/ViewTenderingProjectDetails"
+import RequestProject from "./Components/RequestProject"
 
 // import Home from "./pages/Home"
 // import Blogs from "./pages/Blogs"
@@ -57,7 +59,7 @@ function App() {
       <Routes>
         <Route path="/admin" element={<Layout />}>
           {/* <Route index element={<Home />} /> */}
-          <Route path="" element={<Content />} />
+          <Route path="" element={<Dashboard />} />
           {/* <Route path="companies" element={<Contact />} /> */}
           <Route path="projects" element={<ProjectListAdminGov />} />
           <Route path="projects/newproject" element={<CreateProjectGov />} />
@@ -90,17 +92,18 @@ function App() {
           <Route path="editprofile" element={<EditCitizenP1 />} />
           <Route path="/citizen/projects" element={<CitizenViewProjectList />} />
           <Route path="projects/viewproject/:id" element={<ViewProjectDetails />} />
-          <Route path="projects/reportproject" element={<CitizenReportProject />} />
-          <Route path="/citizen/interactions" element={<Citizen_Interactions />} />
+          <Route path="projects/reportproject/:id" element={<CitizenReportProject />} />
+          <Route path="/citizen/interactions" element={<RequestProject />} />
           <Route path="/citizen/message" element={<Citizen_QueryReply />} />
         </Route>
 
         <Route path="/govt" element={<Govt_Layout />}>
-          <Route path="" element={<Govt_Dashboard />} />
+          <Route path="" element={<Dashboard />} />
           <Route path="notification" element={<GovtNotifications />} />
           <Route path="projects" element={<ProjectListAdminGov />} />
           <Route path="projects/newproject" element={<CreateProjectGov />} />
           <Route path="projects/viewproject/:id" element={<ViewProjectDetails />} />
+          <Route path="projects/viewTenderingProject/:id" element={<ViewTenderingProjectDetails />} />
           <Route path="projects/editproject/:id" element={<EditProjectDetailGov />} />
 
           <Route path="tendering" element={<GovtTenderingProjectList />} />
@@ -122,11 +125,12 @@ function App() {
           <Route path="Projects" element={<CompanyViewProjectList />} />
           <Route path="projects/viewproject/:id" element={<ViewProjectDetails />} />
           <Route path="tenderingprojects" element={<CompanyTenderingProjectList />} />
-          <Route path="tenderingprojects/viewproject/:id" element={<ViewProjectDetails />} />
+          <Route path="tenderingprojects/viewproject/:id" element={<ViewTenderingProjectDetails />} />
 
           <Route path="tenderingprojects/newtender/:id" element={<CreateTender />} />
           <Route path="ourproject/" element={<CompanyOurProject />} />
           <Route path="ourproject/viewproject/:id" element={<ViewOurProjectDetails />} />
+          <Route path="projects/viewTenderingProject/:id" element={<ViewTenderingProjectDetails />} />
           <Route path="ourproject/viewproject/:id/requestfunds" element={<RequestMoreFunds />} />
           <Route path="ourproject/viewproject/:id/updateproject" element={<UpdateProjectData />} />
 

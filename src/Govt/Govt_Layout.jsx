@@ -41,7 +41,7 @@ function Govt_Layout() {
                 </div>
                 <div className="w-1/4 h-4/5 items-center flex mr-[20px] gap-2">
                     <div className="w-full h-full"></div>
-                    <Link to={"notification"}><IoNotificationsCircleOutline className="w-10 h-10"/></Link>
+                    {/* <Link to={"notification"}><IoNotificationsCircleOutline className="w-10 h-10"/></Link> */}
                     <b>Govt.</b>
                 </div>
             </div>
@@ -57,7 +57,7 @@ function Govt_Layout() {
                             <li onClick={() => setSelectLink('projects')} ><Link to={'/govt/projects'}><div className={`${selectLink === 'projects' ? 'ms-3 mt-3 mb-3 -me-5 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white  p-2 text-[#213361] sm:text-hidden`}><AiOutlineFundProjectionScreen size={45} className="ml-3 mr-3" /><b>Projects</b></div></Link></li>
                             <li onClick={() => setSelectLink('companies')} ><Link to={'/govt/companies'}><div className={`${selectLink === 'companies' ? 'ms-3 mt-3 mb-3 -me-5 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white p-2 text-[#213361] sm:text-hidden`}><BsBuildings size={45} className="ml-3 mr-3" /><b>Companies</b></div></Link></li>
                             <li onClick={() => setSelectLink('tendering')} ><Link to={'/govt/tendering'}><div className={`${selectLink === 'tendering' ? 'ms-3 mt-3 mb-3 -me-5 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white p-2 text-[#213361] sm:text-hidden`}><AiOutlineFundProjectionScreen size={45} className="ml-3 mr-3" /><b>Tendering</b></div></Link></li>
-                            <li onClick={() => setSelectLink('interactions')} ><Link to={'/govt/interactions'}><div className={`${selectLink === 'interactions' ? 'ms-3 mt-3 mb-3 -me-5 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white p-2 text-[#213361] sm:text-hidden`}><LuMessagesSquare size={45} className="ml-3 mr-3" /><b>Interaction</b></div></Link></li>
+                            {/* <li onClick={() => setSelectLink('interactions')} ><Link to={'/govt/interactions'}><div className={`${selectLink === 'interactions' ? 'ms-3 mt-3 mb-3 -me-5 pl-6 rounded-s-[20px]' : 'm-3 rounded-[20px]'} flex items-center bg-white p-2 text-[#213361] sm:text-hidden`}><LuMessagesSquare size={45} className="ml-3 mr-3" /><b>Interaction</b></div></Link></li> */}
                             <li onClick={logout} ><Link to={'/'}><div className=" flex items-center bg-white rounded-[20px] p-2 text-[#213361] m-3 mt-[280px]"><FaSignOutAlt size={45} className="ml-3 mr-5 sm:text-hidden" /><b>Sign Out</b></div></Link></li>
                         </ul>
                     </div>
@@ -77,7 +77,7 @@ function Govt_Layout() {
                             <li onClick={() => setSelectLink('projects')} ><Link to={'/govt/projects'}><div className=' flex items-center bg-white  p-2 text-[#213361]'><AiOutlineFundProjectionScreen size={45} className="ml-3 mr-3" /></div></Link></li>
                             <li onClick={() => setSelectLink('companies')} ><Link to={'/govt/companies'}><div className=' flex items-center bg-white  p-2 text-[#213361]'><BsBuildings size={45} className="ml-3 mr-3" /></div></Link></li>
                             <li onClick={() => setSelectLink('tenders')} ><Link to={'/govt/tendering'}><div className=' flex items-center bg-white  p-2 text-[#213361]'><AiOutlineFundProjectionScreen size={45} className="ml-3 mr-3" /></div></Link></li>
-                            <li onClick={() => setSelectLink('interactions')} ><Link to={'/govt/interactions'}><div className=' flex items-center bg-white  p-2 text-[#213361]'><LuMessagesSquare size={45} className="ml-3 mr-3" /></div></Link></li>
+                            {/* <li onClick={() => setSelectLink('interactions')} ><Link to={'/govt/interactions'}><div className=' flex items-center bg-white  p-2 text-[#213361]'><LuMessagesSquare size={45} className="ml-3 mr-3" /></div></Link></li> */}
                             <li onClick={logout} ><Link to={'/'}><div className=' flex items-center bg-white  p-2 text-[#213361]'><FaSignOutAlt size={45} className="ml-3 mr-5" /></div></Link></li>
                         </ul>
                     </div>

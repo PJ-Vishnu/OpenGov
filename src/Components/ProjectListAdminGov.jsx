@@ -26,7 +26,7 @@ function ProjectListAdminGov() {
         try {
           const response = await axios.get(`http://localhost:4000/projects/type/${itemId}`);
           if (response.data.type=='tendering') {
-            console.log(response);  
+            navigate(`/govt/projects/viewTenderingProject/${itemId}`); 
           }else{
             console.log(response.data.type);
             navigate(`/govt/projects/viewproject/${itemId}`);
