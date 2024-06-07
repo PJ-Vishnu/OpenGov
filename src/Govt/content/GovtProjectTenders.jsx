@@ -7,30 +7,45 @@ import { MdDeleteOutline } from 'react-icons/md';
 import { successToast, errorToast } from '../../Toast';
 import { GrSort } from 'react-icons/gr';
 import { FiFilter } from 'react-icons/fi';
+import { useSearch } from '../../Components/SearchContext';
 
 function GovtProjectTenders() {
     const { id } = useParams();
 
     const [tenders, setTenders] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [sortBy, setSortBy] = useState("");
+    const { searchTerm } = useSearch();
 
     useEffect(() => {
-        const fetchTenders = async () => {
-            try {
-                const response = await axios.get(`http://localhost:4000/tenders/projectTenders/${id}`);
-                console.log('Response data:', response.data); // Check the data returned from the server
-                setTenders(response.data.data); // Set tenders to the array of tenders in the response data
-                setLoading(false);
-            } catch (error) {
-                console.error('Error fetching tenders:', error);
-                setLoading(false);
-                errorToast('Failed to fetch tenders');
+    const fetchTenders = async () => {
+        try {
+            const response = await axios.get(`http://localhost:4000/tenders/projectTenders/${id}`);
+            console.log('Response data:', response.data); // Check the data returned from the server
+            
+            let filteredTenders = response.data.data;
+            
+            // Apply filter based on searchTerm if it exists
+            if (searchTerm) {
+                filteredTenders = filteredTenders.filter(tender =>
+                    tender.tenderName.toLowerCase().includes(searchTerm.toLowerCase())
+                );
             }
-        };
-    
-        fetchTenders();
-    }, [id]);
-    console.log('Tenders:', tenders);
+
+            setTenders(filteredTenders); // Set tenders to the array of tenders after filtering
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching tenders:', error);
+            setLoading(false);
+            errorToast('No tenders Found');
+        }
+    };
+
+    fetchTenders();
+}, [id, searchTerm]);
+
+console.log('Tenders:', tenders);
+
 
     const handleDelete = async (tenderId) => {
         console.log("Deleting tender with ID:", tenderId);
@@ -65,16 +80,37 @@ function GovtProjectTenders() {
         return date.toLocaleDateString();
     };
 
+    const sortData = (criteria) => {
+        // Update sortBy state
+        setSortBy(criteria);
+        // Sort data based on criteria
+        const sortedData = [...data].sort((a, b) => {
+            if (criteria === "projectId") {
+                return a.projectId.localeCompare(b.projectId);
+            } else if (criteria === "projectName") {
+                return a.projectName.localeCompare(b.projectName);
+            } else if (criteria === "budget") {
+                return a.budget - b.budget;
+            }
+            return 0;
+        });
+        setData(sortedData);
+    };
+
     return (
         <div>
             <div className="">
-                <div className="w-[98.2%] h-[20px] flex gap-9 p-3 m-3 border-[3px] border-[#213361] justify-center text-white">
-                    <div className="bg-[#313361] p-2 pl-3 pr-3 flex ">
-                        <GrSort size={25} className="pr-2" />Sort
-                    </div>
-                    <div className="bg-[#313361] p-2 pl-3 pr-3 flex">
-                        <FiFilter size={25} className="pr-2" />Filter
-                    </div>
+                <div className="w-[98.2%] h-fit flex gap-9 p-3 m-3 border-[3px] border-[#213361] justify-center text-white">
+                <select
+                    className="bg-[#313361] p-2 pl-3 pr-3 flex items-center"
+                    onChange={(e) => sortData(e.target.value)}
+                    value={sortBy}
+                >
+                    <option value="">Sort By</option>
+                    <option value="projectName">Project Name</option>
+                    <option value="budget">Budget</option>
+                    <option value="id">ID</option>
+                </select>
                 </div>
                 <table className="border-collapse font-sans w-[98.2%] m-3">
                     <thead>

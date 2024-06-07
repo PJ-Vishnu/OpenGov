@@ -8,28 +8,35 @@ import { GrSort } from "react-icons/gr";
 import { FiFilter } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useSearch } from "../../Components/SearchContext";
 
 
 function CompanyOurProject() {
 
     const [data, setData] = useState([])
+    const { searchTerm } = useSearch();
     useEffect(() => {
-        fetchApi()
-        console.log('useeffect is loading..');
-    }, [])
-
-    const fetchApi = (async () => {
-        
-        console.log('api calling starting...');
-        try {
-            const companyId=localStorage.getItem('company-id')
-            const response = await axios.get(`http://localhost:4000/contracts/ourProjects/${companyId}`)
-            setData(response?.data?.result)
-            console.log(response.data);
-        } catch (error) {
-            errorToast(error.response.data.message || 'error')
-        }
-    })
+        const fetchApi = async () => {
+            try {
+                const companyId = localStorage.getItem('company-id');
+                const response = await axios.get(`http://localhost:4000/contracts/ourProjects/${companyId}`);
+                let filteredData = response?.data?.result || [];
+    
+                if (searchTerm) {
+                    filteredData = filteredData.filter(project =>
+                        project.projectName.toLowerCase().includes(searchTerm.toLowerCase())
+                    );
+                }
+    
+                setData(filteredData);
+            } catch (error) {
+                errorToast(error.response?.data?.message || 'error');
+            }
+        };
+    
+        fetchApi();
+    }, [searchTerm]);
+    
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         return date.toISOString().split('T')[0]; // Get only the date part

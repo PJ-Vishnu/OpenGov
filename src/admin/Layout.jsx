@@ -9,8 +9,20 @@ import { LuMessagesSquare } from "react-icons/lu";
 import { FaHamburger, FaSignOutAlt } from "react-icons/fa";
 import { BsLayoutTextSidebarReverse } from "react-icons/bs";
 import axios from "axios";
+import { useSearch } from "../Components/SearchContext";
+import { errorToast } from "../Toast";
 
 function Layout() {
+
+
+    const [searchTerm, setSearchTerm] = useState();
+  const { setSearchTerm: setSearch } = useSearch();
+
+  const handleSearch = (event) => {
+    const term = event.target.value;
+    setSearchTerm(term);
+    setSearch(term);
+  };
 
 
     const navigate = useNavigate()
@@ -22,25 +34,25 @@ function Layout() {
     },[navigate])
 
 
-    useEffect(() => {
-        fetchApi()
-        console.log('useeffect is loading..');
-    }, [])
+    // useEffect(() => {
+    //     fetchApi()
+    //     console.log('useeffect is loading..');
+    // }, [])
 
     const logout = ()=>{
         localStorage.removeItem('admin-id')
         navigate('/')
     }
-    const fetchApi = (async () => {
+    // const fetchApi = (async () => {
 
-        console.log('api calling starting...');
-        try {
-            const response = await axios.get(`http://localhost:4000/projects/projects/${localStorage.getItem("admin-id")}`)
-            setData(response?.data?.result)
-        } catch (error) {
-            errorToast(error.response.data.message || 'error')
-        }
-    })
+    //     console.log('api calling starting...');
+    //     try {
+    //         const response = await axios.get(`http://localhost:4000/projects/projects/${localStorage.getItem("admin-id")}`)
+    //         setData(response?.data?.result)
+    //     } catch (error) {
+    //         errorToast(error.response.data.message || 'error')
+    //     }
+    // })
 
     const [selectLink, setSelectLink] = useState('home')
     const [activeSideBar, setActiveSideBar] = useState(true)
@@ -53,8 +65,16 @@ function Layout() {
                     <b onClick={() => setSelectLink('home')}> <Link to={'/admin/'}>OpenGov</Link></b>
                 </div>
                 <div className="m-auto w-4/6 h-2/3 flex justify-center">
-                    <input className="border-[1px] border-[#213361] outline-none px-8 w-full rounded-[20px] items-center pl-5 pr-20" type="search" name="Search" id="" placeholder="Search..." />
-                    <IoSearch size={40} className="-mb-9 -ml-14 " />
+                <input
+          className="border-[1px] border-[#213361] outline-none px-8 w-full rounded-[20px] items-center pl-5 pr-20"
+          type="search"
+          name="Search"
+          id=""
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={handleSearch}
+        />                    
+        <IoSearch size={40} className="-mb-9 -ml-14 " />
                 </div>
                 <div className="w-1/4 h-4/5 items-center flex mr-[20px]">
                     <div className="w-full h-full"></div>

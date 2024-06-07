@@ -49,6 +49,7 @@ import CompanyNotifications from "./Company/Content/CompanyNotifications"
 import GovtNotifications from "./Govt/content/GovtNotifications"
 import ViewTenderingProjectDetails from "./Components/ViewTenderingProjectDetails"
 import RequestProject from "./Components/RequestProject"
+import { SearchProvider } from "./Components/SearchContext"
 
 // import Home from "./pages/Home"
 // import Blogs from "./pages/Blogs"
@@ -56,6 +57,7 @@ import RequestProject from "./Components/RequestProject"
 function App() {
   return (
     <BrowserRouter>
+    <SearchProvider>
       <Routes>
         <Route path="/admin" element={<Layout />}>
           {/* <Route index element={<Home />} /> */}
@@ -67,7 +69,7 @@ function App() {
           <Route path="projects/editproject/:id" element={<EditProjectDetailGov />} />
           <Route path="companies" element={<CompanyList />} />
           <Route path="companies/newcompany" element={<CreateCompanyAdminP1 />} />
-          <Route path="companies/viewcompany" element={<ViewCompany />} />
+          <Route path="companies/viewcompany/:id" element={<ViewCompany />} />
           <Route path="companies/editcompany/:id" element={<EditCompanyP1 />} />
           <Route path="viewusers" element={<ViewUserList />} />
           <Route path="viewusers/newcitizen" element={<CreateUserP1 />} />
@@ -144,6 +146,7 @@ function App() {
         position="top-center"
         reverseOrder={false}
       />
+      </SearchProvider>
     </BrowserRouter>
   )
 }

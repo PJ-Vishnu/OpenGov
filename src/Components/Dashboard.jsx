@@ -84,7 +84,7 @@ function Dashboard() {
                 </div>
                 <div className="border-2 flex h-full flex-col border-blue-900 rounded-3xl m-3 p-3">
                     <b className="text-blue-900 text-3xl ml-3">Project Need Heatmap</b>
-                    <div className="w-full h-96 rounded-2xl" id="heatmap-container"></div>
+                    <div className="w-full h-[600px] rounded-2xl" id="heatmap-container"></div>
                 </div>
             </div>
         </div>

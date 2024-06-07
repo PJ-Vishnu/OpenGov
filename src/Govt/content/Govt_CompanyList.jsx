@@ -5,18 +5,28 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { errorToast } from "../../Toast";
+import { useSearch } from "../../Components/SearchContext";
 
 function Govt_CompanyList() {
     const [data, setData] = useState([]);
+    const { searchTerm } = useSearch();
 
     useEffect(() => {
         fetchCompanies();
-    }, []);
-
+    }, [searchTerm]);
+    
     const fetchCompanies = async () => {
         try {
             const response = await axios.get('http://localhost:4000/register/getallcompany');
-            setData(response?.data?.result);
+            let filteredData = response.data.result;
+    
+            if (searchTerm) {
+                filteredData = filteredData.filter((company) =>
+                    company.username.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            }
+    
+            setData(filteredData);
         } catch (error) {
             errorToast(error.response.data.message || 'Error fetching companies');
         }

@@ -6,22 +6,33 @@ import { BsBuildingAdd } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { errorToast } from "../Toast";
 import axios from "axios";
+import { useSearch } from "./SearchContext";
 
 function CompanyList() {
     const [data, setData] = useState([]);
+    const { searchTerm } = useSearch();
 
     useEffect(() => {
         fetchCompanies();
-    }, []);
-
+    }, [searchTerm]);
+    
     const fetchCompanies = async () => {
         try {
             const response = await axios.get('http://localhost:4000/register/getallcompany');
-            setData(response?.data?.result);
+            let filteredData = response.data.result;
+    
+            if (searchTerm) {
+                filteredData = filteredData.filter((company) =>
+                    company.username.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            }
+    
+            setData(filteredData);
         } catch (error) {
             errorToast(error.response.data.message || 'Error fetching companies');
         }
     };
+    
 
     const deleteCompany = async (companyId) => {
         try {
@@ -59,7 +70,7 @@ function CompanyList() {
                                     <td className="border pt-3 pb-3 ">{item.phone}</td>
                                     <td className="border pt-3 pb-3 ">
                                         <div className="flex align-middle w-full justify-center items-center gap-8">
-                                            <Link to={'viewcompany'}><GrView color="#213361" size={25} /></Link>
+                                            <Link to={`viewcompany/${item._id}`}><GrView color="#213361" size={25} /></Link>
                                             <Link to={`/admin/companies/editcompany/${item._id}`}>
                                                 <FiEdit color="#213361" size={25} />
                                             </Link>

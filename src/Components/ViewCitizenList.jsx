@@ -5,26 +5,36 @@ import { LuUserPlus } from "react-icons/lu";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { errorToast } from "../Toast";
+import { useSearch } from "./SearchContext";
 
 function ViewUserList() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
+    const { searchTerm } = useSearch();
+
 
     useEffect(() => {
         fetchApi();
-    }, []);
+    }, [searchTerm]); // Listen for changes in searchTerm
 
     const fetchApi = async () => {
         try {
             const response = await axios.get('http://localhost:4000/register/getallcitizen');
-            setData(response?.data?.result);
+            let filteredData = response?.data?.result;
+
+            if (searchTerm) {
+                filteredData = filteredData.filter((citizen) =>
+                    citizen.username.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            }
+
+            setData(filteredData);
         } catch (error) {
             errorToast(error.response.data.message || 'Error');
         } finally {
             setLoading(false);
         }
     };
-
     const deleteUser = async (userId) => {
         try {
             await axios.delete(`http://localhost:4000/register/deleteuser/${userId}`);
@@ -44,6 +54,7 @@ function ViewUserList() {
                 <thead>
                     <tr className="font-bold text-[#213361]">
                         <th className="border pt-3 pb-3">User ID</th>
+                        <th className="border pt-3 pb-3">Avatar</th>
                         <th className="border pt-3 pb-3">User Name</th>
                         <th className="border pt-3 pb-3">Address</th>
                         <th className="border pt-3 pb-3">Email</th>

@@ -12,8 +12,18 @@ import { FaRegListAlt } from "react-icons/fa";
 import { IoConstructOutline } from "react-icons/io5";
 import { VscAccount } from "react-icons/vsc";
 import { IoNotificationsCircleOutline  } from "react-icons/io5";
+import { useSearch } from "../Components/SearchContext";
 
 function CompanyLayout() {
+    const [searchTerm, setSearchTerm] = useState();
+  const { setSearchTerm: setSearch } = useSearch();
+
+  const handleSearch = (event) => {
+    const term = event.target.value;
+    setSearchTerm(term);
+    setSearch(term);
+  };
+
 
     const navigate = useNavigate()
     useEffect(()=>{
@@ -39,7 +49,15 @@ function CompanyLayout() {
                     <b onClick={() => setSelectLink('home')}> <Link to={'/company/'}>OpenGov</Link></b>
                 </div>
                 <div className="m-auto w-4/6 h-2/3 flex justify-center">
-                    <input className="border-[1px] border-[#213361] outline-none px-8 w-full rounded-[20px] items-center pl-5 pr-20" type="search" name="Search" id="" placeholder="Search..." />
+                <input
+          className="border-[1px] border-[#213361] outline-none px-8 w-full rounded-[20px] items-center pl-5 pr-20"
+          type="search"
+          name="Search"
+          id=""
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={handleSearch}
+        /> 
                     <IoSearch size={40} className="-mb-9 -ml-14 " />
                 </div>
                 <div className="w-1/4 h-4/5 flex-row items-center flex mr-[20px] gap-2">

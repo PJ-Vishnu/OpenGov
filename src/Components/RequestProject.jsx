@@ -66,7 +66,7 @@ function RequestProject() {
           ...viewport,
           latitude,
           longitude,
-          zoom: 13
+          zoom: 15
         });
       } else {
         console.log("No results found");
@@ -140,7 +140,7 @@ function RequestProject() {
           ))}
         </ul>
       )}
-      <div className="h-2/4 w-full">
+      <div className="h-3/4 w-full">
         <ReactMapGL
           {...viewport}
           mapStyle="mapbox://styles/mapbox/streets-v11"

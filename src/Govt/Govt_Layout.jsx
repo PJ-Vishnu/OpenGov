@@ -8,18 +8,28 @@ import { HiOutlineUsers } from "react-icons/hi2";
 import { LuMessagesSquare } from "react-icons/lu";
 import { FaHamburger, FaSignOutAlt } from "react-icons/fa";
 import { BsLayoutTextSidebarReverse } from "react-icons/bs";
-import { IoNotificationsCircleOutline  } from "react-icons/io5";
+import { IoNotificationsCircleOutline } from "react-icons/io5";
+import { useSearch } from "../Components/SearchContext";
 
 function Govt_Layout() {
 
-    const navigate = useNavigate()
-    useEffect(()=>{
-        if(!localStorage.getItem("govt-id")){
-                navigate('/signin')
-        }
-    },[navigate])
+    const [searchTerm, setSearchTerm] = useState();
+    const { setSearchTerm: setSearch } = useSearch();
 
-    const logout = ()=>{
+    const handleSearch = (event) => {
+        const term = event.target.value;
+        setSearchTerm(term);
+        setSearch(term);
+    };
+
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (!localStorage.getItem("govt-id")) {
+            navigate('/signin')
+        }
+    }, [navigate])
+
+    const logout = () => {
         localStorage.removeItem('govt-id')
         navigate('/')
     }
@@ -36,7 +46,15 @@ function Govt_Layout() {
                     <b onClick={() => setSelectLink('home')}> <Link to={'/govt/'}>OpenGov</Link></b>
                 </div>
                 <div className="m-auto w-4/6 h-2/3 flex justify-center">
-                    <input className="border-[1px] border-[#213361] outline-none px-8 w-full rounded-[20px] items-center pl-5 pr-20" type="search" name="Search" id="" placeholder="Search..." />
+                    <input
+                        className="border-[1px] border-[#213361] outline-none px-8 w-full rounded-[20px] items-center pl-5 pr-20"
+                        type="search"
+                        name="Search"
+                        id=""
+                        placeholder="Search..."
+                        value={searchTerm}
+                        onChange={handleSearch}
+                    />
                     <IoSearch size={40} className="-mb-9 -ml-14 " />
                 </div>
                 <div className="w-1/4 h-4/5 items-center flex mr-[20px] gap-2">
@@ -67,7 +85,7 @@ function Govt_Layout() {
                 {/* mobile sidebar */}
 
                 <div onClick={() => setActiveSideBar(!activeSideBar)} className="bg-[#213361]  text-white absolute top-[10%] -left-5 z-40 px-4 py-5 rounded-md block sm:hidden">
-                <BsLayoutTextSidebarReverse size={20} />
+                    <BsLayoutTextSidebarReverse size={20} />
                 </div>
 
                 <div className={` ${activeSideBar ? ' translate-x-[0px]' : '-translate-x-[300px] '}  duration-1000  transition-all bg-slate-600  w-[20%] block absolute top-[25%] h-fit sm:hidden flex-col  justify-center items-center `}>
