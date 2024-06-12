@@ -7,6 +7,7 @@ import { GrView } from "react-icons/gr";
 import axios from "axios";
 import { errorToast, successToast } from "../../Toast";
 import { useSearch } from "../../Components/SearchContext";
+import Pagination from "../../Components/Pagination";
 
 function CompanyTenderingProjectList() {
     const [data, setData] = useState([]);
@@ -15,6 +16,8 @@ function CompanyTenderingProjectList() {
     const [filterBy, setFilterBy] = useState("");
 
     const { searchTerm } = useSearch();
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
     
     useEffect(() => {
         fetchApi();
@@ -84,6 +87,12 @@ function CompanyTenderingProjectList() {
         setData(filteredData);
     };
 
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
+    // Change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
         <div>
@@ -129,7 +138,7 @@ function CompanyTenderingProjectList() {
                             </td>
                         </tr>
                     ) : (
-                        data.map((item) => (
+                        currentItems.map((item) => (
                             <tr key={item._id} className="text-center">
                                 <td className="border pt-3 pb-3">{item._id}</td>
                                 <td className="border pt-3 pb-3">{item.projectName}</td>
@@ -152,6 +161,11 @@ function CompanyTenderingProjectList() {
                     )}
                 </tbody>
             </table>
+            <Pagination
+                itemsPerPage={itemsPerPage}
+                totalItems={data.length}
+                paginate={paginate}
+            />
         </div>
     );
 }

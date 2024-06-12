@@ -7,6 +7,7 @@ import { FiFilter } from "react-icons/fi";
 import { GrSort } from "react-icons/gr";
 import { errorToast } from "../../Toast";
 import { useSearch } from "../../Components/SearchContext";
+import Pagination from "../../Components/Pagination";
 
 function GovtTenderingProjectList() {
     const [data, setData] = useState([]);
@@ -14,6 +15,8 @@ function GovtTenderingProjectList() {
     const [sortBy, setSortBy] = useState(""); // State variable for sorting criteria
     const [filterBy, setFilterBy] = useState("");
     const { searchTerm } = useSearch();
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
     
     useEffect(() => {
         fetchApi();
@@ -86,6 +89,13 @@ function GovtTenderingProjectList() {
         setData(filteredData);
     };
 
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
+    // Change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     return (
         <div>
             <div className="">
@@ -132,7 +142,7 @@ function GovtTenderingProjectList() {
                                 </td>
                             </tr>
                         ) : (
-                            data.map((item) => (
+                            currentItems.map((item) => (
                                 <tr key={item._id} className="text-center">
                                     <td className="border pt-3 pb-3">{item._id}</td>
                                     <td className="border pt-3 pb-3">{item.projectName}</td>
@@ -156,6 +166,11 @@ function GovtTenderingProjectList() {
                     </tbody>
                 </table>
             </div>
+            <Pagination
+                itemsPerPage={itemsPerPage}
+                totalItems={data.length}
+                paginate={paginate}
+            />
         </div>
     )
 }

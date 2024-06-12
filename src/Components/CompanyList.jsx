@@ -7,10 +7,13 @@ import { useEffect, useState } from "react";
 import { errorToast } from "../Toast";
 import axios from "axios";
 import { useSearch } from "./SearchContext";
+import Pagination from "./Pagination";
 
 function CompanyList() {
     const [data, setData] = useState([]);
     const { searchTerm } = useSearch();
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
 
     useEffect(() => {
         fetchCompanies();
@@ -43,6 +46,13 @@ function CompanyList() {
         }
     };
 
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
+    // Change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     return (
         <div>
             <div>
@@ -57,7 +67,7 @@ function CompanyList() {
                         <th className="border pt-3 pb-3s" >View/Edit/Delete</th>
                     </tr>
                     {
-                        data && data.map((item) => { //map data to page elements
+                        currentItems.map((item) => { //map data to page elements
                             return (
                                 <tr className="text-center">
                                     <td className="border pt-3 pb-3 ">
@@ -89,6 +99,11 @@ function CompanyList() {
                     <BsBuildingAdd color="#213361" size={30} />
                 </div>
             </Link>
+            <Pagination
+                itemsPerPage={itemsPerPage}
+                totalItems={data.length}
+                paginate={paginate}
+            />
         </div>
     )
 }

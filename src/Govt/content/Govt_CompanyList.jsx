@@ -6,10 +6,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { errorToast } from "../../Toast";
 import { useSearch } from "../../Components/SearchContext";
+import Pagination from "../../Components/Pagination";
 
 function Govt_CompanyList() {
     const [data, setData] = useState([]);
     const { searchTerm } = useSearch();
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
 
     useEffect(() => {
         fetchCompanies();
@@ -31,6 +34,14 @@ function Govt_CompanyList() {
             errorToast(error.response.data.message || 'Error fetching companies');
         }
     };
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
+    // Change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     return (
         <div>
             <div>
@@ -44,7 +55,7 @@ function Govt_CompanyList() {
                         <th className="border pt-3 pb-3s" >View</th>
                     </tr>
                     {
-                        data && data.map((item) => { //map data to page elements
+                        currentItems.map((item) => { //map data to page elements
                             return (
                                 <tr className="text-center">
                                     <td className="border pt-3 pb-3 ">
@@ -67,6 +78,11 @@ function Govt_CompanyList() {
                     }
                 </table>
             </div>
+            <Pagination
+                itemsPerPage={itemsPerPage}
+                totalItems={data.length}
+                paginate={paginate}
+            />
         </div>
     )
 }

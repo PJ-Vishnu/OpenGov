@@ -9,6 +9,7 @@ import { FiFilter } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSearch } from "../../Components/SearchContext";
+import Pagination from "../../Components/Pagination";
 
 
 function CompanyViewProjectList() {
@@ -18,6 +19,8 @@ function CompanyViewProjectList() {
     const [filterBy, setFilterBy] = useState("");
 
     const { searchTerm } = useSearch();
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -93,6 +96,12 @@ function CompanyViewProjectList() {
         setData(filteredData);
     };
 
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
+    // Change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
         <div>
@@ -129,7 +138,7 @@ function CompanyViewProjectList() {
                         <th className="border pt-3 pb-3s" >View</th>
                     </tr>
                     {
-                        data && data.map((item) => { //map data to page elements
+                        currentItems.map((item) => { //map data to page elements
                             return (
                                 <tr className="text-center">
                                     <td className="border pt-3 pb-3 ">{item._id}</td>
@@ -149,6 +158,11 @@ function CompanyViewProjectList() {
                     { }
                 </table>
             </div>
+            <Pagination
+                itemsPerPage={itemsPerPage}
+                totalItems={data.length}
+                paginate={paginate}
+            />
         </div>
     )
 }

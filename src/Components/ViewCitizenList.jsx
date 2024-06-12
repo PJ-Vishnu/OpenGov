@@ -6,11 +6,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { errorToast } from "../Toast";
 import { useSearch } from "./SearchContext";
+import Pagination from "./Pagination";
 
 function ViewUserList() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const { searchTerm } = useSearch();
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
 
 
     useEffect(() => {
@@ -48,6 +51,13 @@ function ViewUserList() {
         }
     };
 
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
+    // Change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     return (
         <div>
             <table className="border-collapse font-sans w-[98.2%] m-3">
@@ -68,7 +78,7 @@ function ViewUserList() {
                             <td colSpan="6" className="text-center">Loading...</td>
                         </tr>
                     ) : (
-                        data.map((item) => (
+                        currentItems.map((item) =>(
                             <tr key={item._id} className="text-center">
                                 <td className="border pt-3 pb-3">{item._id}</td>
                                 <td className="border pt-3 pb-3">
@@ -94,6 +104,11 @@ function ViewUserList() {
                     <LuUserPlus color="#213361" size={30} />
                 </div>
             </Link>
+            <Pagination
+                itemsPerPage={itemsPerPage}
+                totalItems={data.length}
+                paginate={paginate}
+            />
         </div>
     );
 }

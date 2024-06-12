@@ -4,11 +4,10 @@ import axios from "axios";
 import { GrView } from "react-icons/gr";
 import { FiEdit } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
-import { GrSort } from "react-icons/gr";
-import { FiFilter } from "react-icons/fi";
 import { VscNewFile } from "react-icons/vsc";
 import { errorToast, successToast } from "../Toast";
 import { useSearch } from "./SearchContext";
+import Pagination from "./Pagination";
 
 function ProjectListAdminGov() {
     const navigate = useNavigate();
@@ -16,6 +15,8 @@ function ProjectListAdminGov() {
     const [sortBy, setSortBy] = useState(""); // State variable for sorting criteria
     const [filterBy, setFilterBy] = useState(""); // State variable for filtering criteria
     const { searchTerm } = useSearch();
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -88,8 +89,16 @@ function ProjectListAdminGov() {
         }
     };
 
+    // Get current items
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
+    // Change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     return (
-        <div>
+        <div className="flex-1">
             <div className="flex gap-4 p-3 m-3 border-[3px] border-[#213361] justify-center text-white">
                 <select
                     className="bg-[#313361] p-2 pl-3 pr-3 flex items-center"
@@ -122,7 +131,7 @@ function ProjectListAdminGov() {
                         <th className="border pt-3 pb-3s">Budget</th>
                         <th className="border pt-3 pb-3s">View/Edit/Delete</th>
                     </tr>
-                    {data.map((item) => (
+                    {currentItems.map((item) => (
                         <tr className="text-center" key={item._id}>
                             <td className="border pt-3 pb-3 ">{item._id}</td>
                             <td className="border pt-3 pb-3 ">{item.projectName}</td>
@@ -154,6 +163,11 @@ function ProjectListAdminGov() {
                     <VscNewFile color="#213361" size={30} />
                 </div>
             </Link>
+            <Pagination
+                itemsPerPage={itemsPerPage}
+                totalItems={data.length}
+                paginate={paginate}
+            />
         </div>
     );
 }

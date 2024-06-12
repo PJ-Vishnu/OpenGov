@@ -7,12 +7,15 @@ import { errorToast } from "../../Toast";
 import { GrSort } from "react-icons/gr";
 import { FiFilter } from "react-icons/fi";
 import { useSearch } from "../../Components/SearchContext";
+import Pagination from "../../Components/Pagination";
 
 function CitizenViewProjectList() {
     const [data, setData] = useState([]);
     const [sortBy, setSortBy] = useState(""); // State variable for sorting criteria
     const [filterBy, setFilterBy] = useState(""); // State variable for filtering criteria
     const { searchTerm } = useSearch();
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
 
     useEffect(() => {
         const fetchApi = async () => {
@@ -24,17 +27,17 @@ function CitizenViewProjectList() {
                         project.projectName.toLowerCase().includes(searchTerm.toLowerCase())
                     );
                 }
-    
+
                 setData(filteredData);
                 console.log(response.data);
             } catch (error) {
                 errorToast(error.response?.data?.message || 'error');
             }
         };
-    
+
         fetchApi();
     }, [searchTerm]);
-    
+
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -75,6 +78,13 @@ function CitizenViewProjectList() {
         setData(filteredData);
     };
 
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
+    // Change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     return (
         <div>
             <div className="">
@@ -110,24 +120,30 @@ function CitizenViewProjectList() {
                         <th className="border pt-3 pb-3s">Project End Date</th>
                         <th className="border pt-3 pb-3s">View/Report</th>
                     </tr>
-                    {data.map((item) => (
-                        <tr className="text-center" key={item._id}>
-                            <td className="border pt-3 pb-3">{item.projectId}</td>
-                            <td className="border pt-3 pb-3">{item.projectName}</td>
-                            <td className="border pt-3 pb-3">{item.location}</td>
-                            <td className="border pt-3 pb-3">{item.initiator}</td>
-                            <td className="border pt-3 pb-3">{item.budget}</td>
-                            <td className="border pt-3 pb-3">{formatDate(item.projectEndDate)}</td>
-                            <td className="border pt-3 pb-3">
-                                <div className="flex align-middle w-full justify-center items-center gap-8">
-                                    <Link to={`viewproject/${item.projectId}`}><GrView color="#213361" size={25} /></Link>
-                                    <Link to={`reportproject/${item._id}`}><VscReport color="#213361" size={25} /></Link>
-                                </div>
-                            </td>
-                        </tr>
-                    ))}
+                    {
+                        currentItems.map((item) => (
+                            <tr className="text-center" key={item._id}>
+                                <td className="border pt-3 pb-3">{item.projectId}</td>
+                                <td className="border pt-3 pb-3">{item.projectName}</td>
+                                <td className="border pt-3 pb-3">{item.location}</td>
+                                <td className="border pt-3 pb-3">{item.initiator}</td>
+                                <td className="border pt-3 pb-3">{item.budget}</td>
+                                <td className="border pt-3 pb-3">{formatDate(item.projectEndDate)}</td>
+                                <td className="border pt-3 pb-3">
+                                    <div className="flex align-middle w-full justify-center items-center gap-8">
+                                        <Link to={`viewproject/${item.projectId}`}><GrView color="#213361" size={25} /></Link>
+                                        <Link to={`reportproject/${item._id}`}><VscReport color="#213361" size={25} /></Link>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
                 </table>
             </div>
+            <Pagination
+                itemsPerPage={itemsPerPage}
+                totalItems={data.length}
+                paginate={paginate}
+            />
         </div>
     );
 }

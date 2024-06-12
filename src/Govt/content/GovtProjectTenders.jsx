@@ -8,6 +8,7 @@ import { successToast, errorToast } from '../../Toast';
 import { GrSort } from 'react-icons/gr';
 import { FiFilter } from 'react-icons/fi';
 import { useSearch } from '../../Components/SearchContext';
+import Pagination from '../../Components/Pagination';
 
 function GovtProjectTenders() {
     const { id } = useParams();
@@ -16,36 +17,37 @@ function GovtProjectTenders() {
     const [loading, setLoading] = useState(true);
     const [sortBy, setSortBy] = useState("");
     const { searchTerm } = useSearch();
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10; // Adjust as needed
 
     useEffect(() => {
-    const fetchTenders = async () => {
-        try {
-            const response = await axios.get(`http://localhost:4000/tenders/projectTenders/${id}`);
-            console.log('Response data:', response.data); // Check the data returned from the server
-            
-            let filteredTenders = response.data.data;
-            
-            // Apply filter based on searchTerm if it exists
-            if (searchTerm) {
-                filteredTenders = filteredTenders.filter(tender =>
-                    tender.tenderName.toLowerCase().includes(searchTerm.toLowerCase())
-                );
+        const fetchTenders = async () => {
+            try {
+                const response = await axios.get(`http://localhost:4000/tenders/projectTenders/${id}`);
+                console.log('Response data:', response.data); // Check the data returned from the server
+                
+                let filteredTenders = response.data.data;
+                
+                // Apply filter based on searchTerm if it exists
+                if (searchTerm) {
+                    filteredTenders = filteredTenders.filter(tender =>
+                        tender.tenderName.toLowerCase().includes(searchTerm.toLowerCase())
+                    );
+                }
+
+                setTenders(filteredTenders); // Set tenders to the array of tenders after filtering
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching tenders:', error);
+                setLoading(false);
+                errorToast('No tenders Found');
             }
+        };
 
-            setTenders(filteredTenders); // Set tenders to the array of tenders after filtering
-            setLoading(false);
-        } catch (error) {
-            console.error('Error fetching tenders:', error);
-            setLoading(false);
-            errorToast('No tenders Found');
-        }
-    };
+        fetchTenders();
+    }, [id, searchTerm]);
 
-    fetchTenders();
-}, [id, searchTerm]);
-
-console.log('Tenders:', tenders);
-
+    console.log('Tenders:', tenders);
 
     const handleDelete = async (tenderId) => {
         console.log("Deleting tender with ID:", tenderId);
@@ -84,7 +86,7 @@ console.log('Tenders:', tenders);
         // Update sortBy state
         setSortBy(criteria);
         // Sort data based on criteria
-        const sortedData = [...data].sort((a, b) => {
+        const sortedData = [...tenders].sort((a, b) => {
             if (criteria === "projectId") {
                 return a.projectId.localeCompare(b.projectId);
             } else if (criteria === "projectName") {
@@ -94,23 +96,31 @@ console.log('Tenders:', tenders);
             }
             return 0;
         });
-        setData(sortedData);
+        setTenders(sortedData);
     };
+
+    // Get current items
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = tenders.slice(indexOfFirstItem, indexOfLastItem);
+
+    // Change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
         <div>
             <div className="">
                 <div className="w-[98.2%] h-fit flex gap-9 p-3 m-3 border-[3px] border-[#213361] justify-center text-white">
-                <select
-                    className="bg-[#313361] p-2 pl-3 pr-3 flex items-center"
-                    onChange={(e) => sortData(e.target.value)}
-                    value={sortBy}
-                >
-                    <option value="">Sort By</option>
-                    <option value="projectName">Project Name</option>
-                    <option value="budget">Budget</option>
-                    <option value="id">ID</option>
-                </select>
+                    <select
+                        className="bg-[#313361] p-2 pl-3 pr-3 flex items-center"
+                        onChange={(e) => sortData(e.target.value)}
+                        value={sortBy}
+                    >
+                        <option value="">Sort By</option>
+                        <option value="projectId">Project ID</option>
+                        <option value="projectName">Project Name</option>
+                        <option value="budget">Budget</option>
+                    </select>
                 </div>
                 <table className="border-collapse font-sans w-[98.2%] m-3">
                     <thead>
@@ -135,7 +145,7 @@ console.log('Tenders:', tenders);
                                 <td colSpan="8" className="text-center">No tenders found.</td>
                             </tr>
                         ) : (
-                            tenders.map(tender => (
+                            currentItems.map(tender => (
                                 <tr key={tender?._id} className="text-center">
                                     <td className="border p-3">{tender._id}</td>
                                     <td className="border p-3">{tender?.projectId}</td>
@@ -165,6 +175,11 @@ console.log('Tenders:', tenders);
                     </tbody>
                 </table>
             </div>
+            <Pagination
+                itemsPerPage={itemsPerPage}
+                totalItems={tenders.length}
+                paginate={paginate}
+            />
         </div>
     );
 }
