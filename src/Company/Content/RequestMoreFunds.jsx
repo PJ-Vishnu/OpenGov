@@ -107,7 +107,7 @@ function RequestMoreFunds(){
             formData.append('expenditure', JSON.stringify(dynamicForm));
             formData.append('file', tenderFile);
 
-            const response = await axios.put('http://localhost:4000/your-endpoint', formData, {
+            const response = await axios.post('http://localhost:4000/contracts/expenserequest', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

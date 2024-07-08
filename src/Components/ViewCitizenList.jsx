@@ -40,7 +40,7 @@ function ViewUserList() {
     };
     const deleteUser = async (userId) => {
         try {
-            await axios.delete(`http://localhost:4000/register/deleteuser/${userId}`);
+            await axios.delete(`http://localhost:4000/register/deleteUser/${userId}`);
             // Remove the deleted user from the state
             setData(data.filter(user => user._id !== userId));
             // Optionally, show a success message

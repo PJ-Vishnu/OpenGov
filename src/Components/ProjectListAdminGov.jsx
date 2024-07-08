@@ -76,7 +76,7 @@ function ProjectListAdminGov() {
     };
 
     const handleViewProject = (itemId) => {
-        navigate(`/govt/projects/viewproject/${itemId}`);
+        navigate(`viewproject/${itemId}`);
     };
 
     const deleteProject = async (projectID) => {
@@ -143,7 +143,7 @@ function ProjectListAdminGov() {
                                     <button onClick={() => handleViewProject(item._id)}>
                                         <GrView color="#213361" size={25} />
                                     </button>
-                                    <Link to={`/govt/projects/editproject/${item._id}`}>
+                                    <Link to={`editproject/${item._id}`}>
                                         <FiEdit color="#213361" size={25} />
                                     </Link>
                                     <MdDeleteOutline

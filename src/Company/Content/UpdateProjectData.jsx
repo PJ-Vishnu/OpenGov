@@ -19,8 +19,8 @@ function UpdateProjectData() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/contracts/viewProject/${id}`)
-                console.log(response.data.result)
+                const response = await axios.get(`http://localhost:4000/contracts/viewProjectCompany/${id}`);
+                console.log(response.data);
                 // Extract names from tender estimate and set as options for the dropdown
                 if (response.data.result && response.data.result.tenderEstimate) {
                     const options = response.data.result.tenderEstimate.map(item => item.name);
@@ -206,11 +206,9 @@ function UpdateProjectData() {
                 <b className="text-[20px] self-start">Upload Receipts/Bills</b>
                 <input type="file" onChange={handleFileUpload} name="receiptFile" id="" className="border-[2px] border-[#213361] rounded-lg w-full h-9 pl-3" />
                 <br />
-                <Link>
-                    <div onClick={handleSend} className="bg-[#213361] text-white rounded-lg w-fit h-fit p-3 pl-5 pr-5 self-center">
-                        <b>Update</b>
-                    </div>
-                </Link>
+                <div onClick={handleSend} className="bg-[#213361] text-white rounded-lg w-fit h-fit p-3 pl-5 pr-5 self-center cursor-pointer">
+                    <b>Update</b>
+                </div>
             </div>
         </div>
     )
