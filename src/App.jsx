@@ -19,7 +19,7 @@ import ViewUserList from "./Components/ViewCitizenList"
 import ViewCompany from "./Components/ViewCompany"
 import EditCompanyP1 from "./Components/EditCompanyP1"
 import EditCitizenP1 from "./Components/EditCitizenP1"
-import InteractionList from "./Components/InteractionList"
+// import InteractionList from "./Components/InteractionList"
 import ReplyCitizen from "./Components/ReplyCitizen"
 import CitizenLayout from "./Citizen/CitizenLayout"
 import Dashboard from "./Components/Dashboard"
@@ -50,6 +50,7 @@ import GovtNotifications from "./Govt/content/GovtNotifications"
 import ViewTenderingProjectDetails from "./Components/ViewTenderingProjectDetails"
 import RequestProject from "./Components/RequestProject"
 import { SearchProvider } from "./Components/SearchContext"
+import ViewRequestDetails from "./Components/ViewRequestDetails"
 
 // import Home from "./pages/Home"
 // import Blogs from "./pages/Blogs"
@@ -74,7 +75,7 @@ function App() {
           <Route path="viewusers" element={<ViewUserList />} />
           <Route path="viewusers/newcitizen" element={<CreateUserP1 />} />
           <Route path="viewusers/editcitizen/:id" element={<EditCitizenP1 />} />
-          <Route path="interactions" element={<InteractionList />} />
+          {/* <Route path="interactions" element={<InteractionList />} /> */}
           <Route path="interactions/replycitizen" element={<ReplyCitizen />} />
 
 
@@ -116,7 +117,7 @@ function App() {
           <Route path="companies" element={<Govt_CompanyList />} />
           <Route path="companies/viewcompany/:id" element={<ViewCompany />} />
 
-          <Route path="interactions" element={<InteractionList />} />
+          <Route path="fundrequests" element={<ViewRequestDetails />} />
           <Route path="interactions/replycitizen" element={<ReplyCitizen />} />
         </Route>
 

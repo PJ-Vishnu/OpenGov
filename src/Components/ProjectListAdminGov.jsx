@@ -85,7 +85,7 @@ function ProjectListAdminGov() {
             setData(data.filter((project) => project._id !== projectID));
             successToast("Project deleted successfully");
         } catch (error) {
-            errorToast(error.response.data.message || "Error deleting Project");
+            errorToast(error.response.data.message || "Error deleting Note");
         }
     };
 

@@ -219,14 +219,14 @@ function ViewOurProjectDetails() {
 
                 </div>
             </div>
-            <Link to={"requestfunds"}>
+            {/* <Link to={"requestfunds"}>
                 <div className="absolute right-9 flex flex-col justify-center items-center    bottom-10 m-3 p-3 rounded-2xl bg-white border-[2px] border-[#213361]">
                     <GiReceiveMoney color="#213361" size={30} />
                     Request Funds
                 </div>
-            </Link>
+            </Link> */}
             <Link to={"updateproject"}>
-                <div className="absolute right-52 flex flex-col justify-center items-center    bottom-10 m-3 p-3 rounded-2xl bg-white border-[2px] border-[#213361]">
+                <div className="absolute right-9 flex flex-col justify-center items-center    bottom-10 m-3 p-3 rounded-2xl bg-white border-[2px] border-[#213361]">
                     <GrUpdate color="#213361" size={30} />
                     Update Data
                 </div>

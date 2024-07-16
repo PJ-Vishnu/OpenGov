@@ -30,7 +30,7 @@ function CreateUserP1() {
         try {
             let data = formdata
             const response = await axios.post('http://localhost:4000/register/newuser', data)
-            successToast(response.message)
+            successToast(response)
             navigate('/admin/viewusers/')
 
         } catch (error) {
