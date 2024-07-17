@@ -10,14 +10,14 @@ const cMapsDir = normalizePath(path.join(path.dirname(require.resolve('pdfjs-dis
 export default defineConfig({
   plugins: [
     react(),
-    viteStaticCopy({
-      targets: [
-        {
-          src: cMapsDir,
-          dest: 'build', // Adjust destination path as per your project structure
-        },
-      ],
-    }),
+    // viteStaticCopy({
+    //   targets: [
+    //     {
+    //       src: cMapsDir,
+    //       dest: 'dist', // Adjust destination path as per your project structure
+    //     },
+    //   ],
+    // }),
   ],
   server: {
     port: 3000,
