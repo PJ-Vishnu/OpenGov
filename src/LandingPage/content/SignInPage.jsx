@@ -46,7 +46,7 @@ function SignInPage() {
         password,
       };
 
-      const response = await axios.post('http://localhost:4000/auth/login', data);
+      const response = await axios.post('https://opengov-server.onrender.com/auth/login', data);
       const userRole = response.data.result?.role; // Use optional chaining for safety
       console.log(userRole,'userRole');
       if(response.data.result.role === 'admin'){

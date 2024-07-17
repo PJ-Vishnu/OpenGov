@@ -25,7 +25,7 @@ function CompanyViewProjectList() {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get("http://localhost:4000/projects/projects");
+            const response = await axios.get("https://opengov-server.onrender.com/projects/projects");
             let filteredData = response.data.result;
       
             if (searchTerm) {
@@ -45,7 +45,7 @@ function CompanyViewProjectList() {
 
     const checkProjectOrContract = async (itemId) => {
         try {
-          const response = await axios.get(`http://localhost:4000/projects/type/${itemId}`);
+          const response = await axios.get(`https://opengov-server.onrender.com/projects/type/${itemId}`);
           if (response.data.type=='tendering') {
             navigate(`/company/projects/viewTenderingProject/${itemId}`); 
           }else{

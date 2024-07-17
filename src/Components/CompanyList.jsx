@@ -21,7 +21,7 @@ function CompanyList() {
     
     const fetchCompanies = async () => {
         try {
-            const response = await axios.get('http://localhost:4000/register/getallcompany');
+            const response = await axios.get('https://opengov-server.onrender.com/register/getallcompany');
             let filteredData = response.data.result;
     
             if (searchTerm) {
@@ -39,7 +39,7 @@ function CompanyList() {
 
     const deleteCompany = async (companyId) => {
         try {
-            await axios.delete(`http://localhost:4000/register/deleteuser/${companyId}`);
+            await axios.delete(`https://opengov-server.onrender.com/register/deleteuser/${companyId}`);
             setData(data.filter(company => company._id !== companyId));
         } catch (error) {
             errorToast(error.response.data.message || 'Error deleting company');
@@ -71,7 +71,7 @@ function CompanyList() {
                             return (
                                 <tr className="text-center">
                                     <td className="border pt-3 pb-3 ">
-                                        <img src={`http://localhost:4000/${item?.avatar}`} className="w-32 h-32" alt="avatar" />
+                                        <img src={`https://opengov-server.onrender.com/${item?.avatar}`} className="w-32 h-32" alt="avatar" />
                                     </td>
                                     <td className="border pt-3 pb-3 ">{item._id}</td>
                                     <td className="border pt-3 pb-3 ">{item.username}</td>

@@ -58,7 +58,7 @@ function CreateTender() {
             formData.append(key, tenderData[key]);
         }
     
-        axios.post('http://localhost:4000/tenders/createTender', formData, {
+        axios.post('https://opengov-server.onrender.com/tenders/createTender', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

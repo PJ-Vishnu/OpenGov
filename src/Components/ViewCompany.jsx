@@ -13,8 +13,8 @@ function ViewCompany() {
 
     const fetchCompany = async () => {
         try {
-            const response = await axios.get(`http://localhost:4000/register/getOneCompany/${id}`);
-            const response2 = await axios.get(`http://localhost:4000/contracts/ourProjects/${id}`);
+            const response = await axios.get(`https://opengov-server.onrender.com/register/getOneCompany/${id}`);
+            const response2 = await axios.get(`https://opengov-server.onrender.com/contracts/ourProjects/${id}`);
             setData(response?.data?.result);
             setProjects(response2.data.result);
         } catch (error) {

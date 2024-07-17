@@ -20,7 +20,7 @@ function CitizenViewProjectList() {
     useEffect(() => {
         const fetchApi = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/contracts/allProjects`);
+                const response = await axios.get(`https://opengov-server.onrender.com/contracts/allProjects`);
                 let filteredData = response?.data?.result || [];
                 if (searchTerm) {
                     filteredData = filteredData.filter(project =>

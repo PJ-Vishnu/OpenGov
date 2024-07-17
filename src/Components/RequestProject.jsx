@@ -108,7 +108,7 @@ function RequestProject() {
       formData.append("longitude", markers[0].lng,);
       formData.append("latitude", markers[0].lat);
       console.log(formData.latitude+"--------"+formData.longitude);
-      await axios.post("http://localhost:4000/reqProject/requestProject", formData, {
+      await axios.post("https://opengov-server.onrender.com/reqProject/requestProject", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

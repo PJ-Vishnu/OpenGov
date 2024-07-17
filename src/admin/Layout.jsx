@@ -47,7 +47,7 @@ function Layout() {
 
     //     console.log('api calling starting...');
     //     try {
-    //         const response = await axios.get(`http://localhost:4000/projects/projects/${localStorage.getItem("admin-id")}`)
+    //         const response = await axios.get(`https://opengov-server.onrender.com/projects/projects/${localStorage.getItem("admin-id")}`)
     //         setData(response?.data?.result)
     //     } catch (error) {
     //         errorToast(error.response.data.message || 'error')

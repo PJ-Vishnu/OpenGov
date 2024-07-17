@@ -28,7 +28,7 @@ function CreateCompanyAdminP1() {
     const handleSubmit = async(e)=>{
         try {
             let data=formdata
-            const response =  await axios.post('http://localhost:4000/register/newuser',data)
+            const response =  await axios.post('https://opengov-server.onrender.com/register/newuser',data)
             successToast(response.data.message)
        navigate('/admin/companies/')
             

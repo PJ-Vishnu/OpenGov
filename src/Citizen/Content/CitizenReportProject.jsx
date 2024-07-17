@@ -53,7 +53,7 @@ function CitizenReportProject() {
         }
 
         try {
-            const response = await axios.post("http://localhost:4000/reports/report", formDataToSend);
+            const response = await axios.post("https://opengov-server.onrender.com/reports/report", formDataToSend);
             successToast("Data sent successfully:", response.data);
             // Handle success, maybe show a success message to the user
         } catch (error) {

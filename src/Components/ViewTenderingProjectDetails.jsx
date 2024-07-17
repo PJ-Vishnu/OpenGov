@@ -9,7 +9,7 @@ function ViewTenderingProjectDetails() {
     useEffect(() => {
         const fetchProjectDetails = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/projects/viewProject/${id}`);
+                const response = await axios.get(`https://opengov-server.onrender.com/projects/viewProject/${id}`);
                 setProjectDetails(response.data.result);
             } catch (error) {
                 console.error('Error fetching Project data:', error);

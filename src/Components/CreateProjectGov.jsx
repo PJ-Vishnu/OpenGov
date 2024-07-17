@@ -25,7 +25,7 @@ function CreateProjectGov() {
         e.preventDefault();
         try {
             const response = await axios.post(
-                "http://localhost:4000/projects/newProject",
+                "https://opengov-server.onrender.com/projects/newProject",
                 formData
             );
             successToast(response.data.message);

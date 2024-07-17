@@ -4,7 +4,7 @@ function EditCitizenP2({ handleChangeEvent, formdata, handleSubmit, imgPreview }
             <br />
             <label htmlFor="avatar" className="text-[20px] self-start">Profile Picture</label>
             <input type="file" name="avatar" onChange={handleChangeEvent} src="" alt="Choose Image" className="h-[15vh] w-[15vh] self-center text-center"/>
-                   { formdata?.avatar &&  <img src={imgPreview?URL.createObjectURL(formdata?.avatar):`http://localhost:4000/${formdata?.avatar}`} alt="" className="w-36 h-36 self-center" />
+                   { formdata?.avatar &&  <img src={imgPreview?URL.createObjectURL(formdata?.avatar):`https://opengov-server.onrender.com/${formdata?.avatar}`} alt="" className="w-36 h-36 self-center" />
                    }                <br />
             <label htmlFor="dob" className="text-[20px] self-start">Date of Birth</label>
             <input 

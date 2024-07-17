@@ -56,7 +56,7 @@ function SignUpPage1() {
         
         try {
 
-            const emailCheckResponse = await axios.get(`http://localhost:4000/register/check-email/${formdata.email}`);
+            const emailCheckResponse = await axios.get(`https://opengov-server.onrender.com/register/check-email/${formdata.email}`);
 
         // If email is already in use, display an error message
         if (emailCheckResponse.data.exists) {
@@ -77,7 +77,7 @@ function SignUpPage1() {
 
             
          
-            const response =  await axios.post('http://localhost:4000/register/newuser',formData)
+            const response =  await axios.post('https://opengov-server.onrender.com/register/newuser',formData)
     
             
         } catch (error) {

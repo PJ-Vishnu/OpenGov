@@ -25,7 +25,7 @@ function CompanyTenderingProjectList() {
     
     const fetchApi = async () => {
         try {
-            const response = await axios.get('http://localhost:4000/projects/projects');
+            const response = await axios.get('https://opengov-server.onrender.com/projects/projects');
             const currentDate = new Date();
             let filteredProjects = response.data.result;
     

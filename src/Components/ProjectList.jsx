@@ -24,7 +24,7 @@ function ProjectList() {
 
         console.log('api calling starting...');
         try {
-           const response =  await axios.get('http://localhost:4000/projects/getall')
+           const response =  await axios.get('https://opengov-server.onrender.com/projects/getall')
                     setData(response?.data?.result)
         } catch (error) {
             errorToast(error.response.data.message || 'error')

@@ -21,7 +21,7 @@ function ViewRequestDetails() {
     useEffect(() => {
         const fetchRequestData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/requests/${id}`);
+                const response = await axios.get(`https://opengov-server.onrender.com/requests/${id}`);
                 setRequestData(response.data);
                 setPdfUrl(response.data.pdfUrl); // Assuming the backend response includes the PDF file path
             } catch (error) {
@@ -94,7 +94,7 @@ function ViewRequestDetails() {
                         {pdfUrl && (
                             <div className='border-2 border-black w-fit flex justify-center flex-col text-center self-center'>
                                 <Document
-                                    file={`http://localhost:4000/${pdfUrl}`}
+                                    file={`https://opengov-server.onrender.com/${pdfUrl}`}
                                     onLoadSuccess={onDocumentLoadSuccess}
                                 >
                                     <Page pageNumber={pageNumber} />

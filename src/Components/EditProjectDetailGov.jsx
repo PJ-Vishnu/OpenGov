@@ -20,7 +20,7 @@ function EditProjectDetailGov() {
     useEffect(() => {
         const fetchProjectData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/projects/updateProject/${id}`);
+                const response = await axios.get(`https://opengov-server.onrender.com/projects/updateProject/${id}`);
                 const projectData = response.data.result;
                 setFormData(projectData);
             } catch (error) {
@@ -39,7 +39,7 @@ function EditProjectDetailGov() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put(`http://localhost:4000/projects/updateProject/${id}`, formData);
+            const response = await axios.put(`https://opengov-server.onrender.com/projects/updateProject/${id}`, formData);
             console.log('Project details updated successfully:', response.data);
             successToast(response.data.message)
             // Redirect or show success message

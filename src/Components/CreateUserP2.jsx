@@ -4,7 +4,7 @@ function CreateUserP2({handleChangeEvent,formdata,handleSubmit}) {
             <br />
             <b className="text-[20px] self-start">Profile Picture</b>
             <input type="file" name="avatar" onChange={handleChangeEvent} src="" alt="Choose Image" className="h-[15vh] w-[15vh] self-center text-center"/>
-                   { formdata?.avatar &&  <img src={imgPreview?URL.createObjectURL(formdata?.avatar):`http://localhost:4000/${formdata?.avatar}`} alt="" className="w-36 h-36 self-center" />
+                   { formdata?.avatar &&  <img src={imgPreview?URL.createObjectURL(formdata?.avatar):`https://opengov-server.onrender.com/${formdata?.avatar}`} alt="" className="w-36 h-36 self-center" />
                    }                <br />
             <b className="text-[20px] self-start">Date of Birth</b>
             <input type="date" name="dob" id="" placeholder="Enter your D.O.B" value={formdata.dob} onChange={handleChangeEvent} className="border-[2px] border-[#213361] rounded-lg w-full h-9 pl-3" />

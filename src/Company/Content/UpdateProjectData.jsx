@@ -19,7 +19,7 @@ function UpdateProjectData() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/contracts/viewProjectCompany/${id}`);
+                const response = await axios.get(`https://opengov-server.onrender.com/contracts/viewProjectCompany/${id}`);
                 console.log(response.data);
                 // Extract names from tender estimate and set as options for the dropdown
                 if (response.data.result && response.data.result.tenderEstimate) {
@@ -97,7 +97,7 @@ function UpdateProjectData() {
             }
         }
 
-        axios.post('http://localhost:4000/expenses/addExpense', formData, {
+        axios.post('https://opengov-server.onrender.com/expenses/addExpense', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

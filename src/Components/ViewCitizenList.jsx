@@ -22,7 +22,7 @@ function ViewUserList() {
 
     const fetchApi = async () => {
         try {
-            const response = await axios.get('http://localhost:4000/register/getallcitizen');
+            const response = await axios.get('https://opengov-server.onrender.com/register/getallcitizen');
             let filteredData = response?.data?.result;
 
             if (searchTerm) {
@@ -40,7 +40,7 @@ function ViewUserList() {
     };
     const deleteUser = async (userId) => {
         try {
-            await axios.delete(`http://localhost:4000/register/deleteUser/${userId}`);
+            await axios.delete(`https://opengov-server.onrender.com/register/deleteUser/${userId}`);
             // Remove the deleted user from the state
             setData(data.filter(user => user._id !== userId));
             // Optionally, show a success message
@@ -82,7 +82,7 @@ function ViewUserList() {
                             <tr key={item._id} className="text-center">
                                 <td className="border pt-3 pb-3">{item._id}</td>
                                 <td className="border pt-3 pb-3">
-                                    <img src={`http://localhost:4000/${item?.avatar}`} className="w-32 h-32" alt="avatar" />
+                                    <img src={`https://opengov-server.onrender.com/${item?.avatar}`} className="w-32 h-32" alt="avatar" />
                                 </td>
                                 <td className="border pt-3 pb-3">{item.username}</td>
                                 <td className="border pt-3 pb-3">{item.address}</td>

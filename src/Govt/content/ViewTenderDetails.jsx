@@ -22,7 +22,7 @@ function ViewTenderDetails() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/tenders/tenderDetails/${id}`);
+                const response = await axios.get(`https://opengov-server.onrender.com/tenders/tenderDetails/${id}`);
                 setTenderData(response.data.data);
                 setPdfUrl(response.data.data.estimateFile); // Assuming the backend response includes the PDF file path
             } catch (error) {
@@ -102,7 +102,7 @@ function ViewTenderDetails() {
                         {pdfUrl && (
                             <div className='border-2 border-black w-fit flex justify-center flex-col text-center self-center'>
                                 <Document
-                                    file={`http://localhost:4000/${pdfUrl}`}
+                                    file={`https://opengov-server.onrender.com/${pdfUrl}`}
                                     onLoadSuccess={onDocumentLoadSuccess}
                                 >
                                     <Page pageNumber={pageNumber} />

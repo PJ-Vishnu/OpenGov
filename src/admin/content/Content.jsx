@@ -11,7 +11,7 @@ function Content() {
     useEffect(() => {
         async function getReports() {
             try {
-                const response = await axios.get('http://localhost:4000/reqProject/showRequests');
+                const response = await axios.get('https://opengov-server.onrender.com/reqProject/showRequests');
                 const locationData = response.data.result.map(report => ({
                     location: report.location,
                     shortDescription: report.shortDescription,

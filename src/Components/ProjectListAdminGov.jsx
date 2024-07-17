@@ -21,7 +21,7 @@ function ProjectListAdminGov() {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get("http://localhost:4000/projects/projects");
+            const response = await axios.get("https://opengov-server.onrender.com/projects/projects");
             let filteredData = response.data.result;
       
             if (searchTerm) {
@@ -81,7 +81,7 @@ function ProjectListAdminGov() {
 
     const deleteProject = async (projectID) => {
         try {
-            await axios.delete(`http://localhost:4000/projects/deleteProject/${projectID}`);
+            await axios.delete(`https://opengov-server.onrender.com/projects/deleteProject/${projectID}`);
             setData(data.filter((project) => project._id !== projectID));
             successToast("Project deleted successfully");
         } catch (error) {

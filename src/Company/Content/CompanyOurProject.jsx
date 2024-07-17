@@ -23,7 +23,7 @@ function CompanyOurProject() {
         const fetchApi = async () => {
             try {
                 const companyId = localStorage.getItem('company-id');
-                const response = await axios.get(`http://localhost:4000/contracts/ourProjects/${companyId}`);
+                const response = await axios.get(`https://opengov-server.onrender.com/contracts/ourProjects/${companyId}`);
                 let filteredData = response?.data?.result || [];
     
                 if (searchTerm) {

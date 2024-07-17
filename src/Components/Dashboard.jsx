@@ -17,7 +17,7 @@ function Dashboard() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get('http://localhost:4000/projects/count');
+                const response = await axios.get('https://opengov-server.onrender.com/projects/count');
                 setCounts(response.data);
             } catch (error) {
                 console.error('Error fetching counts:', error);
@@ -30,7 +30,7 @@ function Dashboard() {
     useEffect(() => {
         async function getReports() {
             try {
-                const response = await axios.get('http://localhost:4000/reqProject/showRequests');
+                const response = await axios.get('https://opengov-server.onrender.com/reqProject/showRequests');
                 const locationData = response.data.result.map(report => ({
                     location: report.location,
                     shortDescription: report.shortDescription,

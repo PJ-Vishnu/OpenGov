@@ -29,7 +29,7 @@ function EditCitizenP1() {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/register/updateuser/${id}`);
+                const response = await axios.get(`https://opengov-server.onrender.com/register/updateuser/${id}`);
                 const userData = response.data.result; 
                 setFormdata(userData);
             } catch (error) {
@@ -52,7 +52,7 @@ function EditCitizenP1() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put(`http://localhost:4000/register/updateuser/${id}`, formdata);
+            const response = await axios.put(`https://opengov-server.onrender.com/register/updateuser/${id}`, formdata);
             console.log('User data updated successfully:', response.data);
             successToast(response.data.message)
             // Redirect or show success message

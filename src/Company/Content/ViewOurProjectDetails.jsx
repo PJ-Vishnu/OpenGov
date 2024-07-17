@@ -17,7 +17,7 @@ function ViewOurProjectDetails() {
     useEffect(() => {
         const fetchProjectDetails = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/contracts/viewProjectCompany/${id}`);
+                const response = await axios.get(`https://opengov-server.onrender.com/contracts/viewProjectCompany/${id}`);
 
                 const projectData = response.data.result;
                 setProjectDetails(projectData);
@@ -33,7 +33,7 @@ function ViewOurProjectDetails() {
     useEffect(() => {
         const fetchExpenses = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/expenses/getExpenses/${id}`);
+                const response = await axios.get(`https://opengov-server.onrender.com/expenses/getExpenses/${id}`);
                 const { expenseArray, remainingProjectBudget, resourceDetails, expenses } = response.data;
                 setExpenses(expenses)
                 setExpensesArray(expenseArray);
@@ -203,7 +203,7 @@ function ViewOurProjectDetails() {
                                         <td className="px-6 py-4 whitespace-nowrap text-center">{`${formattedHours}:${formattedMinutes} ${amOrPm}`}</td> {/* Time column */}
                                         <td className="px-6 py-4 whitespace-nowrap text-center">
                                             {expense.receiptFile ? (
-                                                <button onClick={() => window.open(`http://localhost:4000/${expense.receiptFile}`, '_blank')}>
+                                                <button onClick={() => window.open(`https://opengov-server.onrender.com/${expense.receiptFile}`, '_blank')}>
                                                     Download Receipt
                                                 </button>
                                             ) : (

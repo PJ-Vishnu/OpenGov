@@ -23,7 +23,7 @@ function GovtProjectTenders() {
     useEffect(() => {
         const fetchTenders = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/tenders/projectTenders/${id}`);
+                const response = await axios.get(`https://opengov-server.onrender.com/tenders/projectTenders/${id}`);
                 console.log('Response data:', response.data); // Check the data returned from the server
                 
                 let filteredTenders = response.data.data;
@@ -52,7 +52,7 @@ function GovtProjectTenders() {
     const handleDelete = async (tenderId) => {
         console.log("Deleting tender with ID:", tenderId);
         try {
-            await axios.delete(`http://localhost:4000/tenders/deleteTender/${tenderId}`);
+            await axios.delete(`https://opengov-server.onrender.com/tenders/deleteTender/${tenderId}`);
             // Remove the deleted tender from the state
             setTenders(tenders.filter(tender => tender._id !== tenderId));
             successToast("Tender deleted successfully");
@@ -65,7 +65,7 @@ function GovtProjectTenders() {
     const handleApprove = async (tenderId) => {
         console.log("Approving tender with ID:", tenderId);
         try {
-            const response = await axios.post(`http://localhost:4000/contracts/approveTender/${tenderId}`);
+            const response = await axios.post(`https://opengov-server.onrender.com/contracts/approveTender/${tenderId}`);
             successToast(response.data.message);
         } catch (error) {
             console.error('Error Approving tender:', error);

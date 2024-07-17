@@ -20,7 +20,7 @@ function ViewProjectDetails() {
     useEffect(() => {
         const fetchProjectDetails = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/contracts/viewProject/${id}`);
+                const response = await axios.get(`https://opengov-server.onrender.com/contracts/viewProject/${id}`);
                 setProjectDescription(response.data.projectDescription)
                 setProjectDetails(response.data.result);
             } catch (error) {
@@ -35,7 +35,7 @@ function ViewProjectDetails() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`http://localhost:4000/reports/getComplaints/${id}`);
+                const response = await axios.get(`https://opengov-server.onrender.com/reports/getComplaints/${id}`);
                 setReports(response.data)
                 console.log(response);
                 // Do something with the response if needed
@@ -50,7 +50,7 @@ function ViewProjectDetails() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`http://localhost:4000/reports/getMedia/${id}`);
+                const response = await axios.get(`https://opengov-server.onrender.com/reports/getMedia/${id}`);
                 setMediaData(response.data.mediaData)
                 console.log(mediaData,'================================================');
                 // Do something with the response if needed
@@ -65,7 +65,7 @@ function ViewProjectDetails() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`http://localhost:4000/reports/getMedia/${id}`);
+                const response = await axios.get(`https://opengov-server.onrender.com/reports/getMedia/${id}`);
                 setReports(response.data)
                 console.log(response);
                 // Do something with the response if needed
@@ -80,7 +80,7 @@ function ViewProjectDetails() {
     useEffect(() => {
         const fetchExpenses = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/expenses/getExpenses/${id}`);
+                const response = await axios.get(`https://opengov-server.onrender.com/expenses/getExpenses/${id}`);
                 const { expenseArray, remainingProjectBudget, resourceDetails, expenses } = response.data;
                 setExpenses(expenses)
                 setExpensesArray(expenseArray);
@@ -96,7 +96,7 @@ function ViewProjectDetails() {
 
     const handleDownload = async (zipFilePath, reportId) => {
         try {
-            const response = await axios.get(`http://localhost:4000/${zipFilePath}`, { responseType: 'blob' });
+            const response = await axios.get(`https://opengov-server.onrender.com/${zipFilePath}`, { responseType: 'blob' });
             saveAs(response.data, 'complaint_files of report ID ' + reportId + '.zip');
         } catch (error) {
             console.error('Error downloading zip file:', error);
@@ -274,7 +274,7 @@ function ViewProjectDetails() {
                                                 <td className="px-6 py-4 whitespace-nowrap text-center">{`${formattedHours}:${formattedMinutes} ${amOrPm}`}</td> {/* Time column */}
                                                 <td className="px-6 py-4 whitespace-nowrap text-center">
                                                     {expense.receiptFile ? (
-                                                        <button onClick={() => window.open(`http://localhost:4000/${expense.receiptFile}`, '_blank')}>
+                                                        <button onClick={() => window.open(`https://opengov-server.onrender.com/${expense.receiptFile}`, '_blank')}>
                                                             Download Receipt
                                                         </button>
                                                     ) : (
@@ -335,7 +335,7 @@ function ViewProjectDetails() {
                 {mediaData.map((item, index) => (
                     <React.Fragment key={index}>
                         {item.images.map((image, i) => (
-                            <img key={i} src={`http://localhost:4000/${image}`} alt={`Photo ${i + 1}`} className="m-2" style={{ maxWidth: '200px', maxHeight: '200px' }} />
+                            <img key={i} src={`https://opengov-server.onrender.com/${image}`} alt={`Photo ${i + 1}`} className="m-2" style={{ maxWidth: '200px', maxHeight: '200px' }} />
                         ))}
                     </React.Fragment>
                 ))}
@@ -349,7 +349,7 @@ function ViewProjectDetails() {
                     <React.Fragment key={index}>
                         {item.videos.map((video, i) => (
                             <video key={i} controls className="m-2" style={{ maxWidth: '200px' }}>
-                                <source src={`http://localhost:4000/${video}`} type="video/mp4" />
+                                <source src={`https://opengov-server.onrender.com/${video}`} type="video/mp4" />
                                 Your browser does not support the video tag.
                             </video>
                         ))}

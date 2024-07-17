@@ -20,7 +20,7 @@ function Govt_CompanyList() {
     
     const fetchCompanies = async () => {
         try {
-            const response = await axios.get('http://localhost:4000/register/getallcompany');
+            const response = await axios.get('https://opengov-server.onrender.com/register/getallcompany');
             let filteredData = response.data.result;
     
             if (searchTerm) {
@@ -59,7 +59,7 @@ function Govt_CompanyList() {
                             return (
                                 <tr className="text-center">
                                     <td className="border pt-3 pb-3 ">
-                                        <img src={`http://localhost:4000/${item?.avatar}`} className="w-32 h-32" alt="avatar" />
+                                        <img src={`https://opengov-server.onrender.com/${item?.avatar}`} className="w-32 h-32" alt="avatar" />
                                     </td>
                                     <td className="border pt-3 pb-3 ">{item._id}</td>
                                     <td className="border pt-3 pb-3 ">{item.username}</td>

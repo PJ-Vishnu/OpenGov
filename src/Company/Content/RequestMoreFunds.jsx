@@ -19,7 +19,7 @@ function RequestMoreFunds(){
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/contracts/viewProjectCompany/${id}`);
+                const response = await axios.get(`https://opengov-server.onrender.com/contracts/viewProjectCompany/${id}`);
                 if (response.data.result && response.data.result.tenderEstimate) {
                     const options = response.data.result.tenderEstimate;
                     setDynamic(options);
@@ -107,7 +107,7 @@ function RequestMoreFunds(){
             formData.append('expenditure', JSON.stringify(dynamicForm));
             formData.append('file', tenderFile);
 
-            const response = await axios.post('http://localhost:4000/contracts/expenserequest', formData, {
+            const response = await axios.post('https://opengov-server.onrender.com/contracts/expenserequest', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
