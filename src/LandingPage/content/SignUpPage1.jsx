@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import axios from "axios"
 import SignUpPage2Citizen from "./SignUpPage2Citizen";
 import SignUpPage2Company from "./SignUpPage2Company";
-import { warningToast } from "../../Toast";
+import { successToast, warningToast } from "../../Toast";
 function SignUpPage1() {
 
     const [next,setNext] = useState(true)
@@ -79,7 +79,7 @@ function SignUpPage1() {
          
             const response =  await axios.post('https://opengov-server.onrender.com/register/newuser',formData)
     
-            
+            successToast("User Created")
         } catch (error) {
             
         }

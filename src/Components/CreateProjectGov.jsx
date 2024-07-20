@@ -28,7 +28,7 @@ function CreateProjectGov() {
                 "https://opengov-server.onrender.com/projects/newProject",
                 formData
             );
-            successToast(response.data.message);
+            successToast("Project Created");
         } catch (error) {
             errorToast(error.response.data.message || "Error");
         }

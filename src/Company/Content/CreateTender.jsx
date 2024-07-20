@@ -3,7 +3,7 @@ import { IoMdAdd, IoMdRemove } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { MdOutlineCurrencyRupee } from "react-icons/md";
 import axios from 'axios';
-import { warningToast } from "../../Toast";
+import { successToast, warningToast } from "../../Toast";
 
 function CreateTender() {
     const { id } = useParams();
@@ -65,6 +65,7 @@ function CreateTender() {
         })
         .then(response => {
             console.log('Tender data sent successfully:', response);
+            successToast("Tender created successfully")
         })
         .catch(error => {
             console.error('Error sending tender data:', error);

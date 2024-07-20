@@ -42,6 +42,7 @@ function EditProjectDetailGov() {
             const response = await axios.put(`https://opengov-server.onrender.com/projects/updateProject/${id}`, formData);
             console.log('Project details updated successfully:', response.data);
             successToast(response.data.message)
+            successToast("Updated Project Details")
             // Redirect or show success message
         } catch (error) {
             console.error('Error updating Project details:', error);
